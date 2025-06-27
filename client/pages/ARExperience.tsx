@@ -131,10 +131,8 @@ export default function ARExperience() {
         nameEn: "Doi Pui Forest",
         type: "tourist_spot",
         description: "ป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เป็นปอดของเชียงใหม่",
-        descriptionEn:
-          "This forest has over 300 tree species and serves as Chiang Mai's lungs",
-        sustainabilityFeature:
-          "ใช้พลังงานแสงอาทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
+        descriptionEn: "This forest has over 300 tree species and serves as Chiang Mai's lungs",
+        sustainabilityFeature: "ใช้พลังงานแสงอาทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
         sustainabilityFeatureEn: "Solar-powered visitor facilities",
         coordinates: { lat: 18.8547, lng: 98.9184 },
         arMarkerId: "doi_pui_marker",
@@ -144,14 +142,10 @@ export default function ARExperience() {
           nameEn: "Forest Guardian Somchai",
           role: "นักอนุรักษ์ป่า",
           roleEn: "Forest Conservationist",
-          story:
-            "สมชายดูแลป่าดอยปุยมา 15 ปี ปลูกต้นไม้ใหม่ทุกปี และสอนเยาวชนให้รักษาป่า",
-          storyEn:
-            "Somchai has protected Doi Pui forest for 15 years, planting new trees annually and teaching youth forest conservation",
-          voiceLine:
-            "ในป่าผืนนี้มีต้นไม้มากก���่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอยู่กับป่า",
-          voiceLineEn:
-            "This forest has over 300 tree species. We plant new ones every year. The forest will stay with us if we stay with the forest.",
+          story: "สมชายดูแลป่าดอยปุยมา 15 ปี ปลูกต้นไม้ใหม่ทุกปี และสอนเยาวชนให้รักษาป่า",
+          storyEn: "Somchai has protected Doi Pui forest for 15 years, planting new trees annually and teaching youth forest conservation",
+          voiceLine: "ในป่าผืนนี้มีต้นไม้มากก���่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอยู่กับป่า",
+          voiceLineEn: "This forest has over 300 tree species. We plant new ones every year. The forest will stay with us if we stay with the forest.",
           audioUrl: "/audio/somchai-thai.mp3",
           audioUrlEn: "/audio/somchai-english.mp3",
           imageUrl: "/images/somchai-forest.jpg",
@@ -159,20 +153,19 @@ export default function ARExperience() {
           achievements: [
             "ปลูกต้นไม้ไปแล้ว 2,000 ต้น",
             "ฝึกอบรมเยาวชน 500+ คน",
-            "ลดการทำลายป่า 80%",
+            "ลดการทำลายป่า 80%"
           ],
           achievementsEn: [
             "Planted 2,000+ trees",
             "Trained 500+ youth",
-            "Reduced deforestation by 80%",
-          ],
+            "Reduced deforestation by 80%"
+          ]
         },
         rewardAmount: 15,
         shareTemplate: {
           thai: "พบกับผู้พิทักษ์ป่าจริง ๆ ที่ดอยปุย 🌲🇹🇭 #EcoHero #ChiangMai",
-          english:
-            "Met a real forest guardian at Doi Pui 🌲🇹🇭 #EcoHero #ChiangMai",
-        },
+          english: "Met a real forest guardian at Doi Pui 🌲🇹🇭 #EcoHero #ChiangMai"
+        }
       },
       aunt_pen_cafe: {
         id: "aunt_pen_cafe",
@@ -182,8 +175,7 @@ export default function ARExperience() {
         description: "ร้านกาแฟชุมชนที่เลิกใช้พลาสติกตั้งแต่ปี 2562",
         descriptionEn: "Community café that went plastic-free since 2019",
         sustainabilityFeature: "ปลอดพลาสติก ใช้ถ้วยไผ่และหลอดกระดาษ",
-        sustainabilityFeatureEn:
-          "Plastic-free with bamboo cups and paper straws",
+        sustainabilityFeatureEn: "Plastic-free with bamboo cups and paper straws",
         coordinates: { lat: 18.7756, lng: 98.9856 },
         arMarkerId: "pen_cafe_marker",
         hero: {
@@ -192,14 +184,10 @@ export default function ARExperience() {
           nameEn: "Aunt Pen",
           role: "เจ้าของร้านกาแฟ",
           roleEn: "Café Owner",
-          story:
-            "ป้าเป็นเป็นคนแรกในย่านที่เลิกใช้พลาสติก เธอทำให้ร้านอื��น ๆ ตามมา",
-          storyEn:
-            "Aunt Pen was the first in the neighborhood to go plastic-free, inspiring other shops to follow",
-          voiceLine:
-            "ฉันเลิกใช้หลอดพลาสติกตั้งแต่ปี 2562 ใครจะรู้ว่ามันจะช่วยทะเลได้จริง ๆ",
-          voiceLineEn:
-            "I stopped using plastic straws since 2019. Who knew it would really help the ocean?",
+          story: "ป้าเป็นเป็นคนแรกในย่านที่เลิกใช้พลาสติก เธอทำให้ร้านอื��น ๆ ตามมา",
+          storyEn: "Aunt Pen was the first in the neighborhood to go plastic-free, inspiring other shops to follow",
+          voiceLine: "ฉันเลิกใช้หลอดพลาสติกตั้งแต่ปี 2562 ใครจะรู้ว่ามันจะช่วยทะเลได้จริง ๆ",
+          voiceLineEn: "I stopped using plastic straws since 2019. Who knew it would really help the ocean?",
           audioUrl: "/audio/pen-thai.mp3",
           audioUrlEn: "/audio/pen-english.mp3",
           imageUrl: "/images/aunt-pen.jpg",
@@ -207,20 +195,19 @@ export default function ARExperience() {
           achievements: [
             "ปลอดพลาสติก 100%",
             "ลูกค้าลดขยะ 5 ตัน/ปี",
-            "เป็นแรงบันดาลใจให้ร้าน 20+ ร้าน",
+            "เป็นแรงบันดาลใจให้ร้าน 20+ ร้าน"
           ],
           achievementsEn: [
             "100% plastic-free",
             "Customers reduced 5 tons/year waste",
-            "Inspired 20+ other shops",
-          ],
+            "Inspired 20+ other shops"
+          ]
         },
         rewardAmount: 10,
         shareTemplate: {
           thai: "พบกับฮีโร่ชุมชนที่ร้านป้าเป็น ♻️🇹🇭 #ZeroWaste #ChiangMai",
-          english:
-            "Met a community hero at Aunt Pen's Café ♻️🇹🇭 #ZeroWaste #ChiangMai",
-        },
+          english: "Met a community hero at Aunt Pen's Café ♻️🇹🇭 #ZeroWaste #ChiangMai"
+        }
       },
       ton_pao_village: {
         id: "ton_pao_village",
@@ -240,12 +227,9 @@ export default function ARExperience() {
           role: "ช่างทอผ้าอาวุโส",
           roleEn: "Master Weaver",
           story: "ยายมาลีสืบทอดภูมิปัญญาการย้อมผ้าจากคุณยายมา 4 รุ่น",
-          storyEn:
-            "Elder Malee inherited the wisdom of natural dyeing from her grandmother, 4 generations deep",
-          voiceLine:
-            "เราสืบทอดการย้อมผ้านี้มา 4 รุ่นแล้ว สีที่คุณเห็นมาจากใบไม้ล้วน ๆ",
-          voiceLineEn:
-            "We've inherited this dyeing tradition for 4 generations. The colors you see come purely from leaves.",
+          storyEn: "Elder Malee inherited the wisdom of natural dyeing from her grandmother, 4 generations deep",
+          voiceLine: "เราสืบทอดการย้อมผ้านี้มา 4 รุ่นแล้ว สีที่คุณเห็นมาจากใบไม้ล้วน ๆ",
+          voiceLineEn: "We've inherited this dyeing tradition for 4 generations. The colors you see come purely from leaves.",
           audioUrl: "/audio/malee-thai.mp3",
           audioUrlEn: "/audio/malee-english.mp3",
           imageUrl: "/images/elder-malee.jpg",
@@ -253,32 +237,29 @@ export default function ARExperience() {
           achievements: [
             "สืบทอดภูมิปัญญา 4 รุ่น",
             "สอนเด็กหนุ่มสาว 200+ คน",
-            "ขายผ้าไปทั่วโลก 30+ ประเทศ",
+            "ขายผ้าไปทั่วโลก 30+ ประเทศ"
           ],
           achievementsEn: [
             "4 generations of wisdom",
             "Taught 200+ young people",
-            "Fabrics sold to 30+ countries",
-          ],
+            "Fabrics sold to 30+ countries"
+          ]
         },
         rewardAmount: 12,
         shareTemplate: {
           thai: "พบกับยายมาลี นักทอผ้าระดับตำนาน ที่บ้านต้นเปาะ 🧵🇹🇭 #TraditionalCraft #ChiangMai",
-          english:
-            "Met legendary weaver Elder Malee at Ton Pao Village 🧵🇹🇭 #TraditionalCraft #ChiangMai",
-        },
+          english: "Met legendary weaver Elder Malee at Ton Pao Village 🧵🇹🇭 #TraditionalCraft #ChiangMai"
+        }
       },
       huai_kaew_waterfall: {
         id: "huai_kaew_waterfall",
-        name: "น้ำตกห้วยแก้ว",
+        name: "น้ำตกห้วย���ก้ว",
         nameEn: "Huai Kaew Waterfall",
         type: "tourist_spot",
         description: "น้ำตกที่มีระบบผลิตไฟฟ้าจากพลังน้ำขนาดเล็ก",
-        descriptionEn:
-          "Waterfall with small-scale hydroelectric power generation",
+        descriptionEn: "Waterfall with small-scale hydroelectric power generation",
         sustainabilityFeature: "ใช้พลังน้ำผลิตไฟฟ้าสำหรับเส้นทางเดิน",
-        sustainabilityFeatureEn:
-          "Hydroelectric power for walking trail lighting",
+        sustainabilityFeatureEn: "Hydroelectric power for walking trail lighting",
         coordinates: { lat: 18.8198, lng: 98.9245 },
         arMarkerId: "waterfall_marker",
         hero: {
@@ -288,11 +269,9 @@ export default function ARExperience() {
           role: "เจ้าหน้าที่อุทยาน",
           roleEn: "Park Ranger",
           story: "นิรันดร์ออกแบบระบบไฟฟ้าพลังน้ำที่ไม่รบกวนระบบนิเวศ",
-          storyEn:
-            "Niran designed the hydroelectric system that doesn't disturb the ecosystem",
+          storyEn: "Niran designed the hydroelectric system that doesn't disturb the ecosystem",
           voiceLine: "น้ำตกนี้ให้พลังงานสะอาดแก่เราทุกวัน โดยไม่ทำร้ายธรรมชาติ",
-          voiceLineEn:
-            "This waterfall gives us clean energy every day without harming nature.",
+          voiceLineEn: "This waterfall gives us clean energy every day without harming nature.",
           audioUrl: "/audio/niran-thai.mp3",
           audioUrlEn: "/audio/niran-english.mp3",
           imageUrl: "/images/ranger-niran.jpg",
@@ -300,21 +279,20 @@ export default function ARExperience() {
           achievements: [
             "ออกแบบระบบไฟฟ้าเป็นมิต���กับสิ่งแวดล้อม",
             "ลดการใช้ไฟฟ้าจากเชื้อเพลิงฟอสซิล 90%",
-            "เป็นต้นแบบอุทยาน 15 แห่ง",
+            "เป็นต้นแบบอุทยาน 15 แห่ง"
           ],
           achievementsEn: [
             "Designed eco-friendly power system",
             "Reduced fossil fuel electricity by 90%",
-            "Model for 15 other parks",
-          ],
+            "Model for 15 other parks"
+          ]
         },
         rewardAmount: 12,
         shareTemplate: {
-          thai: "พบกับนักอนุรักษ์พลังงานที่น้ำตกห้วยแก้ว ⚡🇹🇭 #CleanEnergy #ChiangMai",
-          english:
-            "Met an energy conservationist at Huai Kaew Waterfall ⚡🇹🇭 #CleanEnergy #ChiangMai",
-        },
-      },
+          thai: "พบกับนักอนุรักษ์พลังงานที่น้ำตกห้วยแก���ว ⚡🇹🇭 #CleanEnergy #ChiangMai",
+          english: "Met an energy conservationist at Huai Kaew Waterfall ⚡🇹🇭 #CleanEnergy #ChiangMai"
+        }
+      }
     };
 
     return mockLocations[id] || mockLocations.doi_pui_forest;
@@ -533,54 +511,114 @@ export default function ARExperience() {
   const startARExperience = async () => {
     try {
       // Check if we're on HTTPS (required for camera access)
-      if (location.protocol !== "https:" && location.hostname !== "localhost") {
-        alert(
-          "AR camera features require HTTPS. Please access this app via a secure connection (https://)",
-        );
+      if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        const thaiMessage = `⚠️ ต้องใช้ HTTPS เพื่อเข้าถึงกล้อง
+
+กรุณาใช้ลิงก์ที่ปลอดภัย (https://) แทน
+หรือใช้บริการ Netlify, Vercel, หรือ GitHub Pages
+
+ปัจจุบันคุณอยู่ที่: ${location.href}
+ต้องการ: https://your-domain.com`;
+
+        alert(thaiMessage);
         return;
       }
 
       // Check if getUserMedia is available
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        alert("Camera access is not available on this device/browser");
+        const thaiMessage = `❌ เบราว์เซอร์นี้ไม่รองรับการเข้าถึงกล้อง
+
+กรุณาใช้:
+• Chrome (แนะนำ)
+• Firefox
+• Safari (iOS 11+)
+• Edge
+
+หรือตรวจสอบการตั้งค่าเบราว์เซอร์`;
+        alert(thaiMessage);
         return;
       }
+
+      // Show loading state
+      console.log('🎥 กำลังขอสิทธิ์เข้าถึงกล้อง...');
 
       // Request camera permission with specific constraints
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: "environment", // Use back camera
-          width: { ideal: 1280 },
-          height: { ideal: 960 },
-        },
+          facingMode: 'environment', // Use back camera
+          width: { ideal: 1280, min: 640 },
+          height: { ideal: 960, min: 480 }
+        }
       });
 
       // Test that we got a valid stream
       if (stream && stream.getVideoTracks().length > 0) {
-        console.log("Camera access granted successfully");
+        console.log('✅ เข้าถึงกล้องสำเร็จ!');
+
+        // Test camera capabilities
+        const videoTrack = stream.getVideoTracks()[0];
+        const capabilities = videoTrack.getCapabilities ? videoTrack.getCapabilities() : {};
+        console.log('Camera capabilities:', capabilities);
+
         stream.getTracks().forEach((track) => track.stop()); // Stop test stream
         setArStarted(true);
       } else {
-        throw new Error("No video tracks available");
+        throw new Error('No video tracks available');
       }
     } catch (error) {
       console.error("Camera access error:", error);
 
-      let errorMessage = "Camera access is required for AR experience. ";
+      let thaiMessage = "❌ ไม่สามารถเข้าถึงกล้องได้\n\n";
 
-      if (error.name === "NotAllowedError") {
-        errorMessage += "Please allow camera permissions when prompted.";
-      } else if (error.name === "NotFoundError") {
-        errorMessage += "No camera found on this device.";
-      } else if (error.name === "NotSupportedError") {
-        errorMessage += "Camera access is not supported on this browser.";
-      } else if (error.name === "NotReadableError") {
-        errorMessage += "Camera is already in use by another application.";
+      if (error.name === 'NotAllowedError') {
+        thaiMessage += `🚫 คุณไม่อนุญาตให้เข้าถึงกล้อง
+
+วิธีแก้ไข:
+1. คลิก "อนุญาต" เมื่อเบราว์เซอร์ถาม
+2. ตรวจสอบไอคอน 🔒 ข้างบนแถบที่อยู่
+3. เปิดการอนุญาตกล้องในการตั้งค่า
+4. รีเฟรชหน้าเว็บและลองใหม่`;
+
+      } else if (error.name === 'NotFoundError') {
+        thaiMessage += `📷 ไม่พบกล้องในอุปกรณ์นี้
+
+วิธีแก้ไข:
+• ตรวจสอบว่าอุปกรณ์มีกล้อง
+• เสียบกล้อง USB (คอมพิวเตอร์)
+• รีสตาร์ทแอปกล้อง
+• ลองเบราว์เซอร์อื่น`;
+
+      } else if (error.name === 'NotSupportedError') {
+        thaiMessage += `⚠️ เบราว์เซอร์ไม่รองรับ WebRTC
+
+แนะนำให้ใช้:
+• Chrome มือถือ (แนะนำ)
+• Firefox
+• Safari (iOS 11+)`;
+
+      } else if (error.name === 'NotReadableError') {
+        thaiMessage += `🔒 กล้องถูกใช้งานโดยแอปอื่น
+
+วิธีแก้ไข:
+• ปิดแอปกล้องอื่น ๆ
+• ปิดแท็บเบราว์เซอร์ที่ใช้กล้อง
+• รีสตาร์ทเบราว์เซอร์`;
+
       } else {
-        errorMessage +=
-          "Please check camera permissions in your browser settings.";
+        thaiMessage += `🔧 เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ
+
+ลองวิธีเหล่านี้:
+• รีเฟรชหน้าเว็บ
+• ปิด-เปิดเบราว์เซอร์ใหม่
+• ตรวจสอบการตั้งค่าความเป็นส่วนตัว
+• ใช้เบราว์เซอร์อื่น
+
+ข้อผิดพลาด: ${error.message}`;
       }
 
+      alert(thaiMessage);
+    }
+  };
       alert(errorMessage);
     }
   };
@@ -891,15 +929,26 @@ export default function ARExperience() {
 
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
               <p className="text-sm text-blue-700 font-medium mb-2">
-                {language === "thai" ? "ขั้นตอนถัดไป:" : "Next Step:"}
-              </p>
-              <p className="text-sm text-blue-600">
                 {language === "thai"
-                  ? "สแกนเครื่องหมาย AR ใกล้ป้ายหรือจุดแลนด์มาร์กเพื่อพบกับฮีโร่ท้องถิ่น"
-                  : "Scan the AR marker near the sign or landmark to meet the local hero"}
+                  ? "ขั้นตอนถัดไป:"
+                  : "Next Step:"
+                }
               </p>
+              <p className="text-sm text-blue-600 mb-2">
+                {language === "thai"
+                  ? "กดปุ่มด้านล่างเพื่อเปิดกล้องและสแกนเครื่องหมาย AR"
+                  : "Tap the button below to open camera and scan AR marker"
+                }
+              </p>
+              {location.protocol !== 'https:' && location.hostname !== 'localhost' && (
+                <div className="mt-2 p-2 bg-orange-100 border border-orange-300 rounded text-xs text-orange-700">
+                  {language === "thai"
+                    ? "⚠️ ต้องใช้ HTTPS เพื่อเข้าถึงกล้อง กรุณาใช้ลิงก์ปลอดภัย"
+                    : "⚠️ HTTPS required for camera access. Please use secure link"
+                  }
+                </div>
+              )}
             </div>
-
             <div className="flex gap-3">
               <Button
                 onClick={() =>
@@ -920,7 +969,7 @@ export default function ARExperience() {
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white"
               >
                 <Camera className="h-4 w-4 mr-2" />
-                {language === "thai" ? "สแกน AR" : "Scan AR"}
+                {language === "thai" ? "🎥 เปิดกล้อง AR" : "🎥 Open AR Camera"}
               </Button>
             </div>
           </div>
@@ -1058,7 +1107,7 @@ export default function ARExperience() {
                 onClick={() => setShowLocalHero(false)}
                 className="flex-1"
               >
-                {language === "thai" ? "ดู AR ต่อ" : "Continue AR"}
+                {language === "thai" ? "ด�� AR ต่อ" : "Continue AR"}
               </Button>
             </div>
           </div>

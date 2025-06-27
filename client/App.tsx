@@ -11,6 +11,7 @@ import SmartRedirection from "./pages/SmartRedirection";
 import Leaderboard from "./pages/Leaderboard";
 import Redemption from "./pages/Redemption";
 import ARExperience from "./pages/ARExperience";
+import CameraTest from "./pages/CameraTest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/redemption" element={<Redemption />} />
           <Route path="/ar-experience" element={<ARExperience />} />
+          <Route path="/camera-test" element={<CameraTest />} />
           <Route path="/traffic" element={<SmartRedirection />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -14,6 +14,7 @@ import {
   awardGreenMiles,
   getUserProfile,
   estimateGreenMiles,
+  generateLeaderboard,
 } from "../services/green-miles";
 
 // Mock destinations in Chiang Mai area
@@ -204,6 +205,27 @@ export const getForecastHandler: RequestHandler = (req, res) => {
     res.json(forecast);
   } catch (error) {
     console.error("Error in getForecast:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getLeaderboardHandler: RequestHandler = (req, res) => {
+  try {
+    const { timeRange = "all-time", limit = 50 } = req.query;
+
+    const leaderboard = generateLeaderboard(
+      timeRange as "all-time" | "weekly" | "monthly",
+      parseInt(limit as string) || 50,
+    );
+
+    res.json({
+      leaderboard,
+      timeRange,
+      lastUpdated: new Date().toISOString(),
+      totalUsers: leaderboard.length,
+    });
+  } catch (error) {
+    console.error("Error in getLeaderboard:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

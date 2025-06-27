@@ -6,6 +6,7 @@ import {
   awardGreenMilesHandler,
   getUserProfileHandler,
   getForecastHandler,
+  getLeaderboardHandler,
 } from "./routes/tourism";
 
 export function createServer() {
@@ -28,6 +29,7 @@ export function createServer() {
   app.post("/api/green-miles", awardGreenMilesHandler);
   app.get("/api/user/:userId", getUserProfileHandler);
   app.get("/api/forecast", getForecastHandler);
+  app.get("/api/leaderboard", getLeaderboardHandler);
 
   return app;
 }

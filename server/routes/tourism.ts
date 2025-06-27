@@ -24,6 +24,12 @@ import {
   getUserRedemptions,
   getRedemptionById,
 } from "../services/redemption";
+import {
+  checkARTrigger,
+  verifyARQRCode,
+  getARLocations,
+  mockGPSArrival,
+} from "../services/location-detection";
 
 // Mock destinations in Chiang Mai area
 const MOCK_DESTINATIONS: AlternativeDestination[] = [
@@ -318,6 +324,79 @@ export const getUserRedemptionsHandler: RequestHandler = (req, res) => {
     res.json({ redemptions });
   } catch (error) {
     console.error("Error in getUserRedemptions:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const checkARLocationHandler: RequestHandler = (req, res) => {
+  try {
+    const { lat, lng } = req.query;
+
+    if (!lat || !lng) {
+      return res
+        .status(400)
+        .json({ error: "Latitude and longitude are required" });
+    }
+
+    const userLocation = {
+      lat: parseFloat(lat as string),
+      lng: parseFloat(lng as string),
+    };
+
+    const arTrigger = checkARTrigger(userLocation);
+
+    res.json({
+      canTriggerAR: !!arTrigger,
+      location: arTrigger,
+    });
+  } catch (error) {
+    console.error("Error in checkARLocation:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const verifyARQRHandler: RequestHandler = (req, res) => {
+  try {
+    const { qrCode } = req.body;
+
+    if (!qrCode) {
+      return res.status(400).json({ error: "QR code is required" });
+    }
+
+    const location = verifyARQRCode(qrCode);
+
+    res.json({
+      valid: !!location,
+      location,
+    });
+  } catch (error) {
+    console.error("Error in verifyARQR:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getARLocationsHandler: RequestHandler = (req, res) => {
+  try {
+    const locations = getARLocations();
+    res.json({ locations });
+  } catch (error) {
+    console.error("Error in getARLocations:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const mockArrivalHandler: RequestHandler = (req, res) => {
+  try {
+    const { locationId } = req.params;
+
+    if (!locationId) {
+      return res.status(400).json({ error: "Location ID is required" });
+    }
+
+    const result = mockGPSArrival(locationId);
+    res.json(result);
+  } catch (error) {
+    console.error("Error in mockArrival:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

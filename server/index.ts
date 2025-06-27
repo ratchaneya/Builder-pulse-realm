@@ -11,6 +11,10 @@ import {
   redeemRewardHandler,
   getPartnerLocationsHandler,
   getUserRedemptionsHandler,
+  checkARLocationHandler,
+  verifyARQRHandler,
+  getARLocationsHandler,
+  mockArrivalHandler,
 } from "./routes/tourism";
 
 export function createServer() {
@@ -40,6 +44,12 @@ export function createServer() {
   app.post("/api/redeem", redeemRewardHandler);
   app.get("/api/rewards/:rewardId/locations", getPartnerLocationsHandler);
   app.get("/api/user/:userId/redemptions", getUserRedemptionsHandler);
+
+  // AR Location API endpoints
+  app.get("/api/ar/check-location", checkARLocationHandler);
+  app.post("/api/ar/verify-qr", verifyARQRHandler);
+  app.get("/api/ar/locations", getARLocationsHandler);
+  app.get("/api/ar/mock-arrival/:locationId", mockArrivalHandler);
 
   return app;
 }

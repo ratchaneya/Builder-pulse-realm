@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { WarningBar } from "@/components/ui/warning-bar";
 import { SuggestionCard } from "@/components/ui/suggestion-card";
-import { Leaf, MapPin, RefreshCw, Route } from "lucide-react";
+import { QRScanner } from "@/components/ui/qr-scanner";
+import { Leaf, MapPin, RefreshCw, Route, Camera } from "lucide-react";
 
 const suggestionData = [
   {
@@ -34,11 +35,20 @@ const suggestionData = [
 
 export default function Index() {
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showQRScanner, setShowQRScanner] = useState(false);
   const navigate = useNavigate();
 
   const handleGoHere = (locationName: string) => {
     console.log(`Navigating to ${locationName}`);
-    navigate("/routes");
+    // Simulate arrival at destination and trigger AR experience
+    const locationMap: Record<string, string> = {
+      "Doi Suthep National Park": "doi_suthep",
+      "San Kamphaeng District": "san_kamphaeng",
+      "Mae Rim Valley": "mae_rim",
+    };
+
+    const locationId = locationMap[locationName] || "doi_suthep";
+    navigate(`/ar-experience?location=${locationId}`);
   };
 
   const handleLowCarbonRoute = (locationName: string) => {
@@ -60,6 +70,30 @@ export default function Index() {
     // Simulate refresh delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsRefreshing(false);
+  };
+
+  const handleQRScanSuccess = async (qrCode: string) => {
+    setShowQRScanner(false);
+
+    try {
+      // Verify QR code with backend
+      const response = await fetch("/api/ar/verify-qr", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ qrCode }),
+      });
+
+      const result = await response.json();
+
+      if (result.valid && result.location) {
+        navigate(`/ar-experience?location=${result.location.id}`);
+      } else {
+        alert("Invalid QR code. Please scan a valid destination QR code.");
+      }
+    } catch (error) {
+      console.error("Error verifying QR code:", error);
+      alert("Error verifying QR code. Please try again.");
+    }
   };
 
   return (
@@ -142,31 +176,40 @@ export default function Index() {
             Smart Route Planner
           </Button>
 
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-3">
+            <Button
+              onClick={() => setShowQRScanner(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              <Camera className="h-4 w-4 mr-2" />
+              AR Experience
+            </Button>
+
+            <Button
+              onClick={() => navigate("/redemption")}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
+            >
+              🎁 Rewards
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={handleCompareRoutes}
               variant="outline"
-              className="border-primary text-primary hover:bg-primary/5 text-xs"
+              className="border-primary text-primary hover:bg-primary/5"
             >
-              <MapPin className="h-3 w-3 mr-1" />
+              <MapPin className="h-4 w-4 mr-2" />
               Routes
             </Button>
 
             <Button
               onClick={() => navigate("/green-miles")}
               variant="outline"
-              className="border-primary text-primary hover:bg-primary/5 text-xs"
+              className="border-primary text-primary hover:bg-primary/5"
             >
-              <Leaf className="h-3 w-3 mr-1" />
+              <Leaf className="h-4 w-4 mr-2" />
               Miles
-            </Button>
-
-            <Button
-              onClick={() => navigate("/redemption")}
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary/5 text-xs"
-            >
-              🎁 Rewards
             </Button>
           </div>
 
@@ -179,6 +222,13 @@ export default function Index() {
             More quiet spots
           </Button>
         </section>
+
+        {/* QR Scanner */}
+        <QRScanner
+          isOpen={showQRScanner}
+          onScanSuccess={handleQRScanSuccess}
+          onClose={() => setShowQRScanner(false)}
+        />
 
         {/* Footer Info */}
         <footer className="pt-6 text-center">

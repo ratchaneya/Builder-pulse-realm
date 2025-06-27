@@ -7,52 +7,51 @@
 /* TailwindV4 theme and design tokens */
 @theme {
   /* Fonts */
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
-  /* Theme and design tokens
-   * Example, adding more colors (for a figma design)
-   *  --color-midnight: #121063;
-   *  --color-tahiti: #3ab7bf;
-   *  --color-bermuda: #78dcca;
-   *
-   * Usage:
-   * Now utilities like bg-midnight, text-tahiti, and fill-bermuda will be available in your project
-   * in addition to the default colors.
-   */
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(222.2 84% 4.9%);
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
+  /* Sustainable Tourism App - Nature Theme */
+  --color-forest-green: hsl(140 40% 25%);
+  --color-sage-green: hsl(140 20% 45%);
+  --color-mint-green: hsl(140 30% 65%);
+  --color-earth-brown: hsl(30 25% 35%);
+  --color-sky-blue: hsl(200 50% 70%);
+  --color-warning-red: hsl(0 75% 55%);
+  --color-nature-gray: hsl(140 10% 85%);
+  --color-soft-cream: hsl(45 20% 96%);
+
+  --color-background: hsl(45 20% 96%);
+  --color-foreground: hsl(140 40% 15%);
 
   --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222.2 84% 4.9%);
+  --color-card-foreground: hsl(140 40% 15%);
 
   --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(222.2 84% 4.9%);
+  --color-popover-foreground: hsl(140 40% 15%);
 
-  --color-primary: hsl(222.2 47.4% 11.2%);
-  --color-primary-foreground: hsl(210 40% 98%);
+  --color-primary: hsl(140 40% 25%);
+  --color-primary-foreground: hsl(0 0% 100%);
 
-  --color-secondary: hsl(210 40% 96.1%);
-  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --color-secondary: hsl(140 10% 90%);
+  --color-secondary-foreground: hsl(140 40% 25%);
 
-  --color-muted: hsl(210 40% 96.1%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-muted: hsl(140 10% 85%);
+  --color-muted-foreground: hsl(140 20% 45%);
 
-  --color-accent: hsl(210 40% 96.1%);
-  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+  --color-accent: hsl(140 30% 65%);
+  --color-accent-foreground: hsl(140 40% 15%);
 
-  --color-destructive: hsl(0 84.2% 60.2%);
-  --color-destructive-foreground: hsl(210 40% 98%);
+  --color-destructive: hsl(0 75% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
 
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(222.2 84% 4.9%);
+  --color-border: hsl(140 10% 85%);
+  --color-input: hsl(140 10% 90%);
+  --color-ring: hsl(140 40% 25%);
 
   --color-sidebar-background: hsl(0 0% 98%);
 

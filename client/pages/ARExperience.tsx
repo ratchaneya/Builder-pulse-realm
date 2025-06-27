@@ -156,7 +156,7 @@ export default function ARExperience() {
           storyEn:
             "Somchai has protected Doi Pui forest for 15 years, planting new trees annually and teaching youth forest conservation",
           voiceLine:
-            "ในป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอย��่กับป่า",
+            "ในป่าผ��นนี้มีต้นไม้มากกว่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอยู่กับป่า",
           voiceLineEn:
             "This forest has over 300 tree species. We plant new ones every year. The forest will stay with us if we stay with the forest.",
           audioUrl: "/audio/somchai-thai.mp3",
@@ -176,7 +176,7 @@ export default function ARExperience() {
         },
         rewardAmount: 15,
         shareTemplate: {
-          thai: "พบกับผู้พิทักษ์ป่าจริง ๆ ที่ดอยปุย 🌲🇹🇭 #EcoHero #ChiangMai",
+          thai: "พบกับ��ู้พิทักษ์ป่าจริง ๆ ที่ดอยปุย 🌲🇹🇭 #EcoHero #ChiangMai",
           english:
             "Met a real forest guardian at Doi Pui 🌲🇹🇭 #EcoHero #ChiangMai",
         },
@@ -195,14 +195,43 @@ export default function ARExperience() {
 
   const loadARFramework = async () => {
     try {
-      // Load AR.js framework
-      const script = document.createElement("script");
-      script.src =
-        "https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.js";
-      script.onload = () => {
-        initializeARScene();
+      // Check if we're on HTTPS
+      if (location.protocol !== "https:" && location.hostname !== "localhost") {
+        alert(
+          "AR features require HTTPS. Please access the app via a secure connection.",
+        );
+        return;
+      }
+
+      // Load A-Frame first
+      const aframeScript = document.createElement("script");
+      aframeScript.src = "https://aframe.io/releases/1.4.0/aframe.min.js";
+
+      aframeScript.onload = () => {
+        // Then load AR.js
+        const arScript = document.createElement("script");
+        arScript.src =
+          "https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.js";
+        arScript.onload = () => {
+          initializeARScene();
+        };
+        arScript.onerror = () => {
+          console.error("Failed to load AR.js");
+          alert(
+            "Failed to load AR library. Please check your internet connection.",
+          );
+        };
+        document.head.appendChild(arScript);
       };
-      document.head.appendChild(script);
+
+      aframeScript.onerror = () => {
+        console.error("Failed to load A-Frame");
+        alert(
+          "Failed to load AR framework. Please check your internet connection.",
+        );
+      };
+
+      document.head.appendChild(aframeScript);
     } catch (error) {
       console.error("Error loading AR framework:", error);
     }
@@ -211,15 +240,29 @@ export default function ARExperience() {
   const initializeARScene = () => {
     if (!arSceneRef.current || !location) return;
 
+    // Clear any existing content
+    arSceneRef.current.innerHTML = "";
+
     // Create AR scene with marker detection
     const scene = document.createElement("a-scene");
-    scene.setAttribute("embedded", "");
+    scene.setAttribute("embedded", "true");
     scene.setAttribute(
       "arjs",
-      "sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;",
+      JSON.stringify({
+        sourceType: "webcam",
+        debugUIEnabled: false,
+        detectionMode: "mono_and_matrix",
+        matrixCodeType: "3x3",
+        trackingMethod: "best",
+        sourceWidth: 1280,
+        sourceHeight: 960,
+        displayWidth: 1280,
+        displayHeight: 960,
+      }),
     );
     scene.style.width = "100%";
     scene.style.height = "100%";
+    scene.style.zIndex = "1";
 
     // Create marker entity
     const marker = document.createElement("a-marker");
@@ -356,13 +399,56 @@ export default function ARExperience() {
 
   const startARExperience = async () => {
     try {
-      // Request camera permission
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      stream.getTracks().forEach((track) => track.stop()); // Stop immediately after permission
-      setArStarted(true);
+      // Check if we're on HTTPS (required for camera access)
+      if (location.protocol !== "https:" && location.hostname !== "localhost") {
+        alert(
+          "AR camera features require HTTPS. Please access this app via a secure connection (https://)",
+        );
+        return;
+      }
+
+      // Check if getUserMedia is available
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Camera access is not available on this device/browser");
+        return;
+      }
+
+      // Request camera permission with specific constraints
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: "environment", // Use back camera
+          width: { ideal: 1280 },
+          height: { ideal: 960 },
+        },
+      });
+
+      // Test that we got a valid stream
+      if (stream && stream.getVideoTracks().length > 0) {
+        console.log("Camera access granted successfully");
+        stream.getTracks().forEach((track) => track.stop()); // Stop test stream
+        setArStarted(true);
+      } else {
+        throw new Error("No video tracks available");
+      }
     } catch (error) {
-      console.error("Camera permission denied:", error);
-      alert("Camera access is required for AR experience");
+      console.error("Camera access error:", error);
+
+      let errorMessage = "Camera access is required for AR experience. ";
+
+      if (error.name === "NotAllowedError") {
+        errorMessage += "Please allow camera permissions when prompted.";
+      } else if (error.name === "NotFoundError") {
+        errorMessage += "No camera found on this device.";
+      } else if (error.name === "NotSupportedError") {
+        errorMessage += "Camera access is not supported on this browser.";
+      } else if (error.name === "NotReadableError") {
+        errorMessage += "Camera is already in use by another application.";
+      } else {
+        errorMessage +=
+          "Please check camera permissions in your browser settings.";
+      }
+
+      alert(errorMessage);
     }
   };
 
@@ -657,7 +743,7 @@ export default function ARExperience() {
               </Badge>
               <p className="text-sm text-muted-foreground">
                 {language === "thai"
-                  ? "คุณมาถึงจุดหมายที่ยั่งยืนแล้ว!"
+                  ? "คุณมา��ึงจุดหมายที่ยั่งยืนแล้ว!"
                   : "You've arrived at a certified sustainable destination!"}
               </p>
             </div>

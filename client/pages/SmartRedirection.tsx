@@ -163,9 +163,9 @@ export default function SmartRedirection() {
 
         {/* Gamification Panel */}
         <GamificationPanel
-          userPoints={(1, 247)}
+          userPoints={1247}
           level={3}
-          nextLevelPoints={(1, 500)}
+          nextLevelPoints={1500}
           todaySavings={{
             co2: 2.3,
             time: 35,

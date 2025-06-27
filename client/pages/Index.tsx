@@ -135,12 +135,32 @@ export default function Index() {
         {/* Action Buttons */}
         <section className="space-y-3 pt-4">
           <Button
-            onClick={handleCompareRoutes}
+            onClick={() => navigate("/route-planning")}
             className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             <Route className="h-4 w-4 mr-2" />
-            Compare Travel Routes
+            Smart Route Planner
           </Button>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Button
+              onClick={handleCompareRoutes}
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/5"
+            >
+              <MapPin className="h-4 w-4 mr-2" />
+              Compare Routes
+            </Button>
+
+            <Button
+              onClick={() => navigate("/green-miles")}
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/5"
+            >
+              <Leaf className="h-4 w-4 mr-2" />
+              Green Miles
+            </Button>
+          </div>
 
           <Button
             onClick={handleMoreQuietSpots}

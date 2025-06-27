@@ -2,13 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
-  </head>
+    <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
 
+    <!-- AR.js and camera requirements -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Permissions Policy for camera access -->
+    <meta http-equiv="Permissions-Policy" content="camera=self" />
+
+    <title>EcoTravel - Sustainable Tourism Chiang Mai</title>
+    <meta
+      name="description"
+      content="Sustainable tourism app for Chiang Mai with AR experiences and eco-friendly travel suggestions"
+    />
+  </head>
   <body>
     <div id="root"></div>
-
     <script type="module" src="/client/main.tsx"></script>
   </body>
 </html>

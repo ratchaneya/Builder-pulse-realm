@@ -1,6 +1,12 @@
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import {
+  getTravelDataHandler,
+  awardGreenMilesHandler,
+  getUserProfileHandler,
+  getForecastHandler,
+} from "./routes/tourism";
 
 export function createServer() {
   const app = express();
@@ -16,6 +22,12 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Tourism API endpoints
+  app.post("/api/travel-data", getTravelDataHandler);
+  app.post("/api/green-miles", awardGreenMilesHandler);
+  app.get("/api/user/:userId", getUserProfileHandler);
+  app.get("/api/forecast", getForecastHandler);
 
   return app;
 }

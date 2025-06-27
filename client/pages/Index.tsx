@@ -142,23 +142,31 @@ export default function Index() {
             Smart Route Planner
           </Button>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-2">
             <Button
               onClick={handleCompareRoutes}
               variant="outline"
-              className="border-primary text-primary hover:bg-primary/5"
+              className="border-primary text-primary hover:bg-primary/5 text-xs"
             >
-              <MapPin className="h-4 w-4 mr-2" />
-              Compare Routes
+              <MapPin className="h-3 w-3 mr-1" />
+              Routes
             </Button>
 
             <Button
               onClick={() => navigate("/green-miles")}
               variant="outline"
-              className="border-primary text-primary hover:bg-primary/5"
+              className="border-primary text-primary hover:bg-primary/5 text-xs"
             >
-              <Leaf className="h-4 w-4 mr-2" />
-              Green Miles
+              <Leaf className="h-3 w-3 mr-1" />
+              Miles
+            </Button>
+
+            <Button
+              onClick={() => navigate("/redemption")}
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/5 text-xs"
+            >
+              🎁 Rewards
             </Button>
           </div>
 

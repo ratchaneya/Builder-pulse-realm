@@ -9,6 +9,7 @@ import RoutePlanning from "./pages/RoutePlanning";
 import GreenMilesDashboard from "./pages/GreenMilesDashboard";
 import SmartRedirection from "./pages/SmartRedirection";
 import Leaderboard from "./pages/Leaderboard";
+import Redemption from "./pages/Redemption";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/route-planning" element={<RoutePlanning />} />
           <Route path="/green-miles" element={<GreenMilesDashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/redemption" element={<Redemption />} />
           <Route path="/traffic" element={<SmartRedirection />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

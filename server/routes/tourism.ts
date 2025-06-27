@@ -16,6 +16,14 @@ import {
   estimateGreenMiles,
   generateLeaderboard,
 } from "../services/green-miles";
+import {
+  listAvailableRewards,
+  getEligibleRewards,
+  redeemReward,
+  getPartnerLocations,
+  getUserRedemptions,
+  getRedemptionById,
+} from "../services/redemption";
 
 // Mock destinations in Chiang Mai area
 const MOCK_DESTINATIONS: AlternativeDestination[] = [
@@ -226,6 +234,90 @@ export const getLeaderboardHandler: RequestHandler = (req, res) => {
     });
   } catch (error) {
     console.error("Error in getLeaderboard:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getRewardsHandler: RequestHandler = (req, res) => {
+  try {
+    const { userId } = req.query;
+
+    if (!userId) {
+      const allRewards = listAvailableRewards(0);
+      return res.json({ rewards: allRewards });
+    }
+
+    const userProfile = getUserProfile(userId as string);
+    const userPoints = userProfile?.totalGreenMiles || 0;
+
+    const allRewards = listAvailableRewards(userPoints);
+    const eligibleRewards = getEligibleRewards(userPoints);
+
+    res.json({
+      allRewards,
+      eligibleRewards,
+      userPoints,
+    });
+  } catch (error) {
+    console.error("Error in getRewards:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const redeemRewardHandler: RequestHandler = async (req, res) => {
+  try {
+    const { userId, rewardId } = req.body;
+
+    if (!userId || !rewardId) {
+      return res
+        .status(400)
+        .json({ error: "User ID and reward ID are required" });
+    }
+
+    const result = await redeemReward(userId, rewardId);
+
+    if (result.success) {
+      res.json({
+        success: true,
+        redemption: result.redemption,
+        message: "Reward redeemed successfully!",
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        error: result.error,
+      });
+    }
+  } catch (error) {
+    console.error("Error in redeemReward:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getPartnerLocationsHandler: RequestHandler = (req, res) => {
+  try {
+    const { rewardId } = req.params;
+
+    const locations = getPartnerLocations(rewardId);
+    res.json({ locations });
+  } catch (error) {
+    console.error("Error in getPartnerLocations:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getUserRedemptionsHandler: RequestHandler = (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    const redemptions = getUserRedemptions(userId);
+    res.json({ redemptions });
+  } catch (error) {
+    console.error("Error in getUserRedemptions:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

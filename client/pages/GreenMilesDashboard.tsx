@@ -289,21 +289,32 @@ export default function GreenMilesDashboard() {
         {/* Action Buttons */}
         <div className="space-y-3">
           <Button
-            onClick={() => navigate("/route-planning")}
-            className="w-full"
+            onClick={() => navigate("/redemption")}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             <Trophy className="h-4 w-4 mr-2" />
-            Earn More Miles
+            Redeem Rewards
           </Button>
 
-          <Button
-            onClick={() => navigate("/leaderboard")}
-            variant="outline"
-            className="w-full"
-          >
-            <TrendingUp className="h-4 w-4 mr-2" />
-            View Leaderboard
-          </Button>
+          <div className="grid grid-cols-2 gap-3">
+            <Button
+              onClick={() => navigate("/route-planning")}
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/5"
+            >
+              <Leaf className="h-4 w-4 mr-2" />
+              Earn Miles
+            </Button>
+
+            <Button
+              onClick={() => navigate("/leaderboard")}
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/5"
+            >
+              <TrendingUp className="h-4 w-4 mr-2" />
+              Leaderboard
+            </Button>
+          </div>
         </div>
 
         {/* Tips */}

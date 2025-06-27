@@ -7,6 +7,10 @@ import {
   getUserProfileHandler,
   getForecastHandler,
   getLeaderboardHandler,
+  getRewardsHandler,
+  redeemRewardHandler,
+  getPartnerLocationsHandler,
+  getUserRedemptionsHandler,
 } from "./routes/tourism";
 
 export function createServer() {
@@ -30,6 +34,12 @@ export function createServer() {
   app.get("/api/user/:userId", getUserProfileHandler);
   app.get("/api/forecast", getForecastHandler);
   app.get("/api/leaderboard", getLeaderboardHandler);
+
+  // Redemption API endpoints
+  app.get("/api/rewards", getRewardsHandler);
+  app.post("/api/redeem", redeemRewardHandler);
+  app.get("/api/rewards/:rewardId/locations", getPartnerLocationsHandler);
+  app.get("/api/user/:userId/redemptions", getUserRedemptionsHandler);
 
   return app;
 }

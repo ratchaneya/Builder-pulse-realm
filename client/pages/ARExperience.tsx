@@ -13,6 +13,11 @@ import {
   Leaf,
   Award,
   X,
+  Share2,
+  Languages,
+  Play,
+  Pause,
+  RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,118 +30,162 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
+interface ARHero {
+  id: string;
+  name: string;
+  nameEn: string;
+  role: string;
+  roleEn: string;
+  story: string;
+  storyEn: string;
+  voiceLine: string;
+  voiceLineEn: string;
+  audioUrl: string;
+  audioUrlEn: string;
+  imageUrl: string;
+  avatarUrl: string;
+  achievements: string[];
+  achievementsEn: string[];
+}
+
 interface ARLocation {
   id: string;
   name: string;
+  nameEn: string;
+  type: "tourist_spot" | "community_spot";
   description: string;
-  localHero: {
-    name: string;
-    story: string;
-    videoUrl: string;
-    audioUrl: string;
-  };
-  ecoElements: {
-    waterRefill: boolean;
-    compostBin: boolean;
-    zeroWaste: boolean;
-    solarPower: boolean;
-  };
-  coordinates: {
-    lat: number;
-    lng: number;
+  descriptionEn: string;
+  sustainabilityFeature: string;
+  sustainabilityFeatureEn: string;
+  coordinates: { lat: number; lng: number };
+  arMarkerId: string;
+  hero: ARHero;
+  rewardAmount: number;
+  shareTemplate: {
+    thai: string;
+    english: string;
   };
 }
 
-const arLocations: Record<string, ARLocation> = {
-  doi_suthep: {
-    id: "doi_suthep",
-    name: "Doi Suthep National Park",
-    description:
-      "Sacred mountain temple with stunning city views and commitment to environmental preservation. This temple has been carbon-neutral since 2020.",
-    localHero: {
-      name: "Monk Thich Minh An",
-      story:
-        "Led the temple's transformation to solar power and zero-waste practices, inspiring 50+ temples across Thailand to follow sustainable practices.",
-      videoUrl: "/videos/monk-hero.mp4",
-      audioUrl: "/audio/monk-story.mp3",
-    },
-    ecoElements: {
-      waterRefill: true,
-      compostBin: true,
-      zeroWaste: true,
-      solarPower: true,
-    },
-    coordinates: { lat: 18.8047, lng: 98.9284 },
-  },
-  mae_rim: {
-    id: "mae_rim",
-    name: "Mae Rim Organic Farm",
-    description:
-      "Pioneering organic farming and permaculture education center. Demonstrates sustainable agriculture practices to over 1000 visitors monthly.",
-    localHero: {
-      name: "Farmer Somchai",
-      story:
-        "Converted 50 hectares from chemical farming to organic methods, increased biodiversity by 300% and created jobs for 15 local families.",
-      videoUrl: "/videos/farmer-hero.mp4",
-      audioUrl: "/audio/farmer-story.mp3",
-    },
-    ecoElements: {
-      waterRefill: true,
-      compostBin: true,
-      zeroWaste: true,
-      solarPower: true,
-    },
-    coordinates: { lat: 18.9167, lng: 98.8833 },
-  },
-  san_kamphaeng: {
-    id: "san_kamphaeng",
-    name: "San Kamphaeng Handicrafts Village",
-    description:
-      "Traditional artisan community using only natural materials and ancient techniques. Zero chemical dyes, 100% renewable energy.",
-    localHero: {
-      name: "Artisan Malee",
-      story:
-        "Preserved traditional weaving techniques and trained 200+ young artisans in sustainable craft-making using only natural dyes from local plants.",
-      videoUrl: "/videos/artisan-hero.mp4",
-      audioUrl: "/audio/artisan-story.mp3",
-    },
-    ecoElements: {
-      waterRefill: true,
-      compostBin: true,
-      zeroWaste: true,
-      solarPower: false,
-    },
-    coordinates: { lat: 18.745, lng: 99.1167 },
-  },
+const locationMapping: Record<string, string> = {
+  doi_suthep: "doi_pui_forest",
+  mae_rim: "ton_pao_village",
+  san_kamphaeng: "aunt_pen_cafe",
+  doi_pui_forest: "doi_pui_forest",
+  aunt_pen_cafe: "aunt_pen_cafe",
+  ton_pao_village: "ton_pao_village",
+  huai_kaew_waterfall: "huai_kaew_waterfall",
 };
 
 export default function ARExperience() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const locationId = searchParams.get("location") || "doi_suthep";
+  const locationParam = searchParams.get("location") || "doi_suthep";
+  const locationId = locationMapping[locationParam] || "doi_pui_forest";
 
   const [arStarted, setArStarted] = useState(false);
   const [location, setLocation] = useState<ARLocation | null>(null);
   const [showWelcome, setShowWelcome] = useState(false);
   const [showLocalHero, setShowLocalHero] = useState(false);
+  const [showMarkerScanner, setShowMarkerScanner] = useState(false);
+  const [markerDetected, setMarkerDetected] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [rewardClaimed, setRewardClaimed] = useState(false);
   const [arElementsVisible, setArElementsVisible] = useState(false);
+  const [language, setLanguage] = useState<"thai" | "english">("thai");
+  const [showShare, setShowShare] = useState(false);
+  const [showSubtitles, setShowSubtitles] = useState(true);
+  const [currentSubtitle, setCurrentSubtitle] = useState("");
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const arSceneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const loc = arLocations[locationId];
-    if (loc) {
-      setLocation(loc);
-      // Simulate arrival confirmation
+    loadLocationData();
+  }, [locationId]);
+
+  const loadLocationData = async () => {
+    try {
+      // In a real app, fetch from API
+      const response = await fetch(`/api/ar/location/${locationId}`);
+      if (response.ok) {
+        const locationData = await response.json();
+        setLocation(locationData);
+      } else {
+        // Use mock data for demo
+        setLocation(getMockLocation(locationId));
+      }
+
+      // Simulate arrival and prompt for marker scanning
+      setTimeout(() => {
+        setShowWelcome(true);
+      }, 1000);
+    } catch (error) {
+      console.error("Error loading location:", error);
+      setLocation(getMockLocation(locationId));
       setTimeout(() => {
         setShowWelcome(true);
       }, 1000);
     }
-  }, [locationId]);
+  };
+
+  const getMockLocation = (id: string): ARLocation => {
+    const mockLocations: Record<string, ARLocation> = {
+      doi_pui_forest: {
+        id: "doi_pui_forest",
+        name: "ป่าดอยปุย",
+        nameEn: "Doi Pui Forest",
+        type: "tourist_spot",
+        description: "ป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เป็นปอดของเชียงใหม่",
+        descriptionEn:
+          "This forest has over 300 tree species and serves as Chiang Mai's lungs",
+        sustainabilityFeature:
+          "ใช้พลังงานแสงอาทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
+        sustainabilityFeatureEn: "Solar-powered visitor facilities",
+        coordinates: { lat: 18.8547, lng: 98.9184 },
+        arMarkerId: "doi_pui_marker",
+        hero: {
+          id: "forest_guide_somchai",
+          name: "ผู้ดูแลป่า สมชาย",
+          nameEn: "Forest Guardian Somchai",
+          role: "นักอนุรักษ์ป่า",
+          roleEn: "Forest Conservationist",
+          story:
+            "สมชายดูแลป่าดอยปุยมา 15 ปี ปลูกต้นไม้ใหม่ทุกปี และสอนเยาวชนให้รักษาป่า",
+          storyEn:
+            "Somchai has protected Doi Pui forest for 15 years, planting new trees annually and teaching youth forest conservation",
+          voiceLine:
+            "ในป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอย��่กับป่า",
+          voiceLineEn:
+            "This forest has over 300 tree species. We plant new ones every year. The forest will stay with us if we stay with the forest.",
+          audioUrl: "/audio/somchai-thai.mp3",
+          audioUrlEn: "/audio/somchai-english.mp3",
+          imageUrl: "/images/somchai-forest.jpg",
+          avatarUrl: "/avatars/somchai-3d.glb",
+          achievements: [
+            "ปลูกต้นไม้ไปแล้ว 2,000 ต้น",
+            "ฝึกอบรมเยาวชน 500+ คน",
+            "ลดการทำลายป่า 80%",
+          ],
+          achievementsEn: [
+            "Planted 2,000+ trees",
+            "Trained 500+ youth",
+            "Reduced deforestation by 80%",
+          ],
+        },
+        rewardAmount: 15,
+        shareTemplate: {
+          thai: "พบกับผู้พิทักษ์ป่าจริง ๆ ที่ดอยปุย 🌲🇹🇭 #EcoHero #ChiangMai",
+          english:
+            "Met a real forest guardian at Doi Pui 🌲🇹🇭 #EcoHero #ChiangMai",
+        },
+      },
+      // Add other mock locations as needed
+    };
+
+    return mockLocations[id] || mockLocations.doi_pui_forest;
+  };
 
   useEffect(() => {
     if (arStarted) {
@@ -162,25 +211,66 @@ export default function ARExperience() {
   const initializeARScene = () => {
     if (!arSceneRef.current || !location) return;
 
-    // Create AR scene
+    // Create AR scene with marker detection
     const scene = document.createElement("a-scene");
     scene.setAttribute("embedded", "");
-    scene.setAttribute("arjs", "sourceType: webcam; debugUIEnabled: false;");
+    scene.setAttribute(
+      "arjs",
+      "sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;",
+    );
     scene.style.width = "100%";
     scene.style.height = "100%";
 
-    // Create welcome text
-    const welcomeText = document.createElement("a-text");
-    welcomeText.setAttribute("position", "0 2 -3");
-    welcomeText.setAttribute("scale", "2 2 2");
-    welcomeText.setAttribute("color", "#4CAF50");
-    welcomeText.setAttribute("align", "center");
-    welcomeText.setAttribute("value", `Welcome to ${location.name}!`);
-    welcomeText.setAttribute(
-      "animation",
-      "property: rotation; to: 0 360 0; loop: true; dur: 10000",
+    // Create marker entity
+    const marker = document.createElement("a-marker");
+    marker.setAttribute("preset", "custom");
+    marker.setAttribute("type", "pattern");
+    marker.setAttribute("url", `/markers/${location.arMarkerId}.patt`);
+    marker.setAttribute("smooth", "true");
+    marker.setAttribute("smoothCount", "10");
+    marker.setAttribute("smoothTolerance", "0.01");
+    marker.setAttribute("smoothThreshold", "5");
+
+    // Marker detection events
+    marker.addEventListener("markerFound", () => {
+      setMarkerDetected(true);
+      setArElementsVisible(true);
+    });
+
+    marker.addEventListener("markerLost", () => {
+      setMarkerDetected(false);
+    });
+
+    // Create floating place introduction
+    const placeTitle = document.createElement("a-text");
+    placeTitle.setAttribute("position", "0 2 0");
+    placeTitle.setAttribute("scale", "1.5 1.5 1.5");
+    placeTitle.setAttribute("color", "#2E7D32");
+    placeTitle.setAttribute("align", "center");
+    placeTitle.setAttribute(
+      "value",
+      language === "thai" ? location.name : location.nameEn,
     );
-    scene.appendChild(welcomeText);
+    placeTitle.setAttribute(
+      "animation",
+      "property: position; to: 0 2.5 0; dir: alternate; loop: true; dur: 3000; easing: easeInOutSine",
+    );
+    marker.appendChild(placeTitle);
+
+    // Sustainability feature text
+    const sustainabilityText = document.createElement("a-text");
+    sustainabilityText.setAttribute("position", "0 1.3 0");
+    sustainabilityText.setAttribute("scale", "0.8 0.8 0.8");
+    sustainabilityText.setAttribute("color", "#4CAF50");
+    sustainabilityText.setAttribute("align", "center");
+    sustainabilityText.setAttribute("width", "6");
+    sustainabilityText.setAttribute(
+      "value",
+      language === "thai"
+        ? location.sustainabilityFeature
+        : location.sustainabilityFeatureEn,
+    );
+    marker.appendChild(sustainabilityText);
 
     // Create location description
     const descText = document.createElement("a-text");
@@ -279,8 +369,46 @@ export default function ARExperience() {
   const playHeroStory = () => {
     setShowLocalHero(true);
     if (audioRef.current) {
+      audioRef.current.src =
+        language === "thai"
+          ? location?.hero.audioUrl || ""
+          : location?.hero.audioUrlEn || "";
       audioRef.current.play();
       setAudioPlaying(true);
+
+      // Show subtitles
+      if (showSubtitles && location) {
+        setCurrentSubtitle(
+          language === "thai"
+            ? location.hero.voiceLine
+            : location.hero.voiceLineEn,
+        );
+      }
+    }
+  };
+
+  const handleShare = async () => {
+    if (!location) return;
+
+    const shareText =
+      language === "thai"
+        ? location.shareTemplate.thai
+        : location.shareTemplate.english;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `EcoTravel - ${language === "thai" ? location.name : location.nameEn}`,
+          text: shareText,
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.log("Share cancelled or failed");
+      }
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(shareText + " " + window.location.href);
+      alert("Share text copied to clipboard!");
     }
   };
 
@@ -296,6 +424,11 @@ export default function ARExperience() {
   };
 
   const claimBonusReward = async () => {
+    if (!location || !markerDetected) {
+      alert("Please scan the AR marker first to claim your reward!");
+      return;
+    }
+
     try {
       const response = await fetch("/api/green-miles", {
         method: "POST",
@@ -305,29 +438,30 @@ export default function ARExperience() {
           route: {
             origin: { name: "Nimman Road", lat: 18.7984, lng: 98.9681 },
             destination: {
-              name: location?.name || "",
-              lat: location?.coordinates.lat || 0,
-              lng: location?.coordinates.lng || 0,
+              name: language === "thai" ? location.name : location.nameEn,
+              lat: location.coordinates.lat,
+              lng: location.coordinates.lng,
             },
             mode: {
-              mode: "bike",
-              name: "Bicycle",
-              icon: "bike",
+              mode: "walk",
+              name: "Walking",
+              icon: "walk",
               emissionFactor: 0,
             },
-            distance: 15,
-            duration: 45,
+            distance: 5,
+            duration: 30,
             co2Emissions: 0,
           },
-          isOutsideCity: true,
+          isOutsideCity: location.type === "tourist_spot",
           isRecommendedZone: true,
+          bonusAmount: location.rewardAmount,
         }),
       });
 
       const result = await response.json();
       if (result.success) {
         setRewardClaimed(true);
-        setTimeout(() => setRewardClaimed(false), 3000);
+        setTimeout(() => setRewardClaimed(false), 5000);
       }
     } catch (error) {
       console.error("Error claiming reward:", error);
@@ -402,64 +536,99 @@ export default function ARExperience() {
       )}
 
       {/* AR Controls Overlay */}
-      {arStarted && arElementsVisible && (
+      {arStarted && (
         <div className="absolute bottom-0 left-0 right-0 z-40 bg-black/70 backdrop-blur-sm p-4">
           <div className="container max-w-md mx-auto space-y-3">
-            {/* Eco Elements Indicators */}
-            <div className="flex justify-center gap-4 mb-4">
-              {location.ecoElements.waterRefill && (
-                <div className="text-center">
-                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mb-1">
-                    <Droplets className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="text-xs text-white">Water</span>
+            {/* Marker Detection Status */}
+            <div className="text-center mb-4">
+              {markerDetected ? (
+                <div className="bg-green-600 text-white px-4 py-2 rounded-full inline-flex items-center gap-2">
+                  <Camera className="h-4 w-4" />
+                  <span className="text-sm font-medium">
+                    {language === "thai"
+                      ? "พบเครื่องหมาย AR!"
+                      : "AR Marker Detected!"}
+                  </span>
                 </div>
-              )}
-              {location.ecoElements.compostBin && (
-                <div className="text-center">
-                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mb-1">
-                    <Recycle className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="text-xs text-white">Compost</span>
-                </div>
-              )}
-              {location.ecoElements.zeroWaste && (
-                <div className="text-center">
-                  <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mb-1">
-                    <Leaf className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="text-xs text-white">Zero Waste</span>
-                </div>
-              )}
-              {location.ecoElements.solarPower && (
-                <div className="text-center">
-                  <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mb-1">
-                    <Star className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="text-xs text-white">Solar</span>
+              ) : (
+                <div className="bg-orange-600 text-white px-4 py-2 rounded-full inline-flex items-center gap-2">
+                  <RotateCcw className="h-4 w-4 animate-spin" />
+                  <span className="text-sm font-medium">
+                    {language === "thai"
+                      ? "มองหาเครื่องหมาย AR..."
+                      : "Looking for AR marker..."}
+                  </span>
                 </div>
               )}
             </div>
+
+            {/* Sustainability Feature Display */}
+            {markerDetected && location && (
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 mb-4">
+                <div className="text-center text-white">
+                  <div className="text-2xl mb-2">
+                    {location.type === "tourist_spot" ? "🏞️" : "🏘️"}
+                  </div>
+                  <h3 className="font-semibold mb-1">
+                    {language === "thai" ? location.name : location.nameEn}
+                  </h3>
+                  <p className="text-sm opacity-90">
+                    {language === "thai"
+                      ? location.sustainabilityFeature
+                      : location.sustainabilityFeatureEn}
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Action Buttons */}
             <div className="grid grid-cols-2 gap-3">
               <Button
                 onClick={playHeroStory}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                disabled={!markerDetected}
+                className={cn(
+                  "text-white",
+                  markerDetected
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-gray-500 cursor-not-allowed",
+                )}
               >
                 <Volume2 className="h-4 w-4 mr-2" />
-                Local Hero Story
+                {language === "thai" ? "ฟังเรื่องฮีโร่" : "Hero Story"}
               </Button>
 
               <Button
                 onClick={claimBonusReward}
-                disabled={rewardClaimed}
-                className="bg-green-600 hover:bg-green-700 text-white"
+                disabled={rewardClaimed || !markerDetected}
+                className={cn(
+                  "text-white",
+                  rewardClaimed
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : !markerDetected
+                      ? "bg-gray-500 cursor-not-allowed"
+                      : "bg-green-600 hover:bg-green-700",
+                )}
               >
                 <Gift className="h-4 w-4 mr-2" />
-                {rewardClaimed ? "Claimed!" : "+10 Miles"}
+                {rewardClaimed
+                  ? language === "thai"
+                    ? "รับแล้ว!"
+                    : "Claimed!"
+                  : `+${location?.rewardAmount || 10} ${language === "thai" ? "ไมล์" : "Miles"}`}
               </Button>
             </div>
+
+            {/* Language Toggle */}
+            <Button
+              onClick={() =>
+                setLanguage(language === "thai" ? "english" : "thai")
+              }
+              variant="outline"
+              className="w-full text-white border-white/30 hover:bg-white/10"
+            >
+              <Languages className="h-4 w-4 mr-2" />
+              {language === "thai" ? "Switch to English" : "เปลี่ยนเป็นภาษาไทย"}
+            </Button>
           </div>
         </div>
       )}
@@ -470,86 +639,207 @@ export default function ARExperience() {
           <DialogHeader>
             <DialogTitle className="text-green-700 flex items-center gap-2">
               <Star className="h-5 w-5" />
-              Welcome to {location.name}!
+              {language === "thai"
+                ? `ยินดีต้อนรับสู่ ${location?.name}!`
+                : `Welcome to ${location?.nameEn}!`}
             </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
             <div className="text-center">
-              <div className="text-6xl mb-4">🌿</div>
+              <div className="text-6xl mb-4">
+                {location?.type === "tourist_spot" ? "🏞️" : "🏘️"}
+              </div>
+              <Badge className="mb-3">
+                {location?.type === "tourist_spot"
+                  ? "Tourist Spot"
+                  : "Community Spot"}
+              </Badge>
               <p className="text-sm text-muted-foreground">
-                You've arrived at a certified sustainable destination!
+                {language === "thai"
+                  ? "คุณมาถึงจุดหมายที่ยั่งยืนแล้ว!"
+                  : "You've arrived at a certified sustainable destination!"}
               </p>
             </div>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="text-sm text-green-700">{location.description}</p>
+              <p className="text-sm text-green-700">
+                {language === "thai"
+                  ? location?.description
+                  : location?.descriptionEn}
+              </p>
             </div>
 
-            <Button
-              onClick={() => {
-                setShowWelcome(false);
-                startARExperience();
-              }}
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
-            >
-              <Camera className="h-4 w-4 mr-2" />
-              Explore in AR
-            </Button>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <p className="text-sm text-blue-700 font-medium mb-2">
+                {language === "thai" ? "ขั้นตอนถัดไป:" : "Next Step:"}
+              </p>
+              <p className="text-sm text-blue-600">
+                {language === "thai"
+                  ? "สแกนเครื่องหมาย AR ใกล้ป้ายหรือจุดแลนด์มาร์กเพื่อพบกับฮีโร่ท้องถิ่น"
+                  : "Scan the AR marker near the sign or landmark to meet the local hero"}
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                onClick={() =>
+                  setLanguage(language === "thai" ? "english" : "thai")
+                }
+                variant="outline"
+                className="flex-1"
+              >
+                <Languages className="h-4 w-4 mr-2" />
+                {language === "thai" ? "English" : "ไทย"}
+              </Button>
+
+              <Button
+                onClick={() => {
+                  setShowWelcome(false);
+                  startARExperience();
+                }}
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+              >
+                <Camera className="h-4 w-4 mr-2" />
+                {language === "thai" ? "สแกน AR" : "Scan AR"}
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
 
       {/* Local Hero Dialog */}
       <Dialog open={showLocalHero} onOpenChange={setShowLocalHero}>
-        <DialogContent className="max-w-sm mx-auto">
+        <DialogContent className="max-w-sm mx-auto max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-green-700 flex items-center gap-2">
               <Award className="h-5 w-5" />
-              Local Eco-Hero: {location.localHero.name}
+              {language === "thai"
+                ? `ฮีโร่ท้องถิ่น: ${location?.hero.name}`
+                : `Local Eco-Hero: ${location?.hero.nameEn}`}
             </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
-            {/* Video Placeholder */}
-            <div className="relative bg-gray-100 rounded-lg overflow-hidden h-40">
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-green-100 to-blue-100">
+            {/* Hero Avatar */}
+            <div className="relative bg-gradient-to-br from-green-100 to-blue-100 rounded-lg overflow-hidden h-48">
+              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <Award className="h-8 w-8 text-white" />
+                  <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Award className="h-10 w-10 text-white" />
                   </div>
-                  <p className="text-sm font-medium">
-                    {location.localHero.name}
+                  <p className="text-lg font-bold text-green-800">
+                    {language === "thai"
+                      ? location?.hero.name
+                      : location?.hero.nameEn}
+                  </p>
+                  <p className="text-sm text-green-600">
+                    {language === "thai"
+                      ? location?.hero.role
+                      : location?.hero.roleEn}
                   </p>
                 </div>
               </div>
             </div>
 
+            {/* Voice Line with Subtitles */}
+            {showSubtitles && currentSubtitle && (
+              <div className="bg-black/80 text-white p-3 rounded-lg">
+                <p className="text-sm text-center italic">
+                  "{currentSubtitle}"
+                </p>
+              </div>
+            )}
+
+            {/* Hero Story */}
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <h4 className="font-semibold text-green-800 mb-2">
+                {language === "thai" ? "เรื่องราว" : "Story"}
+              </h4>
               <p className="text-sm text-green-700">
-                {location.localHero.story}
+                {language === "thai"
+                  ? location?.hero.story
+                  : location?.hero.storyEn}
               </p>
+            </div>
+
+            {/* Achievements */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <h4 className="font-semibold text-blue-800 mb-2">
+                {language === "thai" ? "ความสำเร็จ" : "Achievements"}
+              </h4>
+              <ul className="space-y-1">
+                {(language === "thai"
+                  ? location?.hero.achievements
+                  : location?.hero.achievementsEn
+                )?.map((achievement, index) => (
+                  <li
+                    key={index}
+                    className="text-sm text-blue-700 flex items-start gap-2"
+                  >
+                    <Star className="h-3 w-3 text-blue-600 mt-0.5 flex-shrink-0" />
+                    {achievement}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Audio Controls */}
+            <div className="grid grid-cols-3 gap-2">
+              <Button
+                onClick={toggleAudio}
+                variant="outline"
+                className="flex items-center gap-1"
+              >
+                {audioPlaying ? (
+                  <Pause className="h-3 w-3" />
+                ) : (
+                  <Play className="h-3 w-3" />
+                )}
+                {audioPlaying
+                  ? language === "thai"
+                    ? "หยุด"
+                    : "Pause"
+                  : language === "thai"
+                    ? "ฟัง"
+                    : "Listen"}
+              </Button>
+
+              <Button
+                onClick={() => setShowSubtitles(!showSubtitles)}
+                variant="outline"
+                className="text-xs"
+              >
+                {showSubtitles ? "Hide" : "Show"} Sub
+              </Button>
+
+              <Button
+                onClick={handleShare}
+                variant="outline"
+                className="flex items-center gap-1"
+              >
+                <Share2 className="h-3 w-3" />
+                {language === "thai" ? "แชร์" : "Share"}
+              </Button>
             </div>
 
             <div className="flex gap-3">
               <Button
-                onClick={toggleAudio}
+                onClick={() =>
+                  setLanguage(language === "thai" ? "english" : "thai")
+                }
                 variant="outline"
                 className="flex-1"
               >
-                {audioPlaying ? (
-                  <VolumeX className="h-4 w-4 mr-2" />
-                ) : (
-                  <Volume2 className="h-4 w-4 mr-2" />
-                )}
-                {audioPlaying ? "Pause" : "Listen"}
+                <Languages className="h-4 w-4 mr-2" />
+                {language === "thai" ? "English" : "ไทย"}
               </Button>
 
               <Button
                 onClick={() => setShowLocalHero(false)}
                 className="flex-1"
               >
-                Continue AR
+                {language === "thai" ? "ดู AR ต่อ" : "Continue AR"}
               </Button>
             </div>
           </div>
@@ -557,22 +847,44 @@ export default function ARExperience() {
           {/* Hidden Audio Element */}
           <audio
             ref={audioRef}
-            src={location.localHero.audioUrl}
-            onEnded={() => setAudioPlaying(false)}
+            onEnded={() => {
+              setAudioPlaying(false);
+              setCurrentSubtitle("");
+            }}
+            onLoadedMetadata={() => {
+              // Set subtitle timing
+              if (showSubtitles && location) {
+                setCurrentSubtitle(
+                  language === "thai"
+                    ? location.hero.voiceLine
+                    : location.hero.voiceLineEn,
+                );
+              }
+            }}
           />
         </DialogContent>
       </Dialog>
 
       {/* Reward Claimed Notification */}
-      {rewardClaimed && (
+      {rewardClaimed && location && (
         <div className="absolute top-20 left-4 right-4 z-50">
-          <Card className="p-4 bg-green-600 text-white text-center">
-            <div className="flex items-center justify-center gap-2">
-              <Gift className="h-5 w-5" />
-              <span className="font-semibold">+10 Green Miles earned!</span>
+          <Card className="p-4 bg-green-600 text-white text-center animate-bounce">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Gift className="h-6 w-6" />
+              <span className="font-bold text-lg">
+                +{location.rewardAmount}{" "}
+                {language === "thai" ? "เกรีน ไมล์!" : "Green Miles!"}
+              </span>
             </div>
-            <p className="text-sm opacity-90 mt-1">
-              Thanks for visiting this sustainable destination!
+            <p className="text-sm opacity-90">
+              {language === "thai"
+                ? `ขอบคุณที่มาเยี่ยมชม ${location.name}!`
+                : `Thanks for visiting ${location.nameEn}!`}
+            </p>
+            <p className="text-xs opacity-75 mt-1">
+              {language === "thai"
+                ? "พบกับฮีโร่ท้องถิ่นและได้รับแรงบันดาลใจ"
+                : "Met a local hero and got inspired!"}
             </p>
           </Card>
         </div>

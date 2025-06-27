@@ -49,81 +49,6 @@ const mapPins = [
   },
 ];
 
-// Calculate carbon emissions based on distance and transport type
-const calculateEmissions = (
-  transportType: keyof typeof emissionFactors,
-  distanceKm: number,
-) => {
-  return (emissionFactors[transportType] * distanceKm) / 1000; // Convert to kg
-};
-
-// Calculate percentage reduction compared to car
-const calculateReduction = (transportEmission: number, carEmission: number) => {
-  return Math.round(((carEmission - transportEmission) / carEmission) * 100);
-};
-
-const carEmission = calculateEmissions("car", distance);
-
-const routeData = [
-  {
-    id: "a",
-    type: "car" as const,
-    transportName: "Private Car",
-    destination: destination,
-    duration: "25 min",
-    co2Emission: calculateEmissions("car", distance),
-    pmLevel: 45,
-    distance: `${distance} km`,
-    reductionPercent: 0,
-    emissionFactor: emissionFactors.car,
-  },
-  {
-    id: "b",
-    type: "bus" as const,
-    transportName: "Songthaew (Red Truck)",
-    destination: destination,
-    duration: "35 min",
-    co2Emission: calculateEmissions("songthaew", distance),
-    pmLevel: 42,
-    distance: `${distance} km`,
-    reductionPercent: calculateReduction(
-      calculateEmissions("songthaew", distance),
-      carEmission,
-    ),
-    emissionFactor: emissionFactors.songthaew,
-  },
-  {
-    id: "c",
-    type: "bike" as const,
-    transportName: "Bicycle",
-    destination: destination,
-    duration: "55 min",
-    co2Emission: calculateEmissions("bike", distance),
-    pmLevel: 28,
-    distance: `${distance} km`,
-    reductionPercent: calculateReduction(
-      calculateEmissions("bike", distance),
-      carEmission,
-    ),
-    emissionFactor: emissionFactors.bike,
-  },
-  {
-    id: "d",
-    type: "walk" as const,
-    transportName: "Walking",
-    destination: destination,
-    duration: "2h 30min",
-    co2Emission: calculateEmissions("walk", distance),
-    pmLevel: 25,
-    distance: `${distance} km`,
-    reductionPercent: calculateReduction(
-      calculateEmissions("walk", distance),
-      carEmission,
-    ),
-    emissionFactor: emissionFactors.walk,
-  },
-];
-
 export default function RouteComparison() {
   const [selectedRoute, setSelectedRoute] = useState<string>("a");
   const [optimizationMode, setOptimizationMode] =
@@ -140,8 +65,91 @@ export default function RouteComparison() {
     walk: 0, // Walking
   };
 
+  // Calculate carbon emissions based on distance and transport type
+  const calculateEmissions = (
+    transportType: keyof typeof emissionFactors,
+    distanceKm: number,
+  ) => {
+    return (emissionFactors[transportType] * distanceKm) / 1000; // Convert to kg
+  };
+
+  // Calculate percentage reduction compared to car
+  const calculateReduction = (
+    transportEmission: number,
+    carEmission: number,
+  ) => {
+    return Math.round(((carEmission - transportEmission) / carEmission) * 100);
+  };
+
+  const carEmission = calculateEmissions("car", distance);
+
+  const routeData = [
+    {
+      id: "a",
+      type: "car" as const,
+      transportName: "Private Car",
+      destination: destination,
+      duration: "25 min",
+      co2Emission: calculateEmissions("car", distance),
+      pmLevel: 45,
+      distance: `${distance} km`,
+      reductionPercent: 0,
+      emissionFactor: emissionFactors.car,
+    },
+    {
+      id: "b",
+      type: "bus" as const,
+      transportName: "Songthaew (Red Truck)",
+      destination: destination,
+      duration: "35 min",
+      co2Emission: calculateEmissions("songthaew", distance),
+      pmLevel: 42,
+      distance: `${distance} km`,
+      reductionPercent: calculateReduction(
+        calculateEmissions("songthaew", distance),
+        carEmission,
+      ),
+      emissionFactor: emissionFactors.songthaew,
+    },
+    {
+      id: "c",
+      type: "bike" as const,
+      transportName: "Bicycle",
+      destination: destination,
+      duration: "55 min",
+      co2Emission: calculateEmissions("bike", distance),
+      pmLevel: 28,
+      distance: `${distance} km`,
+      reductionPercent: calculateReduction(
+        calculateEmissions("bike", distance),
+        carEmission,
+      ),
+      emissionFactor: emissionFactors.bike,
+    },
+    {
+      id: "d",
+      type: "walk" as const,
+      transportName: "Walking",
+      destination: destination,
+      duration: "2h 30min",
+      co2Emission: calculateEmissions("walk", distance),
+      pmLevel: 25,
+      distance: `${distance} km`,
+      reductionPercent: calculateReduction(
+        calculateEmissions("walk", distance),
+        carEmission,
+      ),
+      emissionFactor: emissionFactors.walk,
+    },
+  ];
+
   const handleBack = () => {
     window.history.back();
+  };
+
+  const handleRefresh = async () => {
+    // Simulate refresh delay
+    await new Promise((resolve) => setTimeout(resolve, 1500));
   };
 
   const getFastestRoute = () => {

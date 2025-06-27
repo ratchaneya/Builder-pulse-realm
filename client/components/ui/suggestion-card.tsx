@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface SuggestionCardProps {
   locationName: string;
   distance: number;
-  pmLevel: number;
+  co2Level: number;
   travelMethod: "bike" | "bus" | "walk";
   description: string;
   className?: string;
@@ -19,22 +19,22 @@ const travelIcons = {
   walk: MapPin,
 };
 
-const pmLevelColor = (level: number) => {
-  if (level <= 50) return "text-primary";
-  if (level <= 100) return "text-yellow-600";
+const co2LevelColor = (level: number) => {
+  if (level <= 1.0) return "text-primary";
+  if (level <= 2.0) return "text-yellow-600";
   return "text-destructive";
 };
 
-const pmLevelText = (level: number) => {
-  if (level <= 50) return "Good";
-  if (level <= 100) return "Moderate";
-  return "Unhealthy";
+const co2LevelText = (level: number) => {
+  if (level <= 1.0) return "Low";
+  if (level <= 2.0) return "Moderate";
+  return "High";
 };
 
 export function SuggestionCard({
   locationName,
   distance,
-  pmLevel,
+  co2Level,
   travelMethod,
   description,
   className,
@@ -71,12 +71,14 @@ export function SuggestionCard({
         <div className="text-right">
           <div className="flex items-center gap-1 mb-1">
             <Leaf className="h-4 w-4 text-primary" />
-            <span className={cn("font-medium text-sm", pmLevelColor(pmLevel))}>
-              {pmLevel}
+            <span
+              className={cn("font-medium text-sm", co2LevelColor(co2Level))}
+            >
+              {co2Level}kg
             </span>
           </div>
-          <div className={cn("text-xs", pmLevelColor(pmLevel))}>
-            {pmLevelText(pmLevel)}
+          <div className={cn("text-xs", co2LevelColor(co2Level))}>
+            {co2LevelText(co2Level)}
           </div>
         </div>
       </div>

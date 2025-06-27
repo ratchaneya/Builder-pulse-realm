@@ -2,14 +2,14 @@ import { AlertTriangle, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface WarningBarProps {
-  pm25Level: number;
+  co2Level: number;
   trafficDelay: string;
   timeToOvercrowd: string;
   className?: string;
 }
 
 export function WarningBar({
-  pm25Level,
+  co2Level,
   trafficDelay,
   timeToOvercrowd,
   className,
@@ -37,9 +37,9 @@ export function WarningBar({
 
         <div className="grid grid-cols-2 gap-4 mt-3">
           <div className="bg-white/20 rounded px-3 py-2">
-            <div className="text-xs opacity-90">PM2.5 Level</div>
-            <div className="font-bold text-lg">{pm25Level} μg/m³</div>
-            <div className="text-xs opacity-90">Unhealthy</div>
+            <div className="text-xs opacity-90">CO₂ Emissions</div>
+            <div className="font-bold text-lg">{co2Level}kg</div>
+            <div className="text-xs opacity-90">High Impact</div>
           </div>
 
           <div className="bg-white/20 rounded px-3 py-2">

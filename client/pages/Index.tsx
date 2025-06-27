@@ -9,26 +9,26 @@ const suggestionData = [
   {
     locationName: "Doi Suthep National Park",
     distance: 12,
-    pmLevel: 35,
+    co2Level: 0.8,
     travelMethod: "bike" as const,
     description:
-      "Escape to fresh mountain air with stunning temple views and peaceful hiking trails away from city pollution.",
+      "Escape to fresh mountain air with stunning temple views and peaceful hiking trails with low carbon footprint.",
   },
   {
     locationName: "San Kamphaeng District",
     distance: 18,
-    pmLevel: 42,
+    co2Level: 1.1,
     travelMethod: "bus" as const,
     description:
-      "Explore traditional handicraft villages and hot springs with clean air and authentic local experiences.",
+      "Explore traditional handicraft villages and hot springs with eco-friendly transport options.",
   },
   {
     locationName: "Mae Rim Valley",
     distance: 25,
-    pmLevel: 28,
+    co2Level: 0.0,
     travelMethod: "bike" as const,
     description:
-      "Discover organic farms, elephant sanctuaries, and riverside cafes in pristine natural surroundings.",
+      "Discover organic farms, elephant sanctuaries, and riverside cafes with zero emissions cycling.",
   },
 ];
 
@@ -99,7 +99,7 @@ export default function Index() {
       <main className="container max-w-md mx-auto px-4 py-6 space-y-6">
         {/* Warning Section */}
         <WarningBar
-          pm25Level={78}
+          co2Level={2.8}
           trafficDelay="+45 min"
           timeToOvercrowd="90 minutes"
         />

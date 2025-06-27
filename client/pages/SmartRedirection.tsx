@@ -12,7 +12,8 @@ const mockAlerts = [
     type: "combined" as const,
     severity: "danger" as const,
     title: "Critical Congestion Alert",
-    message: "Nimman area has exceeded safe thresholds for both traffic and air quality. Immediate redirection recommended.",
+    message:
+      "Nimman area has exceeded safe thresholds for both traffic and air quality. Immediate redirection recommended.",
     timestamp: "14:25",
     metrics: {
       crowdLevel: 85,
@@ -41,7 +42,7 @@ export default function SmartRedirection() {
   };
 
   const handleDismissAlert = (alertId: string) => {
-    setAlerts(alerts.filter(alert => alert.id !== alertId));
+    setAlerts(alerts.filter((alert) => alert.id !== alertId));
   };
 
   const handleNotifyLine = () => {
@@ -75,7 +76,9 @@ export default function SmartRedirection() {
                   <Brain className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <h1 className="font-semibold text-foreground">Smart Engine</h1>
+                  <h1 className="font-semibold text-foreground">
+                    Smart Engine
+                  </h1>
                   <p className="text-xs text-muted-foreground">
                     AI-powered redirection
                   </p>
@@ -115,24 +118,29 @@ export default function SmartRedirection() {
             Intelligent Tourism Redirection
           </h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Our AI system continuously monitors crowd density, air quality, and traffic 
-            patterns to proactively suggest better destinations for sustainable tourism.
+            Our AI system continuously monitors crowd density, air quality, and
+            traffic patterns to proactively suggest better destinations for
+            sustainable tourism.
           </p>
-          
+
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div className="bg-muted/30 rounded-lg p-3 text-center">
               <div className="font-bold text-primary">Real-time</div>
-              <div className="text-xs text-muted-foreground">Data integration</div>
+              <div className="text-xs text-muted-foreground">
+                Data integration
+              </div>
             </div>
             <div className="bg-muted/30 rounded-lg p-3 text-center">
               <div className="font-bold text-primary">1-2 hours</div>
-              <div className="text-xs text-muted-foreground">Prediction window</div>
+              <div className="text-xs text-muted-foreground">
+                Prediction window
+              </div>
             </div>
           </div>
         </section>
 
         {/* Real-time Data Dashboard */}
-        <DataDashboard 
+        <DataDashboard
           location="Nimman Road, Chiang Mai"
           lastUpdated="2 minutes ago"
         />
@@ -155,9 +163,9 @@ export default function SmartRedirection() {
 
         {/* Gamification Panel */}
         <GamificationPanel
-          userPoints={1,247}
+          userPoints={(1, 247)}
           level={3}
-          nextLevelPoints={1,500}
+          nextLevelPoints={(1, 500)}
           todaySavings={{
             co2: 2.3,
             time: 35,
@@ -170,11 +178,13 @@ export default function SmartRedirection() {
           <h3 className="font-semibold text-card-foreground mb-3">
             Data Sources & Integration
           </h3>
-          
+
           <div className="space-y-3 text-sm">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Crowd Density</span>
-              <span className="text-green-600 font-medium">WiFi/Bluetooth tracking</span>
+              <span className="text-green-600 font-medium">
+                WiFi/Bluetooth tracking
+              </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Air Quality</span>
@@ -182,7 +192,9 @@ export default function SmartRedirection() {
             </div>
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Traffic Data</span>
-              <span className="text-green-600 font-medium">Google Directions API</span>
+              <span className="text-green-600 font-medium">
+                Google Directions API
+              </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Historical Analysis</span>
@@ -192,8 +204,10 @@ export default function SmartRedirection() {
 
           <div className="mt-4 p-3 bg-muted/30 rounded-lg">
             <p className="text-xs text-muted-foreground">
-              <strong>Threshold Configuration:</strong> Alerts trigger when traffic score ≥ 2.0 
-              AND PM2.5 > 90 μg/m³. Predictions use 30-day historical patterns with real-time adjustments.
+              <strong>Threshold Configuration:</strong> Alerts trigger when
+              traffic score &ge; 2.0 AND PM2.5 &gt; 90 &mu;g/m&sup3;.
+              Predictions use 30-day historical patterns with real-time
+              adjustments.
             </p>
           </div>
         </section>

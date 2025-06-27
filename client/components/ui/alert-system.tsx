@@ -31,7 +31,7 @@ const alertConfig = {
   },
   pollution: {
     icon: AlertTriangle,
-    color: "bg-red-500 text-white", 
+    color: "bg-red-500 text-white",
     bgColor: "bg-red-50 border-red-200",
   },
   combined: {
@@ -41,10 +41,17 @@ const alertConfig = {
   },
 };
 
-export function AlertSystem({ alerts, onDismiss, onNotifyLine, className }: AlertSystemProps) {
+export function AlertSystem({
+  alerts,
+  onDismiss,
+  onNotifyLine,
+  className,
+}: AlertSystemProps) {
   if (alerts.length === 0) {
     return (
-      <div className={cn("bg-card rounded-xl border border-border p-4", className)}>
+      <div
+        className={cn("bg-card rounded-xl border border-border p-4", className)}
+      >
         <div className="flex items-center gap-2 text-green-600">
           <Bell className="h-5 w-5" />
           <span className="font-medium">All Clear</span>
@@ -82,10 +89,7 @@ export function AlertSystem({ alerts, onDismiss, onNotifyLine, className }: Aler
           return (
             <div
               key={alert.id}
-              className={cn(
-                "rounded-xl border-2 p-4 relative",
-                config.bgColor
-              )}
+              className={cn("rounded-xl border-2 p-4 relative", config.bgColor)}
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3 flex-1">
@@ -103,7 +107,7 @@ export function AlertSystem({ alerts, onDismiss, onNotifyLine, className }: Aler
                           "text-xs px-2 py-0.5 rounded-full font-medium",
                           alert.severity === "danger"
                             ? "bg-red-100 text-red-700"
-                            : "bg-orange-100 text-orange-700"
+                            : "bg-orange-100 text-orange-700",
                         )}
                       >
                         {alert.severity.toUpperCase()}
@@ -119,19 +123,25 @@ export function AlertSystem({ alerts, onDismiss, onNotifyLine, className }: Aler
                         <div className="font-bold text-card-foreground">
                           {alert.metrics.crowdLevel}%
                         </div>
-                        <div className="text-xs text-muted-foreground">Crowd</div>
+                        <div className="text-xs text-muted-foreground">
+                          Crowd
+                        </div>
                       </div>
                       <div className="text-center">
                         <div className="font-bold text-card-foreground">
                           {alert.metrics.pm25Level}
                         </div>
-                        <div className="text-xs text-muted-foreground">PM2.5</div>
+                        <div className="text-xs text-muted-foreground">
+                          PM2.5
+                        </div>
                       </div>
                       <div className="text-center">
                         <div className="font-bold text-card-foreground">
                           {alert.metrics.trafficScore}x
                         </div>
-                        <div className="text-xs text-muted-foreground">Traffic</div>
+                        <div className="text-xs text-muted-foreground">
+                          Traffic
+                        </div>
                       </div>
                     </div>
 
@@ -163,7 +173,8 @@ export function AlertSystem({ alerts, onDismiss, onNotifyLine, className }: Aler
           </span>
         </div>
         <p className="text-xs text-muted-foreground">
-          LINE notifications will be sent when traffic score ≥ 2.0 AND PM2.5 > 90 μg/m³
+          LINE notifications will be sent when traffic score &ge; 2.0 AND PM2.5
+          &gt; 90 &mu;g/m&sup3;
         </p>
       </div>
     </div>

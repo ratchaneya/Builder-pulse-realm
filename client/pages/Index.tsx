@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { WarningBar } from "@/components/ui/warning-bar";
 import { SuggestionCard } from "@/components/ui/suggestion-card";
-import { Leaf, MapPin, RefreshCw } from "lucide-react";
+import { Leaf, MapPin, RefreshCw, Route } from "lucide-react";
 
 const suggestionData = [
   {
@@ -33,20 +34,25 @@ const suggestionData = [
 
 export default function Index() {
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const navigate = useNavigate();
 
   const handleGoHere = (locationName: string) => {
     console.log(`Navigating to ${locationName}`);
-    // In a real app, this would integrate with maps/navigation
+    navigate("/routes");
   };
 
   const handleLowCarbonRoute = (locationName: string) => {
     console.log(`Finding low-carbon route to ${locationName}`);
-    // In a real app, this would show eco-friendly transportation options
+    navigate("/routes");
   };
 
   const handleMoreQuietSpots = () => {
     console.log("Finding more quiet spots");
     // In a real app, this would show additional destinations
+  };
+
+  const handleCompareRoutes = () => {
+    navigate("/routes");
   };
 
   const handleRefresh = async () => {
@@ -128,6 +134,14 @@ export default function Index() {
 
         {/* Action Buttons */}
         <section className="space-y-3 pt-4">
+          <Button
+            onClick={handleCompareRoutes}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+          >
+            <Route className="h-4 w-4 mr-2" />
+            Compare Travel Routes
+          </Button>
+
           <Button
             onClick={handleMoreQuietSpots}
             variant="outline"

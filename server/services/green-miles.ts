@@ -1,7 +1,7 @@
 import { RouteData, GreenMilesReward, UserProfile } from "@shared/tourism";
 
 // Mock user storage (in real app, use database)
-const userProfiles: Map<string, UserProfile> = new Map();
+export const userProfiles: Map<string, UserProfile> = new Map();
 
 export function awardGreenMiles(
   userId: string,

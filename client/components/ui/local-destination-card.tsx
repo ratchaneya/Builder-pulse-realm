@@ -110,39 +110,71 @@ export const LocalDestinationCard: React.FC<LocalDestinationCardProps> = ({
   return (
     <Card
       className={cn(
-        "w-full bg-white border-gray-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer",
+        "w-full bg-white border-gray-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer overflow-hidden",
         className,
       )}
       onClick={openGoogleMaps}
     >
+      {/* Image Header */}
+      {destination.imageUrl && (
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={destination.imageUrl}
+            alt={destination.name}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          <div className="absolute top-3 left-3">
+            <Badge
+              variant="outline"
+              className={cn(
+                "text-xs backdrop-blur-sm bg-white/90",
+                typeColors[destination.type],
+              )}
+            >
+              {typeLabels[destination.type]}
+            </Badge>
+          </div>
+          <div className="absolute top-3 right-3">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+              <TypeIcon className="w-5 h-5 text-white" />
+            </div>
+          </div>
+        </div>
+      )}
+
       <CardContent className="p-4">
         <div className="space-y-3">
           {/* Header */}
           <div className="flex items-start gap-3">
-            <div
-              className={cn(
-                "w-12 h-12 rounded-full flex items-center justify-center",
-                typeColors[destination.type]
-                  .replace("text-", "bg-")
-                  .replace("border-", ""),
-              )}
-            >
-              <TypeIcon className="w-6 h-6 text-white" />
-            </div>
+            {!destination.imageUrl && (
+              <div
+                className={cn(
+                  "w-12 h-12 rounded-full flex items-center justify-center",
+                  typeColors[destination.type]
+                    .replace("text-", "bg-")
+                    .replace("border-", ""),
+                )}
+              >
+                <TypeIcon className="w-6 h-6 text-white" />
+              </div>
+            )}
 
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between mb-1">
                 <h3 className="font-semibold text-gray-900 text-lg leading-tight">
                   {destination.name}
                 </h3>
-                <div className="flex items-center gap-1 ml-2">
-                  <Badge
-                    variant="outline"
-                    className={cn("text-xs", typeColors[destination.type])}
-                  >
-                    {typeLabels[destination.type]}
-                  </Badge>
-                </div>
+                {!destination.imageUrl && (
+                  <div className="flex items-center gap-1 ml-2">
+                    <Badge
+                      variant="outline"
+                      className={cn("text-xs", typeColors[destination.type])}
+                    >
+                      {typeLabels[destination.type]}
+                    </Badge>
+                  </div>
+                )}
               </div>
 
               <p className="text-sm text-gray-600 mb-2 line-clamp-2">

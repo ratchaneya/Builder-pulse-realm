@@ -167,6 +167,15 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    processFile(file);
+  };
+
+  // Process uploaded file
+  const processFile = (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload a valid image file.");
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -174,6 +183,27 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
       setCapturedPhoto(photoDataUrl);
     };
     reader.readAsDataURL(file);
+  };
+
+  // Drag & Drop handlers
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      processFile(files[0]);
+    }
   };
 
   // Confirm photo

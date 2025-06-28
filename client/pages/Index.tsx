@@ -11,16 +11,7 @@ import CheckIn from "./CheckIn";
 import Redemption from "./Redemption";
 import RouteComparison from "./RouteComparison";
 import GreenMilesDashboard from "./GreenMilesDashboard";
-import {
-  Leaf,
-  MapPin,
-  RefreshCw,
-  Route,
-  Camera,
-  Gift,
-  Navigation,
-  Sparkles,
-} from "lucide-react";
+import { Leaf, MapPin, RefreshCw, Route, Camera, Gift, Navigation, Sparkles } from "lucide-react";
 
 type TabType = "route-planner" | "check-in" | "rewards" | "routes" | "miles";
 
@@ -236,10 +227,6 @@ export default function Index() {
         );
 
       default:
-        return null;
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-blue-50 relative">
       {/* Background Images */}
@@ -254,153 +241,170 @@ export default function Index() {
 
       {/* Header */}
       <header className="relative z-10 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white shadow-lg">
-        <div className="container max-w-md mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                <Leaf className="h-7 w-7 text-white" />
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                <Leaf className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">
-                  EcoTravel Chiang Mai
-                </h1>
-                <p className="text-sm text-green-100">
+                <h1 className="text-lg font-bold text-white">EcoTravel Chiang Mai</h1>
+                <p className="text-xs text-green-100">
                   Sustainable Tourism • Local Experiences
                 </p>
               </div>
             </div>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-              className="p-2 text-white hover:bg-white/20"
-            >
-              <RefreshCw
-                className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
-              />
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={() => setShowQRScanner(true)}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white/20"
+              >
+                <Camera className="h-4 w-4 mr-1" />
+                AR
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+                className="p-2 text-white hover:bg-white/20"
+              >
+                <RefreshCw
+                  className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+                />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="relative z-10 container max-w-md mx-auto px-4 py-6 space-y-6">
-        {/* Warning Section */}
-        <WarningBar
-          co2Level={2.8}
-          trafficDelay="+45 min"
-          timeToOvercrowd="90 minutes"
-        />
-
-        {/* Suggestions Section */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 mb-4">
-            <MapPin className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">
-              Alternative Destinations
+      {/* Main Layout - Side Tabs */}
+      <div className="relative z-10 container mx-auto h-[calc(100vh-80px)] flex">
+        {/* Left Sidebar - Tabs */}
+        <div className="w-64 bg-white/90 backdrop-blur-sm border-r border-green-200 shadow-lg">
+          <div className="p-4 border-b border-green-100">
+            <h2 className="text-lg font-semibold text-gray-800 mb-1">
+              Smart Tourism
             </h2>
+            <p className="text-xs text-gray-600">
+              Explore Chiang Mai sustainably
+            </p>
           </div>
 
-          <p className="text-sm text-muted-foreground mb-4">
-            Discover cleaner, less crowded spots with better air quality and
-            peaceful environments.
-          </p>
+          <nav className="p-2">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
 
-          <div className="space-y-4">
-            {suggestionData.map((suggestion, index) => (
-              <SuggestionCard
-                key={index}
-                {...suggestion}
-                onGoHere={() => handleGoHere(suggestion.locationName)}
-                onLowCarbonRoute={() =>
-                  handleLowCarbonRoute(suggestion.locationName)
-                }
-              />
-            ))}
-          </div>
-        </section>
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`w-full text-left p-3 rounded-lg mb-2 transition-all duration-200 group ${
+                    isActive
+                      ? `bg-gradient-to-r ${tab.color} text-white shadow-lg transform scale-105`
+                      : "hover:bg-gray-100 text-gray-700 hover:scale-102"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                      isActive
+                        ? "bg-white/20"
+                        : "bg-gray-100 group-hover:bg-gray-200"
+                    }`}>
+                      <span className="text-lg">{tab.emoji}</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className={`font-medium text-sm ${
+                        isActive ? "text-white" : "text-gray-800"
+                      }`}>
+                        {tab.label}
+                      </h3>
+                    </div>
+                    {isActive && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </nav>
 
-        {/* GPS Navigation to Rural Destinations */}
-        <section>
-          <GPSNavigation />
-        </section>
-
-        {/* Action Buttons */}
-        <section className="space-y-3 pt-4">
-          <Button
-            onClick={() => navigate("/route-planning")}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-          >
-            <Route className="h-4 w-4 mr-2" />
-            Smart Route Planner
-          </Button>
-
-          <div className="grid grid-cols-2 gap-3">
+          {/* Bottom Action */}
+          <div className="absolute bottom-4 left-4 right-4">
             <Button
-              onClick={() => setShowQRScanner(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              <Camera className="h-4 w-4 mr-2" />
-              AR Experience
-            </Button>
-
-            <Button
-              onClick={() => navigate("/check-in")}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-            >
-              📍 Check-in
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3">
-            <Button
-              onClick={() => navigate("/redemption")}
-              className="bg-purple-600 hover:bg-purple-700 text-white"
-            >
-              🎁 Rewards
-            </Button>
-            <Button
-              onClick={handleCompareRoutes}
+              onClick={handleMoreQuietSpots}
               variant="outline"
-              className="border-primary text-primary hover:bg-primary/5"
+              className="w-full border-green-300 text-green-700 hover:bg-green-50"
+              size="sm"
             >
-              <MapPin className="h-4 w-4 mr-2" />
-              Routes
-            </Button>
-
-            <Button
-              onClick={() => navigate("/green-miles")}
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary/5"
-            >
-              <Leaf className="h-4 w-4 mr-2" />
-              Miles
+              More Quiet Spots
             </Button>
           </div>
+        </div>
 
-          <Button
-            onClick={handleMoreQuietSpots}
-            variant="outline"
-            className="w-full border-2 border-dashed border-muted-foreground/30 hover:border-primary hover:bg-primary/5"
-          >
-            <MapPin className="h-4 w-4 mr-2" />
-            More quiet spots
-          </Button>
-        </section>
+        {/* Right Content Area */}
+        <div className="flex-1 bg-white/80 backdrop-blur-sm overflow-auto">
+          <div className="p-6 h-full">
+            {renderContent()}
+          </div>
+        </div>
+      </div>
 
-        {/* QR Scanner */}
-        <QRScanner
-          isOpen={showQRScanner}
-          onScanSuccess={handleQRScanSuccess}
-          onClose={() => setShowQRScanner(false)}
-        />
+      {/* QR Scanner Modal */}
+      {showQRScanner && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg max-w-md w-full">
+            <QRScanner
+              onScanSuccess={handleQRScanSuccess}
+              onClose={() => setShowQRScanner(false)}
+            />
+          </div>
+        </div>
+      )}
 
-        {/* Footer Info */}
-        <footer className="pt-6 text-center">
-          <p className="text-xs text-muted-foreground">
-            Data updated 5 minutes ago • Air quality from PCD Thailand
+      {/* Mobile Responsive - Tab Bar at Bottom */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-20">
+        <div className="flex">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex-1 p-3 text-center ${
+                  isActive
+                    ? "text-green-600 bg-green-50"
+                    : "text-gray-600"
+                }`}
+              >
+                <div className="text-lg mb-1">{tab.emoji}</div>
+                <div className={`text-xs font-medium ${
+                  isActive ? "text-green-700" : "text-gray-500"
+                }`}>
+                  {tab.label.split(' ')[0]}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Mobile Content Padding */}
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          .container {
+            padding-bottom: 80px;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
           </p>
         </footer>
       </main>

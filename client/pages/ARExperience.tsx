@@ -69,1112 +69,734 @@ interface ARLocation {
     thai: string;
     english: string;
   };
+  markerImageUrl: string;
 }
 
-const locationMapping: Record<string, string> = {
-  doi_suthep: "doi_pui_forest",
-  mae_rim: "ton_pao_village",
-  san_kamphaeng: "aunt_pen_cafe",
-  doi_pui_forest: "doi_pui_forest",
-  aunt_pen_cafe: "aunt_pen_cafe",
-  ton_pao_village: "ton_pao_village",
-  huai_kaew_waterfall: "huai_kaew_waterfall",
-};
+// Enhanced AR locations with comprehensive hero stories
+const arLocations: ARLocation[] = [
+  {
+    id: "doi_pui_forest",
+    name: "ป่าดอยปุย",
+    nameEn: "Doi Pui Forest",
+    type: "tourist_spot",
+    description: "ป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เป็นปอดของเชียงใหม่",
+    descriptionEn:
+      "This forest has over 300 tree species and serves as Chiang Mai's lungs",
+    sustainabilityFeature: "ใช้พลังงานแสงอาทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
+    sustainabilityFeatureEn: "Solar-powered visitor facilities",
+    coordinates: { lat: 18.8547, lng: 98.9184 },
+    arMarkerId: "doi_pui_marker",
+    markerImageUrl: "/markers/doi_pui_marker.png",
+    rewardAmount: 15,
+    hero: {
+      id: "forest_guardian_somchai",
+      name: "ผู้พิทักษ์ป่าสมชาย",
+      nameEn: "Forest Guardian Somchai",
+      role: "เจ้าหน้าที่อนุรักษ์ป่า",
+      roleEn: "Forest Conservation Officer",
+      story:
+        "สมชายดูแลป่าดอยปุยมา 25 ปี เขาเฝ้าดูการเปลี่ยนแปลงของสิ่งแวดล้อมและปลูกต้นไม้ใหม่ทุกปี เพื่อให้ลูกหลานได้เห็นป่าเขียวชอุ่มแบบนี้",
+      storyEn:
+        "Somchai has protected Doi Pui forest for 25 years, watching environmental changes and planting new trees annually so future generations can see this lush green forest.",
+      voiceLine:
+        "ในป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอยู่กับป่า",
+      voiceLineEn:
+        "This forest has over 300 tree species. We plant new ones every year. The forest will stay with us if we stay with the forest.",
+      audioUrl: "/audio/heroes/somchai_thai.mp3",
+      audioUrlEn: "/audio/heroes/somchai_english.mp3",
+      imageUrl:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      achievements: [
+        "ปลูกต้นไม้แล้วกว่า 5,000 ต้น",
+        "ป้องกันไฟป่ามา 25 ปี",
+        "อบรมเยาวชนเรื่องการอนุรักษ์",
+      ],
+      achievementsEn: [
+        "Planted over 5,000 trees",
+        "25 years of forest fire prevention",
+        "Training youth in conservation",
+      ],
+    },
+    shareTemplate: {
+      thai: "ได้พบกับผู้พิทักษ์ป่าสมชาย ที่ป่าดอยปุย 🌲 เขาปลูกต้นไม้มาแล้วกว่า 5,000 ต้น! #การท่องเที่ยวยั่งยืน #เชียงใหม่",
+      english:
+        "Met Forest Guardian Somchai at Doi Pui Forest 🌲 He's planted over 5,000 trees! #SustainableTourism #ChiangMai",
+    },
+  },
+  {
+    id: "aunt_pen_cafe",
+    name: "คาเฟ่ป้าเป็น",
+    nameEn: "Aunt Pen's Café",
+    type: "community_spot",
+    description: "คาเฟ่เล็กๆ ริมลำธาร ไม่ใช้พลาสติกและเสิร์ฟอาหารออร์แกนิค",
+    descriptionEn: "Small streamside café serving organic food without plastic",
+    sustainabilityFeature: "ไม่ใช้หลอดพลาสติกและภาชนะโฟม",
+    sustainabilityFeatureEn: "No plastic straws or foam containers",
+    coordinates: { lat: 18.7261, lng: 98.9389 },
+    arMarkerId: "aunt_pen_marker",
+    markerImageUrl: "/markers/aunt_pen_marker.png",
+    rewardAmount: 10,
+    hero: {
+      id: "aunt_pen",
+      name: "ป้าเป็น",
+      nameEn: "Aunt Pen",
+      role: "เจ้าของคาเฟ่",
+      roleEn: "Café Owner",
+      story:
+        "ป้าเป็นเปิดคาเฟ่มา 8 ปี และตัดสินใจเลิกใช้พลาสติกตั้งแต่ปี 2562 เธอเชื่อว่าการเปลี่ยนแปลงเล็กๆ จากคนคนหนึ่งสามารถสร้างผลกระทบใหญ่ได้",
+      storyEn:
+        "Aunt Pen has run her café for 8 years and stopped using plastic in 2019. She believes small changes from one person can create a big impact.",
+      voiceLine:
+        "ฉันเลิกใช้หลอดพลาสติกตั้งแต่ปี 2562 ใครจะรู้ว่ามันจะช่วยทะเลได้จริง ๆ",
+      voiceLineEn:
+        "I stopped using plastic straws in 2019. Who knew it would really help the ocean.",
+      audioUrl: "/audio/heroes/aunt_pen_thai.mp3",
+      audioUrlEn: "/audio/heroes/aunt_pen_english.mp3",
+      imageUrl:
+        "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&h=300&fit=crop&crop=center",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face",
+      achievements: [
+        "ไม่ใช้พลาสติกมา 5 ปี",
+        "ใช้ผักออร์แกนิคจากท้องถิ่น",
+        "แจกถุงผ้าฟรีให้ลูกค้า",
+      ],
+      achievementsEn: [
+        "Plastic-free for 5 years",
+        "Uses local organic vegetables",
+        "Gives free cloth bags to customers",
+      ],
+    },
+    shareTemplate: {
+      thai: "พบกับป้าเป็น เจ้าของคาเฟ่ที่ไม่ใช้พลาสติก ☕️🌿 แรงบันดาลใจจริงๆ! #Zero Waste #เชียงใหม่",
+      english:
+        "Met Aunt Pen, plastic-free café owner ☕️🌿 So inspiring! #ZeroWaste #ChiangMai",
+    },
+  },
+  {
+    id: "ton_pao_village",
+    name: "หมู่บ้านตอนเป้า",
+    nameEn: "Ton Pao Village",
+    type: "community_spot",
+    description: "หมู่บ้านทอผ้าแบบดั้งเดิม ใช้สีธรรมชาติจากใบไม้และดอกไม้",
+    descriptionEn:
+      "Traditional weaving village using natural dyes from leaves and flowers",
+    sustainabilityFeature: "ใช้สีย้อมจากธรรมชาติ 100%",
+    sustainabilityFeatureEn: "100% natural dyes",
+    coordinates: { lat: 18.8147, lng: 99.0525 },
+    arMarkerId: "ton_pao_marker",
+    markerImageUrl: "/markers/ton_pao_marker.png",
+    rewardAmount: 12,
+    hero: {
+      id: "elder_malee",
+      name: "ยายมาลี",
+      nameEn: "Elder Malee",
+      role: "ช่างทอผ้าพ��้นบ้าน",
+      roleEn: "Traditional Weaver",
+      story:
+        "ยายมาลีอายุ 73 ปี ทอผ้าด้วยมือมาตั้งแต่อายุ 12 ปี เธอสืบทอดวิธีการย้อมผ้าด้วยสีธรรมชาติจากยายทวด และสอนให้ลูกหลานทุกคน",
+      storyEn:
+        "Grandma Malee, 73, has been hand-weaving since age 12. She inherited natural dyeing techniques from her great-grandmother and teaches all her descendants.",
+      voiceLine:
+        "เราสืบทอดการย้อมผ้านี้มา 4 รุ่นแล้ว สีที่คุณเห็นมาจากใบไม้ล้วน ๆ",
+      voiceLineEn:
+        "We've passed down this dyeing tradition for 4 generations. The colors you see come purely from leaves.",
+      audioUrl: "/audio/heroes/malee_thai.mp3",
+      audioUrlEn: "/audio/heroes/malee_english.mp3",
+      imageUrl:
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face",
+      achievements: [
+        "ทอผ้ามาแล้วกว่า 60 ปี",
+        "ใช้สีธรรมชาติ 100%",
+        "สอนให้ลูกหลาน 15 คน",
+      ],
+      achievementsEn: [
+        "Weaving for over 60 years",
+        "100% natural dyes",
+        "Taught 15 descendants",
+      ],
+    },
+    shareTemplate: {
+      thai: "พบกับยายมาลี ช่างทอผ้าอายุ 73 ปี ที่หมู่บ้านตอนเป้า 🧵✨ ภูมิปัญญา 4 รุ่น! #ภูมิปัญญาไทย #เชียงใหม่",
+      english:
+        "Met Elder Malee, 73-year-old weaver at Ton Pao Village 🧵✨ 4 generations of wisdom! #ThaiWisdom #ChiangMai",
+    },
+  },
+  {
+    id: "huai_kaew_waterfall",
+    name: "น้ำตกห้วยแก้ว",
+    nameEn: "Huai Kaew Waterfall",
+    type: "tourist_spot",
+    description: "น้ำตกธรรมชาติ มีระบบจัดการขยะและการอนุรักษ์น้ำ",
+    descriptionEn:
+      "Natural waterfall with waste management and water conservation systems",
+    sustainabilityFeature: "ระบบกรองน้ำธรรมชาติและจุดทิ้งขยะแยกประเภท",
+    sustainabilityFeatureEn:
+      "Natural water filtration and waste separation points",
+    coordinates: { lat: 18.8156, lng: 98.9234 },
+    arMarkerId: "huai_kaew_marker",
+    markerImageUrl: "/markers/huai_kaew_marker.png",
+    rewardAmount: 12,
+    hero: {
+      id: "park_ranger_niran",
+      name: "เรนเจอร์นิรันดร์",
+      nameEn: "Park Ranger Niran",
+      role: "เจ้าหน้าที่อุทยาน",
+      roleEn: "Park Ranger",
+      story:
+        "นิรันดร์ดูแลน้ำตกห้วยแก้วมา 15 ปี เขาตั้งระบบแยกขยะและสอนนักท่องเที่ยวเรื่องการอนุรักษ์ธรรมชาติ",
+      storyEn:
+        "Niran has cared for Huai Kaew Waterfall for 15 years. He set up waste separation systems and teaches tourists about nature conservation.",
+      voiceLine:
+        "น้ำใสขนาดนี้ไม่ใช่เรื่องบังเอิญ เราดูแลทุกหยดน้ำ ทุกใบไม้ ให้ลูกหลานได้เห็น",
+      voiceLineEn:
+        "Water this clear isn't by chance. We care for every drop, every leaf, so future generations can see this.",
+      audioUrl: "/audio/heroes/niran_thai.mp3",
+      audioUrlEn: "/audio/heroes/niran_english.mp3",
+      imageUrl:
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&crop=center",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      achievements: [
+        "ดูแลน้ำตกมา 15 ปี",
+        "ตั้งระบบแยกขยะ",
+        "อนุรักษ์พันธุ์ปลาพื้นเมือง",
+      ],
+      achievementsEn: [
+        "Protected waterfall for 15 years",
+        "Established waste separation",
+        "Conserved native fish species",
+      ],
+    },
+    shareTemplate: {
+      thai: "พบกับเรนเจอร์นิรันดร์ ผู้ดูแลน้ำตกห้วยแก้ว 💧🌿 เขาทำให้น้ำใสแบบนี้! #อนุรักษ์ธรรมชาติ #เชียงใหม่",
+      english:
+        "Met Park Ranger Niran at Huai Kaew Waterfall 💧🌿 He keeps the water this clear! #NatureConservation #ChiangMai",
+    },
+  },
+];
+
+type ARState =
+  | "scanning"
+  | "marker_found"
+  | "intro"
+  | "hero_story"
+  | "completed"
+  | "error";
 
 export default function ARExperience() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const locationParam = searchParams.get("location") || "doi_suthep";
-  const locationId = locationMapping[locationParam] || "doi_pui_forest";
+  const locationId = searchParams.get("location") || "doi_pui_forest";
 
-  const [arStarted, setArStarted] = useState(false);
-  const [location, setLocation] = useState<ARLocation | null>(null);
-  const [showWelcome, setShowWelcome] = useState(false);
-  const [showLocalHero, setShowLocalHero] = useState(false);
-  const [showMarkerScanner, setShowMarkerScanner] = useState(false);
+  const [arState, setArState] = useState<ARState>("scanning");
+  const [isLanguageThai, setIsLanguageThai] = useState(true);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isAudioMuted, setIsAudioMuted] = useState(false);
+  const [showHeroDialog, setShowHeroDialog] = useState(false);
+  const [greenMilesEarned, setGreenMilesEarned] = useState(0);
+  const [hasEarnedReward, setHasEarnedReward] = useState(false);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
   const [markerDetected, setMarkerDetected] = useState(false);
-  const [audioPlaying, setAudioPlaying] = useState(false);
-  const [rewardClaimed, setRewardClaimed] = useState(false);
-  const [arElementsVisible, setArElementsVisible] = useState(false);
-  const [language, setLanguage] = useState<"thai" | "english">("thai");
-  const [showShare, setShowShare] = useState(false);
-  const [showSubtitles, setShowSubtitles] = useState(true);
-  const [currentSubtitle, setCurrentSubtitle] = useState("");
+  const [showShareDialog, setShowShareDialog] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const arSceneRef = useRef<HTMLDivElement>(null);
 
+  // Find current location data
+  const currentLocation =
+    arLocations.find((loc) => loc.id === locationId) || arLocations[0];
+  const { hero } = currentLocation;
+
+  // Initialize camera
   useEffect(() => {
-    loadLocationData();
-  }, [locationId]);
+    const initCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "environment",
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+          },
+          audio: false,
+        });
 
-  const loadLocationData = async () => {
-    try {
-      // Use mock data directly for demo (API endpoint not implemented yet)
-      setLocation(getMockLocation(locationId));
-
-      // Simulate arrival and prompt for marker scanning
-      setTimeout(() => {
-        setShowWelcome(true);
-      }, 1000);
-    } catch (error) {
-      console.error("Error loading location:", error);
-      setLocation(getMockLocation(locationId));
-      setTimeout(() => {
-        setShowWelcome(true);
-      }, 1000);
-    }
-  };
-
-  const getMockLocation = (id: string): ARLocation => {
-    const mockLocations: Record<string, ARLocation> = {
-      doi_pui_forest: {
-        id: "doi_pui_forest",
-        name: "ป่าดอยปุย",
-        nameEn: "Doi Pui Forest",
-        type: "tourist_spot",
-        description: "ป่าผืนนี้มีต้นไม้มากกว่า 300 ชนิด เป็นปอดของเชียงใหม่",
-        descriptionEn:
-          "This forest has over 300 tree species and serves as Chiang Mai's lungs",
-        sustainabilityFeature:
-          "ใช้พลังงานแสงอ��ทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
-        sustainabilityFeatureEn: "Solar-powered visitor facilities",
-        coordinates: { lat: 18.8547, lng: 98.9184 },
-        arMarkerId: "doi_pui_marker",
-        hero: {
-          id: "forest_guide_somchai",
-          name: "ผู้ดูแลป่า สมชาย",
-          nameEn: "Forest Guardian Somchai",
-          role: "นักอนุรักษ์ป่า",
-          roleEn: "Forest Conservationist",
-          story:
-            "สมชายดูแลป่าดอยปุยมา 15 ปี ปลูกต้นไม้ใหม่ทุกปี และสอนเยาวชนให้รักษาป่า",
-          storyEn:
-            "Somchai has protected Doi Pui forest for 15 years, planting new trees annually and teaching youth forest conservation",
-          voiceLine:
-            "ในป่าผืนนี้มีต้นไม้มากก���่า 300 ชนิด เราปลูกใหม่ทุกปี ป่าจะอยู่กับเรา ถ้าเราอยู่กับป่า",
-          voiceLineEn:
-            "This forest has over 300 tree species. We plant new ones every year. The forest will stay with us if we stay with the forest.",
-          audioUrl: "/audio/somchai-thai.mp3",
-          audioUrlEn: "/audio/somchai-english.mp3",
-          imageUrl: "/images/somchai-forest.jpg",
-          avatarUrl: "/avatars/somchai-3d.glb",
-          achievements: [
-            "ปลูกต้นไม้ไปแล้ว 2,000 ต้น",
-            "ฝึกอบรมเยาวชน 500+ คน",
-            "ลดการทำลายป่า 80%",
-          ],
-          achievementsEn: [
-            "Planted 2,000+ trees",
-            "Trained 500+ youth",
-            "Reduced deforestation by 80%",
-          ],
-        },
-        rewardAmount: 15,
-        shareTemplate: {
-          thai: "พบกับผู้พิทักษ์ป่าจริง ๆ ที่ดอยปุย 🌲🇹🇭 #EcoHero #ChiangMai",
-          english:
-            "Met a real forest guardian at Doi Pui 🌲🇹🇭 #EcoHero #ChiangMai",
-        },
-      },
-      aunt_pen_cafe: {
-        id: "aunt_pen_cafe",
-        name: "ร้านกาแฟป้าเป็น",
-        nameEn: "Aunt Pen's Café",
-        type: "community_spot",
-        description: "ร้านกาแฟชุมชนที่เลิกใช้พลาสติกตั้งแต่ปี 2562",
-        descriptionEn: "Community café that went plastic-free since 2019",
-        sustainabilityFeature: "ปลอดพลาสติก ใช้ถ้วยไผ่และหลอดกระดาษ",
-        sustainabilityFeatureEn:
-          "Plastic-free with bamboo cups and paper straws",
-        coordinates: { lat: 18.7756, lng: 98.9856 },
-        arMarkerId: "pen_cafe_marker",
-        hero: {
-          id: "aunt_pen",
-          name: "ป้าเป็น",
-          nameEn: "Aunt Pen",
-          role: "เจ้าของร้านกาแฟ",
-          roleEn: "Café Owner",
-          story:
-            "ป้าเป็นเป็นคนแรกในย่านที่เลิกใช้พลาสติก เธอทำให้ร้านอื��น ๆ ตามมา",
-          storyEn:
-            "Aunt Pen was the first in the neighborhood to go plastic-free, inspiring other shops to follow",
-          voiceLine:
-            "ฉันเลิกใช้หลอดพลาสติกตั้งแต่ปี 2562 ใครจะรู้ว่ามันจะช่วยทะเลได้จริง ๆ",
-          voiceLineEn:
-            "I stopped using plastic straws since 2019. Who knew it would really help the ocean?",
-          audioUrl: "/audio/pen-thai.mp3",
-          audioUrlEn: "/audio/pen-english.mp3",
-          imageUrl: "/images/aunt-pen.jpg",
-          avatarUrl: "/avatars/pen-3d.glb",
-          achievements: [
-            "ปลอดพลาสติก 100%",
-            "ลูกค้าลดขยะ 5 ตัน/ปี",
-            "เป็นแรงบันดาลใจให้ร้าน 20+ ร้าน",
-          ],
-          achievementsEn: [
-            "100% plastic-free",
-            "Customers reduced 5 tons/year waste",
-            "Inspired 20+ other shops",
-          ],
-        },
-        rewardAmount: 10,
-        shareTemplate: {
-          thai: "พบกับฮีโร่ชุมชนที่ร้านป้าเป็น ♻️🇹🇭 #ZeroWaste #ChiangMai",
-          english:
-            "Met a community hero at Aunt Pen's Café ♻️🇹🇭 #ZeroWaste #ChiangMai",
-        },
-      },
-      ton_pao_village: {
-        id: "ton_pao_village",
-        name: "บ้านต้น��ปาะ",
-        nameEn: "Ban Ton Pao Weaving Village",
-        type: "community_spot",
-        description: "หมู่บ้านทอผ้าที่ใช้สีธรรมชาติจากใบไม้",
-        descriptionEn: "Weaving village using natural dyes from leaves",
-        sustainabilityFeature: "ย้อมผ้าด้วยสีจากธรรมชาติ 100%",
-        sustainabilityFeatureEn: "100% natural plant-based fabric dyes",
-        coordinates: { lat: 18.8123, lng: 98.8945 },
-        arMarkerId: "tonpao_marker",
-        hero: {
-          id: "elder_malee",
-          name: "ยายมาลี",
-          nameEn: "Elder Malee",
-          role: "ช่างทอผ้าอาวุโส",
-          roleEn: "Master Weaver",
-          story: "ยายมาลีสืบทอดภูมิปัญญาการย้อมผ้าจากคุณยายมา 4 รุ่น",
-          storyEn:
-            "Elder Malee inherited the wisdom of natural dyeing from her grandmother, 4 generations deep",
-          voiceLine:
-            "เราสืบทอดการย้อมผ้านี้มา 4 รุ่นแล้ว สีที่คุณเห็นมาจากใบไม้ล้วน ๆ",
-          voiceLineEn:
-            "We've inherited this dyeing tradition for 4 generations. The colors you see come purely from leaves.",
-          audioUrl: "/audio/malee-thai.mp3",
-          audioUrlEn: "/audio/malee-english.mp3",
-          imageUrl: "/images/elder-malee.jpg",
-          avatarUrl: "/avatars/malee-3d.glb",
-          achievements: [
-            "สืบทอดภูมิปัญญา 4 รุ่น",
-            "สอนเด็กหนุ่มสาว 200+ คน",
-            "ขายผ้าไปทั่วโลก 30+ ประเทศ",
-          ],
-          achievementsEn: [
-            "4 generations of wisdom",
-            "Taught 200+ young people",
-            "Fabrics sold to 30+ countries",
-          ],
-        },
-        rewardAmount: 12,
-        shareTemplate: {
-          thai: "พบกับยายมาลี นักทอผ้าระดับตำนาน ที่บ้านต้นเปาะ 🧵🇹🇭 #TraditionalCraft #ChiangMai",
-          english:
-            "Met legendary weaver Elder Malee at Ton Pao Village 🧵🇹🇭 #TraditionalCraft #ChiangMai",
-        },
-      },
-      huai_kaew_waterfall: {
-        id: "huai_kaew_waterfall",
-        name: "น้ำตกห้วย���ก้ว",
-        nameEn: "Huai Kaew Waterfall",
-        type: "tourist_spot",
-        description: "น้ำตกที่มีระบบผลิตไฟฟ้าจากพลังน้ำขนาดเล็ก",
-        descriptionEn:
-          "Waterfall with small-scale hydroelectric power generation",
-        sustainabilityFeature: "ใช้พลังน้ำผลิตไฟฟ้าสำหรับเส้นทางเดิน",
-        sustainabilityFeatureEn:
-          "Hydroelectric power for walking trail lighting",
-        coordinates: { lat: 18.8198, lng: 98.9245 },
-        arMarkerId: "waterfall_marker",
-        hero: {
-          id: "park_ranger_niran",
-          name: "นิรันดร์",
-          nameEn: "Park Ranger Niran",
-          role: "เจ้าหน้าที่อุทยาน",
-          roleEn: "Park Ranger",
-          story: "นิรันดร์ออกแบบระบบไฟฟ้าพลังน้ำที่ไม่รบกวนระบบนิเวศ",
-          storyEn:
-            "Niran designed the hydroelectric system that doesn't disturb the ecosystem",
-          voiceLine:
-            "น้ำตกนี้ให้พลังงานสะอาดแก่เราท��กวัน โดยไม่ทำร้ายธรรมชาติ",
-          voiceLineEn:
-            "This waterfall gives us clean energy every day without harming nature.",
-          audioUrl: "/audio/niran-thai.mp3",
-          audioUrlEn: "/audio/niran-english.mp3",
-          imageUrl: "/images/ranger-niran.jpg",
-          avatarUrl: "/avatars/niran-3d.glb",
-          achievements: [
-            "ออกแบบระบบไฟฟ้���เป็นมิต���กับสิ่งแวดล้อม",
-            "ลดการใช้ไฟฟ้าจากเชื้อเพลิงฟอสซิล 90%",
-            "เป็นต้นแบบอุทยาน 15 แห่ง",
-          ],
-          achievementsEn: [
-            "Designed eco-friendly power system",
-            "Reduced fossil fuel electricity by 90%",
-            "Model for 15 other parks",
-          ],
-        },
-        rewardAmount: 12,
-        shareTemplate: {
-          thai: "พบกับนักอนุรักษ์พลังงานที่น้ำตกห้วยแก���ว ⚡🇹🇭 #CleanEnergy #ChiangMai",
-          english:
-            "Met an energy conservationist at Huai Kaew Waterfall ⚡🇹🇭 #CleanEnergy #ChiangMai",
-        },
-      },
+        setCameraStream(stream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+        }
+      } catch (error) {
+        console.error("Camera access failed:", error);
+        setArState("error");
+      }
     };
 
-    return mockLocations[id] || mockLocations.doi_pui_forest;
-  };
+    initCamera();
 
+    return () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, []);
+
+  // Simulate AR marker detection (in a real app, this would use AR.js or WebXR)
   useEffect(() => {
-    if (arStarted) {
-      loadARFramework();
+    if (arState === "scanning") {
+      const timer = setTimeout(() => {
+        setMarkerDetected(true);
+        setArState("marker_found");
+
+        // Auto-progress to intro after marker found
+        setTimeout(() => {
+          setArState("intro");
+        }, 2000);
+      }, 3000);
+
+      return () => clearTimeout(timer);
     }
-  }, [arStarted]);
+  }, [arState]);
 
-  const loadARFramework = async () => {
-    try {
-      // Check if we're on HTTPS
-      if (location.protocol !== "https:" && location.hostname !== "localhost") {
-        alert(
-          "AR features require HTTPS. Please access the app via a secure connection.",
-        );
-        return;
-      }
-
-      // Load A-Frame first
-      const aframeScript = document.createElement("script");
-      aframeScript.src = "https://aframe.io/releases/1.4.0/aframe.min.js";
-
-      aframeScript.onload = () => {
-        // Then load AR.js
-        const arScript = document.createElement("script");
-        arScript.src =
-          "https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.js";
-        arScript.onload = () => {
-          initializeARScene();
-        };
-        arScript.onerror = () => {
-          console.error("Failed to load AR.js");
-          alert(
-            "Failed to load AR library. Please check your internet connection.",
-          );
-        };
-        document.head.appendChild(arScript);
-      };
-
-      aframeScript.onerror = () => {
-        console.error("Failed to load A-Frame");
-        alert(
-          "Failed to load AR framework. Please check your internet connection.",
-        );
-      };
-
-      document.head.appendChild(aframeScript);
-    } catch (error) {
-      console.error("Error loading AR framework:", error);
-    }
-  };
-
-  const initializeARScene = () => {
-    if (!arSceneRef.current || !location) return;
-
-    // Clear any existing content
-    arSceneRef.current.innerHTML = "";
-
-    // Create AR scene with marker detection
-    const scene = document.createElement("a-scene");
-    scene.setAttribute("embedded", "true");
-    scene.setAttribute(
-      "arjs",
-      JSON.stringify({
-        sourceType: "webcam",
-        debugUIEnabled: false,
-        detectionMode: "mono_and_matrix",
-        matrixCodeType: "3x3",
-        trackingMethod: "best",
-        sourceWidth: 1280,
-        sourceHeight: 960,
-        displayWidth: 1280,
-        displayHeight: 960,
-      }),
-    );
-    scene.style.width = "100%";
-    scene.style.height = "100%";
-    scene.style.zIndex = "1";
-
-    // Create marker entity
-    const marker = document.createElement("a-marker");
-    marker.setAttribute("preset", "custom");
-    marker.setAttribute("type", "pattern");
-    marker.setAttribute("url", `/markers/${location.arMarkerId}.patt`);
-    marker.setAttribute("smooth", "true");
-    marker.setAttribute("smoothCount", "10");
-    marker.setAttribute("smoothTolerance", "0.01");
-    marker.setAttribute("smoothThreshold", "5");
-
-    // Marker detection events
-    marker.addEventListener("markerFound", () => {
-      setMarkerDetected(true);
-      setArElementsVisible(true);
-    });
-
-    marker.addEventListener("markerLost", () => {
-      setMarkerDetected(false);
-    });
-
-    // Create floating place introduction
-    const placeTitle = document.createElement("a-text");
-    placeTitle.setAttribute("position", "0 2 0");
-    placeTitle.setAttribute("scale", "1.5 1.5 1.5");
-    placeTitle.setAttribute("color", "#2E7D32");
-    placeTitle.setAttribute("align", "center");
-    placeTitle.setAttribute(
-      "value",
-      language === "thai" ? location.name : location.nameEn,
-    );
-    placeTitle.setAttribute(
-      "animation",
-      "property: position; to: 0 2.5 0; dir: alternate; loop: true; dur: 3000; easing: easeInOutSine",
-    );
-    marker.appendChild(placeTitle);
-
-    // Sustainability feature text
-    const sustainabilityText = document.createElement("a-text");
-    sustainabilityText.setAttribute("position", "0 1.3 0");
-    sustainabilityText.setAttribute("scale", "0.8 0.8 0.8");
-    sustainabilityText.setAttribute("color", "#4CAF50");
-    sustainabilityText.setAttribute("align", "center");
-    sustainabilityText.setAttribute("width", "6");
-    sustainabilityText.setAttribute(
-      "value",
-      language === "thai"
-        ? location.sustainabilityFeature
-        : location.sustainabilityFeatureEn,
-    );
-    marker.appendChild(sustainabilityText);
-
-    // Create location description
-    const descText = document.createElement("a-text");
-    descText.setAttribute("position", "0 1 -3");
-    descText.setAttribute("scale", "1 1 1");
-    descText.setAttribute("color", "#2E7D32");
-    descText.setAttribute("align", "center");
-    descText.setAttribute("width", "6");
-    descText.setAttribute("value", location.description);
-    scene.appendChild(descText);
-
-    // Create eco-elements
-    if (location.ecoElements.waterRefill) {
-      const waterIcon = document.createElement("a-box");
-      waterIcon.setAttribute("position", "-2 0.5 -2");
-      waterIcon.setAttribute("rotation", "0 45 0");
-      waterIcon.setAttribute("color", "#2196F3");
-      waterIcon.setAttribute("scale", "0.3 0.6 0.3");
-      waterIcon.setAttribute(
-        "animation",
-        "property: position; to: -2 1 -2; dir: alternate; loop: true; dur: 2000",
-      );
-      scene.appendChild(waterIcon);
-
-      const waterLabel = document.createElement("a-text");
-      waterLabel.setAttribute("position", "-2 0 -2");
-      waterLabel.setAttribute("scale", "0.5 0.5 0.5");
-      waterLabel.setAttribute("color", "#2196F3");
-      waterLabel.setAttribute("align", "center");
-      waterLabel.setAttribute("value", "Water Refill");
-      scene.appendChild(waterLabel);
-    }
-
-    if (location.ecoElements.compostBin) {
-      const compostIcon = document.createElement("a-cylinder");
-      compostIcon.setAttribute("position", "2 0.5 -2");
-      compostIcon.setAttribute("color", "#8BC34A");
-      compostIcon.setAttribute("scale", "0.3 0.6 0.3");
-      compostIcon.setAttribute(
-        "animation",
-        "property: rotation; to: 0 360 0; loop: true; dur: 3000",
-      );
-      scene.appendChild(compostIcon);
-
-      const compostLabel = document.createElement("a-text");
-      compostLabel.setAttribute("position", "2 0 -2");
-      compostLabel.setAttribute("scale", "0.5 0.5 0.5");
-      compostLabel.setAttribute("color", "#8BC34A");
-      compostLabel.setAttribute("align", "center");
-      compostLabel.setAttribute("value", "Compost Bin");
-      scene.appendChild(compostLabel);
-    }
-
-    if (location.ecoElements.solarPower) {
-      const solarPanel = document.createElement("a-plane");
-      solarPanel.setAttribute("position", "0 3 -4");
-      solarPanel.setAttribute("rotation", "-15 0 0");
-      solarPanel.setAttribute("color", "#1565C0");
-      solarPanel.setAttribute("scale", "1 0.7 1");
-      solarPanel.setAttribute(
-        "animation",
-        "property: material.color; to: #FFD54F; dir: alternate; loop: true; dur: 2000",
-      );
-      scene.appendChild(solarPanel);
-
-      const solarLabel = document.createElement("a-text");
-      solarLabel.setAttribute("position", "0 2.5 -4");
-      solarLabel.setAttribute("scale", "0.5 0.5 0.5");
-      solarLabel.setAttribute("color", "#1565C0");
-      solarLabel.setAttribute("align", "center");
-      solarLabel.setAttribute("value", "Solar Powered");
-      scene.appendChild(solarLabel);
-    }
-
-    // Create camera
-    const camera = document.createElement("a-entity");
-    camera.setAttribute("camera", "");
-    scene.appendChild(camera);
-
-    arSceneRef.current.appendChild(scene);
-    setArElementsVisible(true);
-  };
-
-  const startARExperience = async () => {
-    try {
-      // Check if we're on HTTPS (required for camera access)
-      if (location.protocol !== "https:" && location.hostname !== "localhost") {
-        const thaiMessage = `⚠️ ต้องใช้ HTTPS เพื่อเข้าถึงกล้อง
-
-กรุณาใช้ลิงก์ที่ปลอดภัย (https://) แทน
-หรือใช้บริการ Netlify, Vercel, หรือ GitHub Pages
-
-ปัจจุบันคุณอยู่ที่: ${location.href}
-ต้องการ: https://your-domain.com`;
-
-        alert(thaiMessage);
-        return;
-      }
-
-      // Check if getUserMedia is available
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        const thaiMessage = `❌ เบราว์เซอร์นี้ไม่รองรับการเข้าถึงกล้อง
-
-กรุณาใช้:
-• Chrome (แนะนำ)
-• Firefox
-• Safari (iOS 11+)
-• Edge
-
-หรือตรวจสอบการตั้งค่าเบราว์เซอร์`;
-        alert(thaiMessage);
-        return;
-      }
-
-      // Show loading state
-      console.log("🎥 กำลังขอสิทธิ์เข้าถึงกล้อง...");
-
-      // Request camera permission with specific constraints
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "environment", // Use back camera
-          width: { ideal: 1280, min: 640 },
-          height: { ideal: 960, min: 480 },
-        },
-      });
-
-      // Test that we got a valid stream
-      if (stream && stream.getVideoTracks().length > 0) {
-        console.log("✅ เข้าถึงกล้องสำเร็จ!");
-
-        // Test camera capabilities
-        const videoTrack = stream.getVideoTracks()[0];
-        const capabilities = videoTrack.getCapabilities
-          ? videoTrack.getCapabilities()
-          : {};
-        console.log("Camera capabilities:", capabilities);
-
-        stream.getTracks().forEach((track) => track.stop()); // Stop test stream
-        setArStarted(true);
-      } else {
-        throw new Error("No video tracks available");
-      }
-    } catch (error) {
-      console.error("Camera access error:", error);
-
-      let thaiMessage = "❌ ไม่สามารถเข้าถึงกล้องได้\n\n";
-
-      if (error.name === "NotAllowedError") {
-        thaiMessage += `🚫 คุณไม่อนุญาตให้เข้าถึงกล้อง
-
-วิธีแก้ไข:
-1. คลิก "อนุญาต" เมื่อเบราว์เซอร์ถาม
-2. ตรวจสอบไอคอน 🔒 ข้างบนแถบที่อยู่
-3. เปิดการอนุญาตกล้องในการตั้งค่า
-4. รีเฟรชหน��าเว็บและลองใหม่`;
-      } else if (error.name === "NotFoundError") {
-        thaiMessage += `📷 ไม่พบกล้องในอุปกรณ์นี้
-
-วิธีแก้ไข:
-• ตรวจสอบว่าอุปกรณ์มีกล้อง
-• เสียบกล้อง USB (คอมพิวเตอร์)
-• รีส��าร์ทแอปกล้อง
-• ลองเบราว์เซอร์อื่น`;
-      } else if (error.name === "NotSupportedError") {
-        thaiMessage += `⚠️ เบราว์เซอร์ไม่รองรับ WebRTC
-
-แนะนำให้ใช้:
-• Chrome มือถือ (แนะนำ)
-• Firefox
-• Safari (iOS 11+)`;
-      } else if (error.name === "NotReadableError") {
-        thaiMessage += `🔒 กล้องถูกใช้งานโดยแอปอื่น
-
-วิธีแก้ไข:
-• ปิดแอปกล้องอื่น ๆ
-• ปิดแท็บเบราว์เซอร์ที่ใช้กล้อง
-• รีสตาร์ทเบราว์เซอร์`;
-      } else {
-        thaiMessage += `🔧 เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ
-
-ลองวิธีเหล่านี้:
-• รีเฟรชหน้าเว็บ
-• ปิด-เปิดเบราว์เซอร์ใหม่
-• ตรวจสอบการตั้งค่าความเป็นส่วนตัว
-• ใช้เบราว์เซอร์อื่น
-
-ข้อผิดพลาด: ${error.message}`;
-      }
-
-      alert(thaiMessage);
-    }
-  };
-
-  const playHeroStory = () => {
-    setShowLocalHero(true);
-    if (audioRef.current) {
-      audioRef.current.src =
-        language === "thai"
-          ? location?.hero.audioUrl || ""
-          : location?.hero.audioUrlEn || "";
-      audioRef.current.play();
-      setAudioPlaying(true);
-
-      // Show subtitles
-      if (showSubtitles && location) {
-        setCurrentSubtitle(
-          language === "thai"
-            ? location.hero.voiceLine
-            : location.hero.voiceLineEn,
-        );
-      }
-    }
-  };
-
-  const handleShare = async () => {
-    if (!location) return;
-
-    const shareText =
-      language === "thai"
-        ? location.shareTemplate.thai
-        : location.shareTemplate.english;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `EcoTravel - ${language === "thai" ? location.name : location.nameEn}`,
-          text: shareText,
-          url: window.location.href,
-        });
-      } catch (error) {
-        console.log("Share cancelled or failed");
-      }
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(shareText + " " + window.location.href);
-      alert("Share text copied to clipboard!");
-    }
-  };
-
+  // Audio controls
   const toggleAudio = () => {
     if (audioRef.current) {
-      if (audioPlaying) {
+      if (isAudioPlaying) {
         audioRef.current.pause();
+        setIsAudioPlaying(false);
       } else {
         audioRef.current.play();
+        setIsAudioPlaying(true);
       }
-      setAudioPlaying(!audioPlaying);
     }
   };
 
-  const claimBonusReward = async () => {
-    if (!location || !markerDetected) {
-      alert("Please scan the AR marker first to claim your reward!");
-      return;
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isAudioMuted;
+      setIsAudioMuted(!isAudioMuted);
     }
+  };
+
+  // Start hero story
+  const startHeroStory = () => {
+    setArState("hero_story");
+    setShowHeroDialog(true);
+
+    // Auto-play audio
+    if (audioRef.current) {
+      audioRef.current.play();
+      setIsAudioPlaying(true);
+    }
+  };
+
+  // Claim Green Miles reward
+  const claimReward = async () => {
+    if (hasEarnedReward) return;
 
     try {
       const response = await fetch("/api/green-miles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId: "demo_user_001",
-          route: {
-            origin: { name: "Nimman Road", lat: 18.7984, lng: 98.9681 },
-            destination: {
-              name: language === "thai" ? location.name : location.nameEn,
-              lat: location.coordinates.lat,
-              lng: location.coordinates.lng,
-            },
-            mode: {
-              mode: "walk",
-              name: "Walking",
-              icon: "walk",
-              emissionFactor: 0,
-            },
-            distance: 5,
-            duration: 30,
-            co2Emissions: 0,
-          },
-          isOutsideCity: location.type === "tourist_spot",
-          isRecommendedZone: true,
-          bonusAmount: location.rewardAmount,
+          action: "ar_hero_experience",
+          locationId: currentLocation.id,
+          greenMiles: currentLocation.rewardAmount,
+          heroId: hero.id,
         }),
       });
 
-      const result = await response.json();
-      if (result.success) {
-        setRewardClaimed(true);
-        setTimeout(() => setRewardClaimed(false), 5000);
+      if (response.ok) {
+        setGreenMilesEarned(currentLocation.rewardAmount);
+        setHasEarnedReward(true);
+        setArState("completed");
       }
     } catch (error) {
       console.error("Error claiming reward:", error);
     }
   };
 
-  if (!location) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Location not found</p>
-      </div>
-    );
-  }
+  // Share story
+  const shareStory = async () => {
+    const shareText = isLanguageThai
+      ? currentLocation.shareTemplate.thai
+      : currentLocation.shareTemplate.english;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: isLanguageThai ? `พบกับ${hero.name}` : `Met ${hero.nameEn}`,
+          text: shareText,
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.log("Share cancelled");
+      }
+    } else {
+      // Fallback to clipboard
+      navigator.clipboard?.writeText(shareText);
+      setShowShareDialog(true);
+    }
+  };
+
+  // Reset AR experience
+  const resetExperience = () => {
+    setArState("scanning");
+    setMarkerDetected(false);
+    setShowHeroDialog(false);
+    setIsAudioPlaying(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
+
+  const currentName = isLanguageThai
+    ? currentLocation.name
+    : currentLocation.nameEn;
+  const currentDescription = isLanguageThai
+    ? currentLocation.description
+    : currentLocation.descriptionEn;
+  const currentSustainability = isLanguageThai
+    ? currentLocation.sustainabilityFeature
+    : currentLocation.sustainabilityFeatureEn;
+  const heroName = isLanguageThai ? hero.name : hero.nameEn;
+  const heroRole = isLanguageThai ? hero.role : hero.roleEn;
+  const heroStory = isLanguageThai ? hero.story : hero.storyEn;
+  const heroVoiceLine = isLanguageThai ? hero.voiceLine : hero.voiceLineEn;
+  const heroAchievements = isLanguageThai
+    ? hero.achievements
+    : hero.achievementsEn;
 
   return (
-    <div className="min-h-screen bg-black relative">
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm">
-        <div className="container max-w-md mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate(-1)}
-              className="text-white hover:bg-white/20"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-
-            <div className="text-center text-white">
-              <h1 className="font-semibold">AR Experience</h1>
-              <p className="text-xs opacity-80">{location.name}</p>
-            </div>
-
-            <Badge className="bg-green-600 text-white">
-              <MapPin className="h-3 w-3 mr-1" />
-              Arrived
-            </Badge>
-          </div>
-        </div>
-      </header>
-
-      {/* AR Scene Container */}
-      <div
-        ref={arSceneRef}
-        className="w-full h-full"
-        style={{ display: arStarted ? "block" : "none" }}
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Camera Video */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        playsInline
+        muted
       />
 
-      {/* Welcome Screen */}
-      {!arStarted && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-green-900 to-blue-900">
-          <Card className="p-6 m-4 text-center max-w-sm bg-white/95">
-            <div className="text-4xl mb-4">🌟</div>
-            <h2 className="text-xl font-bold text-green-800 mb-2">
-              Welcome to {location.name}!
-            </h2>
-            <p className="text-sm text-muted-foreground mb-6">
-              Experience this sustainable destination through augmented reality
-              and meet local eco-heroes making a difference.
-            </p>
-
+      {/* AR Overlay Content */}
+      <div className="absolute inset-0 z-10">
+        {/* Header Controls */}
+        <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/70 to-transparent p-4">
+          <div className="flex items-center justify-between">
             <Button
-              onClick={startARExperience}
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
+              onClick={() => navigate("/")}
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/20"
             >
-              <Camera className="h-4 w-4 mr-2" />
-              Start AR Experience
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {isLanguageThai ? "กลับ" : "Back"}
             </Button>
-          </Card>
-        </div>
-      )}
 
-      {/* AR Controls Overlay */}
-      {arStarted && (
-        <div className="absolute bottom-0 left-0 right-0 z-40 bg-black/70 backdrop-blur-sm p-4">
-          <div className="container max-w-md mx-auto space-y-3">
-            {/* Marker Detection Status */}
-            <div className="text-center mb-4">
-              {markerDetected ? (
-                <div className="bg-green-600 text-white px-4 py-2 rounded-full inline-flex items-center gap-2">
-                  <Camera className="h-4 w-4" />
-                  <span className="text-sm font-medium">
-                    {language === "thai"
-                      ? "พบเครื่องหมาย AR!"
-                      : "AR Marker Detected!"}
-                  </span>
-                </div>
-              ) : (
-                <div className="bg-orange-600 text-white px-4 py-2 rounded-full inline-flex items-center gap-2">
-                  <RotateCcw className="h-4 w-4 animate-spin" />
-                  <span className="text-sm font-medium">
-                    {language === "thai"
-                      ? "มองหาเครื่องหมาย AR..."
-                      : "Looking for AR marker..."}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Sustainability Feature Display */}
-            {markerDetected && location && (
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 mb-4">
-                <div className="text-center text-white">
-                  <div className="text-2xl mb-2">
-                    {location.type === "tourist_spot" ? "🏞️" : "🏘️"}
-                  </div>
-                  <h3 className="font-semibold mb-1">
-                    {language === "thai" ? location.name : location.nameEn}
-                  </h3>
-                  <p className="text-sm opacity-90">
-                    {language === "thai"
-                      ? location.sustainabilityFeature
-                      : location.sustainabilityFeatureEn}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-2">
               <Button
-                onClick={playHeroStory}
-                disabled={!markerDetected}
-                className={cn(
-                  "text-white",
-                  markerDetected
-                    ? "bg-blue-600 hover:bg-blue-700"
-                    : "bg-gray-500 cursor-not-allowed",
-                )}
+                onClick={() => setIsLanguageThai(!isLanguageThai)}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white/20"
               >
-                <Volume2 className="h-4 w-4 mr-2" />
-                {language === "thai" ? "ฟังเรื่องฮีโร่" : "Hero Story"}
+                <Languages className="w-4 h-4 mr-1" />
+                {isLanguageThai ? "EN" : "ไทย"}
               </Button>
 
               <Button
-                onClick={claimBonusReward}
-                disabled={rewardClaimed || !markerDetected}
-                className={cn(
-                  "text-white",
-                  rewardClaimed
-                    ? "bg-gray-500 cursor-not-allowed"
-                    : !markerDetected
-                      ? "bg-gray-500 cursor-not-allowed"
-                      : "bg-green-600 hover:bg-green-700",
+                onClick={toggleMute}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white/20"
+              >
+                {isAudioMuted ? (
+                  <VolumeX className="w-4 h-4" />
+                ) : (
+                  <Volume2 className="w-4 h-4" />
                 )}
-              >
-                <Gift className="h-4 w-4 mr-2" />
-                {rewardClaimed
-                  ? language === "thai"
-                    ? "รับแล้ว!"
-                    : "Claimed!"
-                  : `+${location?.rewardAmount || 10} ${language === "thai" ? "ไมล์" : "Miles"}`}
-              </Button>
-            </div>
-
-            {/* Language Toggle */}
-            <Button
-              onClick={() =>
-                setLanguage(language === "thai" ? "english" : "thai")
-              }
-              variant="outline"
-              className="w-full text-white border-white/30 hover:bg-white/10"
-            >
-              <Languages className="h-4 w-4 mr-2" />
-              {language === "thai" ? "Switch to English" : "เปลี่ยนเป็นภาษาไทย"}
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* Welcome Dialog */}
-      <Dialog open={showWelcome} onOpenChange={setShowWelcome}>
-        <DialogContent className="max-w-sm mx-auto">
-          <DialogHeader>
-            <DialogTitle className="text-green-700 flex items-center gap-2">
-              <Star className="h-5 w-5" />
-              {language === "thai"
-                ? `ยินดีต้อนรับสู่ ${location?.name}!`
-                : `Welcome to ${location?.nameEn}!`}
-            </DialogTitle>
-          </DialogHeader>
-
-          <div className="space-y-4">
-            <div className="text-center">
-              <div className="text-6xl mb-4">
-                {location?.type === "tourist_spot" ? "🏞️" : "🏘️"}
-              </div>
-              <Badge className="mb-3">
-                {location?.type === "tourist_spot"
-                  ? "Tourist Spot"
-                  : "Community Spot"}
-              </Badge>
-              <p className="text-sm text-muted-foreground">
-                {language === "thai"
-                  ? "คุณมา��ึงจุดหมายที่ยั่งยืนแล้ว!"
-                  : "You've arrived at a certified sustainable destination!"}
-              </p>
-            </div>
-
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="text-sm text-green-700">
-                {language === "thai"
-                  ? location?.description
-                  : location?.descriptionEn}
-              </p>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <p className="text-sm text-blue-700 font-medium mb-2">
-                {language === "thai" ? "ขั้นตอนถัดไป:" : "Next Step:"}
-              </p>
-              <p className="text-sm text-blue-600 mb-2">
-                {language === "thai"
-                  ? "กดปุ่มด้านล่างเพื่อเปิดกล้องและสแกนเครื่องหมาย AR"
-                  : "Tap the button below to open camera and scan AR marker"}
-              </p>
-              {location.protocol !== "https:" &&
-                location.hostname !== "localhost" && (
-                  <div className="mt-2 p-2 bg-orange-100 border border-orange-300 rounded text-xs text-orange-700">
-                    {language === "thai"
-                      ? "⚠️ ต้องใช้ HTTPS เพื่อเข้าถึงกล้อง กรุณาใช้ลิงก์ปลอดภัย"
-                      : "⚠️ HTTPS required for camera access. Please use secure link"}
-                  </div>
-                )}
-            </div>
-            <div className="flex gap-3">
-              <Button
-                onClick={() =>
-                  setLanguage(language === "thai" ? "english" : "thai")
-                }
-                variant="outline"
-                className="flex-1"
-              >
-                <Languages className="h-4 w-4 mr-2" />
-                {language === "thai" ? "English" : "ไทย"}
-              </Button>
-
-              <Button
-                onClick={() => {
-                  setShowWelcome(false);
-                  startARExperience();
-                }}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
-              >
-                <Camera className="h-4 w-4 mr-2" />
-                {language === "thai" ? "��� เปิดกล้อง AR" : "🎥 Open AR Camera"}
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
 
-      {/* Local Hero Dialog */}
-      <Dialog open={showLocalHero} onOpenChange={setShowLocalHero}>
-        <DialogContent className="max-w-sm mx-auto max-h-[80vh] overflow-y-auto">
+        {/* AR State Content */}
+        {arState === "scanning" && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Card className="bg-black/70 backdrop-blur-sm text-white border-green-400 max-w-sm mx-4">
+              <CardContent className="p-6 text-center">
+                <Scan className="w-12 h-12 text-green-400 mx-auto mb-4 animate-pulse" />
+                <h3 className="text-lg font-semibold mb-2">
+                  {isLanguageThai
+                    ? "สแกนหาเครื่องหมาย AR"
+                    : "Scanning for AR Marker"}
+                </h3>
+                <p className="text-sm text-gray-300 mb-4">
+                  {isLanguageThai
+                    ? "มองหาป้ายหรือเครื่องหมายพิเศษใกล้จุดท่องเที่ยว"
+                    : "Look for special signs or markers near the tourist spot"}
+                </p>
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div className="bg-green-400 h-2 rounded-full animate-pulse w-3/4"></div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {arState === "marker_found" && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Card className="bg-green-600/90 backdrop-blur-sm text-white border-green-400 max-w-sm mx-4">
+              <CardContent className="p-6 text-center">
+                <CheckCircle className="w-12 h-12 text-white mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">
+                  {isLanguageThai ? "พบเครื่องหมายแล้ว!" : "Marker Found!"}
+                </h3>
+                <p className="text-sm">
+                  {isLanguageThai
+                    ? "กำลังโหลดประสบการณ์ AR..."
+                    : "Loading AR experience..."}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {arState === "intro" && (
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+            <Card className="bg-white/10 backdrop-blur-sm text-white border border-white/20">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      {currentName}
+                    </h3>
+                    <p className="text-sm text-gray-200 mb-2">
+                      {currentDescription}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Leaf className="w-4 h-4 text-green-400" />
+                      <span className="text-xs text-green-300">
+                        {currentSustainability}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={startHeroStory}
+                  className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
+                >
+                  <Heart className="w-4 h-4 mr-2" />
+                  {isLanguageThai ? "พบกับฮีโร่ท้องถิ่น" : "Meet Local Hero"}
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {arState === "completed" && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Card className="bg-green-600/95 backdrop-blur-sm text-white border-green-400 max-w-sm mx-4">
+              <CardContent className="p-6 text-center">
+                <Trophy className="w-16 h-16 text-yellow-300 mx-auto mb-4" />
+                <h3 className="text-xl font-bold mb-2">
+                  {isLanguageThai ? "ได้รับแรงบันดาลใจ!" : "Inspired!"}
+                </h3>
+                <p className="text-sm mb-4">+{greenMilesEarned} Green Miles</p>
+                <div className="space-y-3">
+                  <Button
+                    onClick={shareStory}
+                    className="w-full bg-white/20 hover:bg-white/30 text-white"
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    {isLanguageThai ? "แชร์เรื่องราว" : "Share Story"}
+                  </Button>
+                  <Button
+                    onClick={() => navigate("/")}
+                    variant="outline"
+                    className="w-full border-white text-white hover:bg-white/10"
+                  >
+                    {isLanguageThai ? "กลับหน้าหลัก" : "Back to Home"}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {arState === "error" && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Card className="bg-red-600/90 backdrop-blur-sm text-white max-w-sm mx-4">
+              <CardContent className="p-6 text-center">
+                <X className="w-12 h-12 text-white mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">
+                  {isLanguageThai
+                    ? "ไม่สามารถเข้าถึงกล้องได้"
+                    : "Camera Access Failed"}
+                </h3>
+                <p className="text-sm mb-4">
+                  {isLanguageThai
+                    ? "กรุณาอนุญาตการใช้กล้องและลองใหม่"
+                    : "Please allow camera access and try again"}
+                </p>
+                <Button
+                  onClick={() => window.location.reload()}
+                  className="w-full bg-white/20 hover:bg-white/30"
+                >
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  {isLanguageThai ? "ลองใหม่" : "Retry"}
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Reset Button */}
+        {(arState === "hero_story" || arState === "completed") && (
+          <Button
+            onClick={resetExperience}
+            className="absolute top-20 right-4 bg-black/50 hover:bg-black/70 text-white"
+            size="sm"
+          >
+            <RotateCcw className="w-4 h-4 mr-1" />
+            {isLanguageThai ? "เริ่มใหม่" : "Reset"}
+          </Button>
+        )}
+      </div>
+
+      {/* Hero Story Dialog */}
+      <Dialog open={showHeroDialog} onOpenChange={setShowHeroDialog}>
+        <DialogContent className="max-w-md bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
           <DialogHeader>
-            <DialogTitle className="text-green-700 flex items-center gap-2">
-              <Award className="h-5 w-5" />
-              {language === "thai"
-                ? `ฮีโร่ท้องถิ่น: ${location?.hero.name}`
-                : `Local Eco-Hero: ${location?.hero.nameEn}`}
+            <DialogTitle className="text-center text-green-900">
+              {isLanguageThai ? "ฮีโร่ท้องถิ่น" : "Local Hero"}
             </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
             {/* Hero Avatar */}
-            <div className="relative bg-gradient-to-br from-green-100 to-blue-100 rounded-lg overflow-hidden h-48">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Award className="h-10 w-10 text-white" />
+            <div className="text-center">
+              <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-green-200 mb-3">
+                <img
+                  src={hero.avatarUrl}
+                  alt={heroName}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="font-bold text-lg text-green-900">{heroName}</h3>
+              <p className="text-green-700 text-sm">{heroRole}</p>
+            </div>
+
+            {/* Voice Line */}
+            <Card className="bg-white/80 border border-green-200">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                    <Star className="w-4 h-4 text-green-600" />
                   </div>
-                  <p className="text-lg font-bold text-green-800">
-                    {language === "thai"
-                      ? location?.hero.name
-                      : location?.hero.nameEn}
+                  <p className="text-sm text-gray-800 italic flex-1">
+                    "{heroVoiceLine}"
                   </p>
-                  <p className="text-sm text-green-600">
-                    {language === "thai"
-                      ? location?.hero.role
-                      : location?.hero.roleEn}
-                  </p>
+                  <Button
+                    onClick={toggleAudio}
+                    variant="ghost"
+                    size="sm"
+                    className="text-green-600"
+                  >
+                    {isAudioPlaying ? (
+                      <Pause className="w-4 h-4" />
+                    ) : (
+                      <Play className="w-4 h-4" />
+                    )}
+                  </Button>
                 </div>
-              </div>
-            </div>
-
-            {/* Voice Line with Subtitles */}
-            {showSubtitles && currentSubtitle && (
-              <div className="bg-black/80 text-white p-3 rounded-lg">
-                <p className="text-sm text-center italic">
-                  "{currentSubtitle}"
-                </p>
-              </div>
-            )}
-
-            {/* Hero Story */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <h4 className="font-semibold text-green-800 mb-2">
-                {language === "thai" ? "เรื่องราว" : "Story"}
-              </h4>
-              <p className="text-sm text-green-700">
-                {language === "thai"
-                  ? location?.hero.story
-                  : location?.hero.storyEn}
-              </p>
-            </div>
+                <p className="text-sm text-green-700">{heroStory}</p>
+              </CardContent>
+            </Card>
 
             {/* Achievements */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <h4 className="font-semibold text-blue-800 mb-2">
-                {language === "thai" ? "ความสำเร็จ" : "Achievements"}
+            <div className="space-y-2">
+              <h4 className="font-medium text-green-900 text-sm">
+                {isLanguageThai ? "ความสำเร็จ" : "Achievements"}
               </h4>
-              <ul className="space-y-1">
-                {(language === "thai"
-                  ? location?.hero.achievements
-                  : location?.hero.achievementsEn
-                )?.map((achievement, index) => (
-                  <li
-                    key={index}
-                    className="text-sm text-blue-700 flex items-start gap-2"
-                  >
-                    <Star className="h-3 w-3 text-blue-600 mt-0.5 flex-shrink-0" />
-                    {achievement}
-                  </li>
+              <div className="space-y-1">
+                {heroAchievements.map((achievement, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <Award className="w-3 h-3 text-yellow-500" />
+                    <span className="text-xs text-gray-700">{achievement}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            {/* Audio Controls */}
-            <div className="grid grid-cols-3 gap-2">
-              <Button
-                onClick={toggleAudio}
-                variant="outline"
-                className="flex items-center gap-1"
-              >
-                {audioPlaying ? (
-                  <Pause className="h-3 w-3" />
-                ) : (
-                  <Play className="h-3 w-3" />
-                )}
-                {audioPlaying
-                  ? language === "thai"
-                    ? "หยุด"
-                    : "Pause"
-                  : language === "thai"
-                    ? "ฟัง"
-                    : "Listen"}
-              </Button>
-
-              <Button
-                onClick={() => setShowSubtitles(!showSubtitles)}
-                variant="outline"
-                className="text-xs"
-              >
-                {showSubtitles ? "Hide" : "Show"} Sub
-              </Button>
-
-              <Button
-                onClick={handleShare}
-                variant="outline"
-                className="flex items-center gap-1"
-              >
-                <Share2 className="h-3 w-3" />
-                {language === "thai" ? "แชร์" : "Share"}
-              </Button>
-            </div>
-
+            {/* Action Buttons */}
             <div className="flex gap-3">
               <Button
-                onClick={() =>
-                  setLanguage(language === "thai" ? "english" : "thai")
-                }
+                onClick={shareStory}
                 variant="outline"
-                className="flex-1"
+                className="flex-1 border-green-300 text-green-700 hover:bg-green-50"
               >
-                <Languages className="h-4 w-4 mr-2" />
-                {language === "thai" ? "English" : "ไทย"}
+                <Share2 className="w-4 h-4 mr-2" />
+                {isLanguageThai ? "แชร์" : "Share"}
               </Button>
 
               <Button
-                onClick={() => setShowLocalHero(false)}
-                className="flex-1"
+                onClick={claimReward}
+                disabled={hasEarnedReward}
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
               >
-                {language === "thai" ? "ด�� AR ต่อ" : "Continue AR"}
+                <Gift className="w-4 h-4 mr-2" />
+                {hasEarnedReward
+                  ? isLanguageThai
+                    ? "ได้รับแล้ว"
+                    : "Claimed"
+                  : isLanguageThai
+                    ? `+${currentLocation.rewardAmount} Miles`
+                    : `+${currentLocation.rewardAmount} Miles`}
               </Button>
             </div>
           </div>
-
-          {/* Hidden Audio Element */}
-          <audio
-            ref={audioRef}
-            onEnded={() => {
-              setAudioPlaying(false);
-              setCurrentSubtitle("");
-            }}
-            onLoadedMetadata={() => {
-              // Set subtitle timing
-              if (showSubtitles && location) {
-                setCurrentSubtitle(
-                  language === "thai"
-                    ? location.hero.voiceLine
-                    : location.hero.voiceLineEn,
-                );
-              }
-            }}
-          />
         </DialogContent>
       </Dialog>
 
-      {/* Reward Claimed Notification */}
-      {rewardClaimed && location && (
-        <div className="absolute top-20 left-4 right-4 z-50">
-          <Card className="p-4 bg-green-600 text-white text-center animate-bounce">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Gift className="h-6 w-6" />
-              <span className="font-bold text-lg">
-                +{location.rewardAmount}{" "}
-                {language === "thai" ? "เกรีน ไมล์!" : "Green Miles!"}
-              </span>
-            </div>
-            <p className="text-sm opacity-90">
-              {language === "thai"
-                ? `ขอบคุณที่��าเย���่ยมชม ${location.name}!`
-                : `Thanks for visiting ${location.nameEn}!`}
-            </p>
-            <p className="text-xs opacity-75 mt-1">
-              {language === "thai"
-                ? "พบกับฮีโร่ท้องถิ่นและได้รับ��รงบันดาลใจ"
-                : "Met a local hero and got inspired!"}
-            </p>
-          </Card>
-        </div>
-      )}
+      {/* Share Dialog */}
+      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>
+              {isLanguageThai ? "คัดลอกข้อความแล้ว!" : "Text Copied!"}
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-gray-600">
+            {isLanguageThai
+              ? "ข้อความแชร์ถูกคัดลอกไปที่คลิปบอร์ดแล้ว"
+              : "Share text has been copied to clipboard"}
+          </p>
+        </DialogContent>
+      </Dialog>
+
+      {/* Hidden Audio Element */}
+      <audio
+        ref={audioRef}
+        preload="metadata"
+        onPlay={() => setIsAudioPlaying(true)}
+        onPause={() => setIsAudioPlaying(false)}
+        onEnded={() => setIsAudioPlaying(false)}
+      >
+        <source
+          src={isLanguageThai ? hero.audioUrl : hero.audioUrlEn}
+          type="audio/mpeg"
+        />
+      </audio>
     </div>
   );
 }

@@ -48,7 +48,7 @@ const localDestinations: LocalDestination[] = [
   {
     id: "aunt_pen_cafe",
     name: "คาเฟ่ป้าเป็น",
-    description: "คาเฟ่เล็กๆ ริมลำธาร เสิร์ฟกาแฟหอมกรุ่นและขนมโฮมเมด",
+    description: "คาเฟ่เล็กๆ ริมลำธาร เสิร์ฟกาแฟหอมกรุ่นและขนมโฮมเ���ด",
     type: "cafe",
     openingHours: "07:00-18:00",
     location: {
@@ -59,6 +59,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["กาแฟดริป", "ขนมโฮมเมด", "ริมลำธาร"],
     priceRange: "budget",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "grandma_mali_weaving",
@@ -67,7 +69,7 @@ const localDestinations: LocalDestination[] = [
     type: "workshop",
     openingHours: "09:00-17:00",
     location: {
-      name: "หมู่���้านบ้านโป่ง",
+      name: "หมู่บ้านบ้านโป่ง",
       coordinates: { lat: 18.8147, lng: 99.0525 },
       district: "บ้านโป่ง",
     },
@@ -93,7 +95,7 @@ const localDestinations: LocalDestination[] = [
   {
     id: "mae_sa_waterfall_cafe",
     name: "คาเฟ่น้ำตกแม่สา",
-    description: "คาเฟ่กลางป่า ริมน้ำตก เสียงธรรมชาติผ่อนคล���ย",
+    description: "คาเฟ่กลางป่า ริมน้ำตก เสียงธรรมชาติผ่อนคลาย",
     type: "cafe",
     openingHours: "08:00-17:00",
     location: {
@@ -153,7 +155,7 @@ const localDestinations: LocalDestination[] = [
   {
     id: "mae_taeng_elephant_sanctuary",
     name: "ปางช้างแม่แตง",
-    description: "อนุรักษ์ช้างอย่างยั่งยืน ไม่มีการบังคับช้างแสด��",
+    description: "อนุรักษ์ช้างอย่างยั่งยืน ไม่มีการบังคับช้างแสดง",
     type: "scenic",
     openingHours: "08:00-17:00",
     location: {
@@ -183,7 +185,7 @@ const localDestinations: LocalDestination[] = [
   {
     id: "khao_soi_mae_manee",
     name: "ข้าวซอยแม่มณี",
-    description: "ข้าวซอยแม่มณี อร่อยระดับตำน��น เปิดมา 40 ปี",
+    description: "ข้าวซอยแม่มณี อร่อยระดับตำนาน เปิดมา 40 ปี",
     type: "local_food",
     openingHours: "10:00-15:00",
     location: {
@@ -368,7 +370,7 @@ export default function LocalExplorer() {
                 ไม่พบสถานที่ที่ค้นหา
               </h3>
               <p className="text-gray-600 mb-4">
-                ลองเปลี่ยนคำค้นหาห��ือประเภทสถานที่
+                ลองเปลี่ยนคำค้นหาหรือประเภทสถานที่
               </p>
               <Button
                 onClick={() => {
@@ -404,7 +406,7 @@ export default function LocalExplorer() {
           <CardContent className="p-4 text-center">
             <Compass className="w-8 h-8 text-blue-600 mx-auto mb-2" />
             <h3 className="font-medium text-blue-900 mb-1">
-              สนับส��ุนการท่องเที่ยวยั่งยืน
+              สนับสนุนการท่องเที่ยวยั่งยืน
             </h3>
             <p className="text-sm text-blue-700">
               สำรวจสถานที่ท้องถิ่นนอกเมือง ลดความแออัด สร้างรายได้ให้ชุมชน

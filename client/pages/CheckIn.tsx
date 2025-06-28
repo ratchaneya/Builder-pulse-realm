@@ -27,6 +27,13 @@ interface CheckInState {
   isLoading: boolean;
   error: string | null;
   visitedLocations: string[];
+  gpsCheckResult: {
+    success: boolean;
+    distance: number;
+    accuracy: number;
+    message: string;
+  } | null;
+  isCheckingGPS: boolean;
 }
 
 export default function CheckIn() {

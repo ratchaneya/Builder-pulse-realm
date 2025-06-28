@@ -98,19 +98,31 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-blue-50 relative">
+      {/* Background Images */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&crop=center"
+          alt="Chiang Mai landscape"
+          className="w-full h-full object-cover opacity-10"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50/90 via-emerald-50/95 to-blue-50/90"></div>
+      </div>
+
       {/* Header */}
-      <header className="bg-card border-b border-border px-4 py-4 shadow-sm">
-        <div className="container max-w-md mx-auto">
+      <header className="relative z-10 bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white shadow-lg">
+        <div className="container max-w-md mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-                <Leaf className="h-5 w-5 text-primary-foreground" />
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                <Leaf className="h-7 w-7 text-white" />
               </div>
               <div>
-                <h1 className="font-semibold text-foreground">EcoTravel</h1>
-                <p className="text-xs text-muted-foreground">
-                  Sustainable Tourism
+                <h1 className="text-xl font-bold text-white">
+                  EcoTravel Chiang Mai
+                </h1>
+                <p className="text-sm text-green-100">
+                  Sustainable Tourism • Local Experiences
                 </p>
               </div>
             </div>
@@ -120,7 +132,7 @@ export default function Index() {
               size="sm"
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="p-2"
+              className="p-2 text-white hover:bg-white/20"
             >
               <RefreshCw
                 className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}

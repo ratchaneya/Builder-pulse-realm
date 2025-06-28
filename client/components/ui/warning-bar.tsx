@@ -57,7 +57,7 @@ const featuredDestinations: LocalDestination[] = [
     priceRange: "budget",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&h=250&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop&crop=center",
   },
   {
     id: "grandma_mali_weaving",

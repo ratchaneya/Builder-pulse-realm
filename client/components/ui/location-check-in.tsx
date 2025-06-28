@@ -122,10 +122,82 @@ export const LocationCheckIn: React.FC<LocationCheckInProps> = ({
     }
   };
 
-  // Handle hero popup close
+  // Handle hero popup close - start AR experience
   const handleHeroClose = () => {
-    setStep("complete");
+    setStep("ar-experience");
+    initializeARCamera();
   };
+
+  // Initialize AR camera
+  const initializeARCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: "environment",
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        },
+        audio: false,
+      });
+
+      setCameraStream(stream);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+      }
+
+      // Simulate AR marker detection
+      setTimeout(() => {
+        setMarkerDetected(true);
+        setArState("marker_found");
+
+        setTimeout(() => {
+          setArState("story");
+        }, 2000);
+      }, 3000);
+    } catch (error) {
+      console.error("AR Camera access failed:", error);
+      // Skip to completion if camera fails
+      setStep("complete");
+    }
+  };
+
+  // Stop AR camera
+  const stopARCamera = () => {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach((track) => track.stop());
+      setCameraStream(null);
+    }
+  };
+
+  // Audio controls
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isAudioPlaying) {
+        audioRef.current.pause();
+        setIsAudioPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsAudioPlaying(true);
+      }
+    }
+  };
+
+  // Complete AR experience
+  const completeARExperience = () => {
+    setArState("completed");
+    stopARCamera();
+    setTimeout(() => {
+      setStep("complete");
+    }, 2000);
+  };
+
+  // Cleanup camera on unmount
+  React.useEffect(() => {
+    return () => {
+      stopARCamera();
+    };
+  }, [cameraStream]);
 
   // Handle check-in completion
   const handleComplete = () => {

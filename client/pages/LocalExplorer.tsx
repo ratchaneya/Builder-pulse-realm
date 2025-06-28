@@ -103,7 +103,7 @@ const localDestinations: LocalDestination[] = [
     type: "cafe",
     openingHours: "08:00-17:00",
     location: {
-      name: "น้ำตกแม่สา",
+      name: "น้ำตกแ���่สา",
       coordinates: { lat: 18.9167, lng: 99.0833 },
       district: "แม่ริม",
     },
@@ -128,12 +128,12 @@ const localDestinations: LocalDestination[] = [
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "ban_tawai_woodcarving",
     name: "หมู่บ้านแกะสลักไม้บ้านถวาย",
-    description: "แกะสลักไม้ระดับศิลปกรรม ชมการสาธิตและซื้อของฝาก",
+    description: "แกะส���ักไม้ระดับศิลปกรรม ชมการสาธิตและซื้อของฝาก",
     type: "cultural",
     openingHours: "08:00-18:00",
     location: {
@@ -166,7 +166,7 @@ const localDestinations: LocalDestination[] = [
   },
   {
     id: "mae_taeng_elephant_sanctuary",
-    name: "ปางช้างแม่แตง",
+    name: "���างช้างแม่แตง",
     description: "อนุรักษ์ช้างอย่างยั่งยืน ไม่มีการบังคับช้างแสดง",
     type: "scenic",
     openingHours: "08:00-17:00",
@@ -192,7 +192,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.8456, lng: 99.0123 },
       district: "สันทราย",
     },
-    highlights: ["ท่องเที่ยวชุมชน", "วัฒนธรรมท้องถิ่น", "วิถี��ีวิต"],
+    highlights: ["ท่องเที่ยวชุมชน", "วัฒนธรรม��้องถิ่น", "วิถีชีวิต"],
     priceRange: "budget",
     isOpen: true,
     imageUrl:
@@ -222,7 +222,7 @@ const localDestinations: LocalDestination[] = [
     type: "workshop",
     openingHours: "09:00-17:00",
     location: {
-      name: "มหาวิทยาลัยแม่โจ้",
+      name: "มหาวิทยาลัย���ม่โจ้",
       coordinates: { lat: 18.8978, lng: 99.2234 },
       district: "สันทราย",
     },

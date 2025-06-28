@@ -310,9 +310,13 @@ export default function CheckIn() {
                     ตำแหน่งปัจจุบัน
                   </h3>
                   <p className="text-sm text-green-600">
-                    ละติจูด: {state.userLocation.coords.latitude.toFixed(6)}
+                    ความแม่นยำ: {Math.round(state.userLocation.coords.accuracy)}
+                    m
                     <br />
-                    ลองจิจูด: {state.userLocation.coords.longitude.toFixed(6)}
+                    อัพเดท:{" "}
+                    {new Date(state.userLocation.timestamp).toLocaleTimeString(
+                      "th-TH",
+                    )}
                   </p>
                 </div>
                 <Button
@@ -323,6 +327,67 @@ export default function CheckIn() {
                 >
                   <RefreshCw className="w-4 h-4" />
                 </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* GPS Check Result */}
+        {state.gpsCheckResult && (
+          <Card
+            className={cn(
+              "border-2",
+              state.gpsCheckResult.success
+                ? "bg-green-50 border-green-300"
+                : "bg-orange-50 border-orange-300",
+            )}
+          >
+            <CardContent className="p-4">
+              <div className="flex items-start gap-3">
+                <div
+                  className={cn(
+                    "w-10 h-10 rounded-full flex items-center justify-center",
+                    state.gpsCheckResult.success
+                      ? "bg-green-100"
+                      : "bg-orange-100",
+                  )}
+                >
+                  {state.gpsCheckResult.success ? (
+                    <MapPin className="w-5 h-5 text-green-600" />
+                  ) : (
+                    <Target className="w-5 h-5 text-orange-600" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <h3
+                    className={cn(
+                      "font-medium mb-1",
+                      state.gpsCheckResult.success
+                        ? "text-green-900"
+                        : "text-orange-900",
+                    )}
+                  >
+                    GPS Verification
+                  </h3>
+                  <p
+                    className={cn(
+                      "text-sm mb-2",
+                      state.gpsCheckResult.success
+                        ? "text-green-700"
+                        : "text-orange-700",
+                    )}
+                  >
+                    {state.gpsCheckResult.message}
+                  </p>
+                  <div className="flex gap-4 text-xs">
+                    <span className="text-gray-600">
+                      ระยะทาง: {state.gpsCheckResult.distance}m
+                    </span>
+                    <span className="text-gray-600">
+                      ความแม่นยำ: {state.gpsCheckResult.accuracy}m
+                    </span>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>

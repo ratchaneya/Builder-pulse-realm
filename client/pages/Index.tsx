@@ -21,7 +21,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-type TabType = "route-planner" | "check-in" | "rewards" | "routes" | "miles";
+type TabType = "route-planner" | "rewards" | "routes" | "miles";
 
 const suggestionData = [
   {

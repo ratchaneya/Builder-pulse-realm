@@ -420,13 +420,18 @@ export default function CheckIn() {
                             </Badge>
                           </div>
 
-                          {destination.distance <= destination.radius ? (
+                          {state.isCheckingGPS &&
+                          state.nearbyDestinations[0]?.id === destination.id ? (
+                            <Badge className="bg-blue-100 text-blue-800 border-blue-300 animate-pulse">
+                              📡 ตรวจสอบ GPS...
+                            </Badge>
+                          ) : destination.distance <= destination.radius ? (
                             <Badge className="bg-green-100 text-green-800 border-green-300">
                               📸 ดรอปรูปได้
                             </Badge>
                           ) : (
-                            <Badge className="bg-gray-100 text-gray-600 border-gray-300">
-                              ไกลเกินไป ({destination.radius}m)
+                            <Badge className="bg-orange-100 text-orange-800 border-orange-300">
+                              📍 คลิกเพื่อตรวจสอบ GPS
                             </Badge>
                           )}
                         </div>

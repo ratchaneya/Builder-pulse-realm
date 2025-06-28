@@ -199,13 +199,6 @@ export default function Index() {
           </div>
         );
 
-      case "check-in":
-        return (
-          <div className="h-full -m-6">
-            <CheckIn />
-          </div>
-        );
-
       case "rewards":
         return (
           <div className="h-full -m-6">

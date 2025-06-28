@@ -44,7 +44,7 @@ export const ecoCheckInDestinations: EcoDestination[] = [
   },
   {
     id: "hang_dong_pottery",
-    name: "หมู่บ้านเครื่��งปั้นดินเผาหางดง",
+    name: "หมู่บ้านเครื่องปั้นดินเผาหางดง",
     nameEn: "Hang Dong Pottery Village",
     coordinates: { lat: 18.6719, lng: 98.9342 },
     radius: 100,
@@ -248,6 +248,57 @@ export class GeolocationService {
     } catch (error) {
       console.error("Location verification failed:", error);
       return false;
+    }
+  }
+
+  // Precise GPS check for check-in functionality
+  async checkPreciseLocation(
+    targetLat: number,
+    targetLng: number,
+    radiusMeters: number = 100,
+  ): Promise<{
+    success: boolean;
+    distance: number;
+    accuracy: number;
+    message: string;
+  }> {
+    try {
+      const position = await this.getCurrentPosition();
+      const userLat = position.coords.latitude;
+      const userLng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
+      const distance = this.calculateDistance(
+        { lat: userLat, lng: userLng },
+        { lat: targetLat, lng: targetLng },
+      );
+
+      const isWithinRange = distance <= radiusMeters;
+      const hasGoodAccuracy = accuracy <= 50; // Better accuracy requirement
+
+      let message = "";
+      if (!hasGoodAccuracy) {
+        message = `GPS accuracy is too low (${Math.round(accuracy)}m). Please wait for better signal.`;
+      } else if (!isWithinRange) {
+        message = `You're still ${Math.round(distance)}m away from the check-in point.`;
+      } else {
+        message = `🎉 You've arrived! Ready to check in.`;
+      }
+
+      return {
+        success: isWithinRange && hasGoodAccuracy,
+        distance: Math.round(distance),
+        accuracy: Math.round(accuracy),
+        message,
+      };
+    } catch (error) {
+      console.error("GPS check failed:", error);
+      return {
+        success: false,
+        distance: -1,
+        accuracy: -1,
+        message: `❌ GPS error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      };
     }
   }
 }

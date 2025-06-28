@@ -171,11 +171,38 @@ export default function CheckIn() {
     }
   };
 
-  // Handle destination selection
-  const handleDestinationSelect = (
+  // Handle destination selection with GPS verification
+  const handleDestinationSelect = async (
     destination: EcoDestination & { distance: number },
   ) => {
-    setState((prev) => ({ ...prev, selectedDestination: destination }));
+    setState((prev) => ({
+      ...prev,
+      isCheckingGPS: true,
+      gpsCheckResult: null,
+    }));
+
+    // Perform precise GPS check
+    const gpsResult = await geolocationService.checkPreciseLocation(
+      destination.coordinates.lat,
+      destination.coordinates.lng,
+      destination.radius,
+    );
+
+    setState((prev) => ({
+      ...prev,
+      isCheckingGPS: false,
+      gpsCheckResult: gpsResult,
+      selectedDestination: gpsResult.success ? destination : null,
+    }));
+
+    // Show result message
+    if (gpsResult.success) {
+      // Auto-proceed to check-in if GPS verification passed
+      console.log("GPS verification passed, proceeding to check-in");
+    } else {
+      // Show error message
+      alert(gpsResult.message);
+    }
   };
 
   // Handle check-in cancellation

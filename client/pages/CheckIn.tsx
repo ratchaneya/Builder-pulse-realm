@@ -215,7 +215,7 @@ export default function CheckIn() {
                 variant="outline"
                 className="w-full"
               >
-                กลับหน้าหลัก
+                กลับห���้าหลัก
               </Button>
             </div>
           </CardContent>
@@ -325,18 +325,22 @@ export default function CheckIn() {
                 <Card
                   key={destination.id}
                   className={cn(
-                    "bg-white border-green-200 cursor-pointer transition-all duration-200 hover:shadow-md hover:scale-[1.02]",
-                    destination.distance <= 100 &&
-                      "ring-2 ring-green-300 bg-green-50",
+                    "bg-white border-green-200 transition-all duration-200",
+                    destination.distance <= destination.radius
+                      ? "ring-2 ring-green-300 bg-green-50 cursor-pointer hover:shadow-md hover:scale-[1.02]"
+                      : "cursor-not-allowed opacity-75",
                   )}
-                  onClick={() => handleDestinationSelect(destination)}
+                  onClick={() =>
+                    destination.distance <= destination.radius &&
+                    handleDestinationSelect(destination)
+                  }
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
                       <div
                         className={cn(
                           "w-12 h-12 rounded-full flex items-center justify-center",
-                          destination.distance <= 100
+                          destination.distance <= destination.radius
                             ? "bg-green-100"
                             : "bg-gray-100",
                         )}
@@ -344,7 +348,7 @@ export default function CheckIn() {
                         <MapPin
                           className={cn(
                             "w-6 h-6",
-                            destination.distance <= 100
+                            destination.distance <= destination.radius
                               ? "text-green-600"
                               : "text-gray-500",
                           )}
@@ -370,7 +374,7 @@ export default function CheckIn() {
                             <span
                               className={cn(
                                 "font-medium",
-                                destination.distance <= 100
+                                destination.distance <= destination.radius
                                   ? "text-green-600"
                                   : "text-gray-500",
                               )}
@@ -383,9 +387,13 @@ export default function CheckIn() {
                             </Badge>
                           </div>
 
-                          {destination.distance <= 100 && (
+                          {destination.distance <= destination.radius ? (
                             <Badge className="bg-green-100 text-green-800 border-green-300">
-                              พร้อมเช็คอิน
+                              📸 ดรอปรูปได้
+                            </Badge>
+                          ) : (
+                            <Badge className="bg-gray-100 text-gray-600 border-gray-300">
+                              ไกลเกินไป ({destination.radius}m)
                             </Badge>
                           )}
                         </div>

@@ -75,7 +75,7 @@ const featuredDestinations: LocalDestination[] = [
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=250&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop&crop=center",
   },
   {
     id: "doi_saket_coffee_farm",

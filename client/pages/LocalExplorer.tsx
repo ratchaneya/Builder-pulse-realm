@@ -73,7 +73,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.8147, lng: 99.0525 },
       district: "บ้านโป่ง",
     },
-    highlights: ["ทอผ้าด้วยมือ", "สีธรรมชาติ", "ภูมิปัญญาท้องถิ่น"],
+    highlights: ["ทอผ้าด้ว��มือ", "สีธรรมชาติ", "ภูมิปัญญาท้องถิ่น"],
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
@@ -230,7 +230,7 @@ const localDestinations: LocalDestination[] = [
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1566281896662-f273d89b3b59?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1495465798138-718f86d1a4bc?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "huai_kaew_waterfall",

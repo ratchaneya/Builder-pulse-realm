@@ -30,6 +30,7 @@ interface LocalDestination {
   highlights: string[];
   priceRange: "budget" | "moderate" | "premium";
   isOpen?: boolean;
+  imageUrl?: string;
 }
 
 interface WarningBarProps {

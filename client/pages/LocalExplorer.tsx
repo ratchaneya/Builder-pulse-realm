@@ -73,7 +73,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.8147, lng: 99.0525 },
       district: "บ้านโป่ง",
     },
-    highlights: ["ทอผ้าด้ว��มือ", "สีธรรมชาติ", "ภูมิปัญญาท้องถิ่น"],
+    highlights: ["ทอผ้าด้วยมือ", "สีธรรมชาติ", "ภูมิปัญญาท้องถิ่น"],
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
@@ -86,7 +86,7 @@ const localDestinations: LocalDestination[] = [
     type: "workshop",
     openingHours: "08:00-16:00",
     location: {
-      name: "หมู่บ้านเครื่องปั้นดินเผา",
+      name: "หมู่บ้านเครื่อง��ั้นดินเผา",
       coordinates: { lat: 18.6719, lng: 98.9342 },
       district: "หางดง",
     },
@@ -301,9 +301,19 @@ export default function LocalExplorer() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 relative">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1552832230-6ab2069bb588?w=1200&h=800&fit=crop&crop=center"
+          alt="Traditional Thai village"
+          className="w-full h-full object-cover opacity-10"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50/90 to-emerald-50/90"></div>
+      </div>
+
       {/* Header */}
-      <header className="bg-white border-b border-green-200 shadow-sm sticky top-0 z-10">
+      <header className="relative z-10 bg-white/90 backdrop-blur-sm border-b border-green-200 shadow-sm sticky top-0">
         <div className="container max-w-md mx-auto px-4 py-4">
           <div className="flex items-center gap-3">
             <Button

@@ -65,13 +65,6 @@ export default function Index() {
       color: "from-blue-500 to-indigo-600",
     },
     {
-      id: "check-in" as TabType,
-      label: "Check-in",
-      icon: MapPin,
-      emoji: "📍",
-      color: "from-emerald-500 to-green-600",
-    },
-    {
       id: "rewards" as TabType,
       label: "Rewards",
       icon: Gift,

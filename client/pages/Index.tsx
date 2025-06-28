@@ -192,14 +192,20 @@ export default function Index() {
             </Button>
 
             <Button
+              onClick={() => navigate("/check-in")}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+            >
+              📍 Check-in
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            <Button
               onClick={() => navigate("/redemption")}
               className="bg-purple-600 hover:bg-purple-700 text-white"
             >
               🎁 Rewards
             </Button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={handleCompareRoutes}
               variant="outline"

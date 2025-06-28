@@ -18,9 +18,13 @@ import {
   Play,
   Pause,
   RotateCcw,
+  Scan,
+  CheckCircle,
+  Trophy,
+  Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -134,7 +138,7 @@ export default function ARExperience() {
         descriptionEn:
           "This forest has over 300 tree species and serves as Chiang Mai's lungs",
         sustainabilityFeature:
-          "ใช้พลังงานแสงอาทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
+          "ใช้พลังงานแสงอ��ทิตย์สำหรับศูนย์บริการนักท่องเที่ยว",
         sustainabilityFeatureEn: "Solar-powered visitor facilities",
         coordinates: { lat: 18.8547, lng: 98.9184 },
         arMarkerId: "doi_pui_marker",
@@ -224,7 +228,7 @@ export default function ARExperience() {
       },
       ton_pao_village: {
         id: "ton_pao_village",
-        name: "บ้านต้นเปาะ",
+        name: "บ้านต้น��ปาะ",
         nameEn: "Ban Ton Pao Weaving Village",
         type: "community_spot",
         description: "หมู่บ้านทอผ้าที่ใช้สีธรรมชาติจากใบไม้",
@@ -299,7 +303,7 @@ export default function ARExperience() {
           imageUrl: "/images/ranger-niran.jpg",
           avatarUrl: "/avatars/niran-3d.glb",
           achievements: [
-            "ออกแบบระบบไฟฟ้าเป็นมิต���กับสิ่งแวดล้อม",
+            "ออกแบบระบบไฟฟ้���เป็นมิต���กับสิ่งแวดล้อม",
             "ลดการใช้ไฟฟ้าจากเชื้อเพลิงฟอสซิล 90%",
             "เป็นต้นแบบอุทยาน 15 แห่ง",
           ],
@@ -609,7 +613,7 @@ export default function ARExperience() {
 วิธีแก้ไข:
 • ตรวจสอบว่าอุปกรณ์มีกล้อง
 • เสียบกล้อง USB (คอมพิวเตอร์)
-• รีสตาร์ทแอปกล้อง
+• รีส��าร์ทแอปกล้อง
 • ลองเบราว์เซอร์อื่น`;
       } else if (error.name === "NotSupportedError") {
         thaiMessage += `⚠️ เบราว์เซอร์ไม่รองรับ WebRTC
@@ -983,7 +987,7 @@ export default function ARExperience() {
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white"
               >
                 <Camera className="h-4 w-4 mr-2" />
-                {language === "thai" ? "🎥 เปิดกล้อง AR" : "🎥 Open AR Camera"}
+                {language === "thai" ? "��� เปิดกล้อง AR" : "🎥 Open AR Camera"}
               </Button>
             </div>
           </div>
@@ -1165,7 +1169,7 @@ export default function ARExperience() {
             </p>
             <p className="text-xs opacity-75 mt-1">
               {language === "thai"
-                ? "พบกับฮีโร่ท้องถิ่นและได้รับแรงบันดาลใจ"
+                ? "พบกับฮีโร่ท้องถิ่นและได้รับ��รงบันดาลใจ"
                 : "Met a local hero and got inspired!"}
             </p>
           </Card>

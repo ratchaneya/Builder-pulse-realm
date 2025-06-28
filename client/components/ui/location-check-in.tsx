@@ -24,6 +24,8 @@ import {
   Award,
   Gift,
   Heart,
+  Languages,
+  ArrowLeft,
 } from "lucide-react";
 
 interface CheckInLocation {
@@ -582,7 +584,7 @@ export const LocationCheckIn: React.FC<LocationCheckInProps> = ({
               <Target className="w-10 h-10 text-green-600" />
             </div>
             <h3 className="text-xl font-bold text-green-900">
-              {isEnglish ? "You've Arrived!" : "คุณมาถึงจุดหมายแล���ว!"}
+              {isEnglish ? "You've Arrived!" : "คุณมาถึงจุดหมายแล้ว!"}
             </h3>
             <Badge className="bg-green-100 text-green-800 border-green-200">
               <MapPin className="w-3 h-3 mr-1" />

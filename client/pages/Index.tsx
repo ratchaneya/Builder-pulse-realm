@@ -54,7 +54,46 @@ const suggestionData = [
 export default function Index() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showQRScanner, setShowQRScanner] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabType>("route-planner");
   const navigate = useNavigate();
+
+  const tabs = [
+    {
+      id: "route-planner" as TabType,
+      label: "Smart Route Planner",
+      icon: Route,
+      emoji: "🚀",
+      color: "from-blue-500 to-indigo-600",
+    },
+    {
+      id: "check-in" as TabType,
+      label: "Check-in",
+      icon: MapPin,
+      emoji: "📍",
+      color: "from-emerald-500 to-green-600",
+    },
+    {
+      id: "rewards" as TabType,
+      label: "Rewards",
+      icon: Gift,
+      emoji: "🎁",
+      color: "from-purple-500 to-pink-600",
+    },
+    {
+      id: "routes" as TabType,
+      label: "Routes",
+      icon: Navigation,
+      emoji: "🧭",
+      color: "from-orange-500 to-red-600",
+    },
+    {
+      id: "miles" as TabType,
+      label: "Miles",
+      icon: Sparkles,
+      emoji: "🌿",
+      color: "from-green-500 to-teal-600",
+    },
+  ];
 
   const handleGoHere = (locationName: string) => {
     console.log(`Navigating to ${locationName}`);

@@ -66,6 +66,15 @@ export default function Index() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showQRScanner, setShowQRScanner] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>("route-planner");
+  const [userLocation, setUserLocation] = useState<GeolocationPosition | null>(
+    null,
+  );
+  const [nearbyDestinations, setNearbyDestinations] = useState<string[]>([]);
+  const [checkedInDestinations, setCheckedInDestinations] = useState<string[]>(
+    [],
+  );
+  const [showARExperience, setShowARExperience] = useState(false);
+  const [currentARLocation, setCurrentARLocation] = useState<any>(null);
   const navigate = useNavigate();
 
   const tabs = [

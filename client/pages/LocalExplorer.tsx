@@ -156,7 +156,7 @@ const localDestinations: LocalDestination[] = [
     location: {
       name: "ตลาดสันกำแพง",
       coordinates: { lat: 18.7606, lng: 99.1828 },
-      district: "��ันกำแพง",
+      district: "สันกำแพง",
     },
     highlights: ["อาหารริมทาง", "ราคาถูก", "ของใช้ท้องถิ่น"],
     priceRange: "budget",
@@ -212,6 +212,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["ข้าวซอยต้นตำรับ", "40 ปี", "รสชาติดั้งเดิม"],
     priceRange: "budget",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "organic_farm_mae_jo",
@@ -227,6 +229,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["ผักออร์แกนิค", "ทำอาหารเอง", "เรียนรู้การเกษตร"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1566281896662-f273d89b3b59?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "huai_kaew_waterfall",
@@ -242,6 +246,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["น้ำตกสวย", "เดินป่า", "ธรรมชาติ"],
     priceRange: "budget",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&crop=center",
   },
 ];
 

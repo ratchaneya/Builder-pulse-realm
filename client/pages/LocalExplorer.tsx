@@ -107,7 +107,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.9167, lng: 99.0833 },
       district: "แม่ริม",
     },
-    highlights: ["ริมน���ำตก", "กลางป่า", "เสียงธรรมชาติ"],
+    highlights: ["ริมน้ำตก", "กลางป่า", "เสียงธรรมชาติ"],
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
@@ -166,7 +166,7 @@ const localDestinations: LocalDestination[] = [
   },
   {
     id: "mae_taeng_elephant_sanctuary",
-    name: "ปางช้��งแม่แตง",
+    name: "ปางช้างแ��่แตง",
     description: "อนุรักษ์ช้างอย่างยั่งยืน ไม่มีการบังคับช้างแสดง",
     type: "scenic",
     openingHours: "08:00-17:00",
@@ -196,7 +196,7 @@ const localDestinations: LocalDestination[] = [
     priceRange: "budget",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1552832230-6ab2069bb588?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "khao_soi_mae_manee",
@@ -320,7 +320,7 @@ export default function LocalExplorer() {
                 Local Explorer
               </h1>
               <p className="text-sm text-green-600">
-                สำรวจสถานที่ท้อ���ถิ่นนอกเมือง
+                สำรวจสถานที่ท้องถิ่นนอกเมือง
               </p>
             </div>
           </div>

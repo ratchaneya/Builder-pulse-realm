@@ -86,7 +86,7 @@ const localDestinations: LocalDestination[] = [
     type: "workshop",
     openingHours: "08:00-16:00",
     location: {
-      name: "หมู่บ้านเครื่อง��ั้นดินเผา",
+      name: "หมู่บ้านเครื่องปั้นดินเผา",
       coordinates: { lat: 18.6719, lng: 98.9342 },
       district: "หางดง",
     },
@@ -288,7 +288,7 @@ export default function LocalExplorer() {
   const typeOptions = [
     { value: "all", label: "ทั้งหมด", icon: Compass },
     { value: "cafe", label: "คาเฟ่", icon: Coffee },
-    { value: "local_food", label: "อาหารท้องถิ่น", icon: Utensils },
+    { value: "local_food", label: "���าหารท้องถิ่น", icon: Utensils },
     { value: "workshop", label: "เวิร์คช็อป", icon: Palette },
     { value: "scenic", label: "จุดชมวิว", icon: Mountain },
     { value: "market", label: "ตลาดท้องถิ่น", icon: Sparkles },
@@ -338,7 +338,7 @@ export default function LocalExplorer() {
       </header>
 
       {/* Search and Filter Section */}
-      <section className="container max-w-md mx-auto px-4 py-4 space-y-4">
+      <section className="relative z-10 container max-w-md mx-auto px-4 py-4 space-y-4">
         {/* Search Bar */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />

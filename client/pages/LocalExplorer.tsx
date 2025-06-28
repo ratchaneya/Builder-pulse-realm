@@ -77,11 +77,11 @@ const localDestinations: LocalDestination[] = [
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "khun_chai_pottery",
-    name: "เวิร์คช็อปปั้นดินเผาลุงชาย",
+    name: "เวิร์คช็อปป��้นดินเผาลุงชาย",
     description: "ปั้นดินเผาแบบดั้งเดิม เผาด้วยฟืน ไม่ใช้เครื่องจักร",
     type: "workshop",
     openingHours: "08:00-16:00",
@@ -107,7 +107,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.9167, lng: 99.0833 },
       district: "แม่ริม",
     },
-    highlights: ["ริมน้ำตก", "กลางป่า", "เสียงธรรมชาติ"],
+    highlights: ["ริมน้ำตก", "กลางป่า", "เสียงธรรม���าติ"],
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
@@ -167,7 +167,7 @@ const localDestinations: LocalDestination[] = [
   {
     id: "mae_taeng_elephant_sanctuary",
     name: "ปางช้างแม่แตง",
-    description: "อนุรักษ์ช้างอย่างยั่งยืน ไม่มีการบังคับช้างแสดง",
+    description: "อนุรักษ์ช��างอย่างยั่งยืน ไม่มีการบังคับช้างแสดง",
     type: "scenic",
     openingHours: "08:00-17:00",
     location: {
@@ -224,7 +224,7 @@ const localDestinations: LocalDestination[] = [
     location: {
       name: "มหาวิทยาลัยแม่โจ้",
       coordinates: { lat: 18.8978, lng: 99.2234 },
-      district: "สันทราย",
+      district: "ส��นทราย",
     },
     highlights: ["ผักออร์แกนิค", "ทำอาหารเอง", "เรียนรู้การเกษตร"],
     priceRange: "moderate",
@@ -320,7 +320,7 @@ export default function LocalExplorer() {
                 Local Explorer
               </h1>
               <p className="text-sm text-green-600">
-                สำรวจสถานที่ท้องถิ่���นอกเมือง
+                สำรวจสถานที่ท้องถิ่นนอ���เมือง
               </p>
             </div>
           </div>

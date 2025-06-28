@@ -15,6 +15,10 @@ import {
   verifyARQRHandler,
   getARLocationsHandler,
   mockArrivalHandler,
+  checkInHandler,
+  getCheckInLocationsHandler,
+  getCheckInHistoryHandler,
+  verifyCheckInHandler,
 } from "./routes/tourism";
 
 export function createServer() {

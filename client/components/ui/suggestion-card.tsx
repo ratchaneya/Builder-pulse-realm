@@ -50,11 +50,39 @@ export function SuggestionCard({
   co2Level,
   travelMethod,
   description,
+  coordinates,
   className,
   onGoHere,
   onLowCarbonRoute,
+  onCheckIn,
+  isNearby = false,
+  isCheckedIn = false,
 }: SuggestionCardProps) {
   const TravelIcon = travelIcons[travelMethod];
+
+  const openGoogleMaps = () => {
+    if (!coordinates) {
+      console.warn("No coordinates provided for", locationName);
+      return;
+    }
+
+    const { lat, lng } = coordinates;
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+
+    // Try to open in Google Maps app first (mobile), fallback to web
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = /android|iphone|ipad|ipod|mobile/.test(userAgent);
+
+    if (isMobile) {
+      const mapsAppUrl = `comgooglemaps://?daddr=${lat},${lng}&directionsmode=driving`;
+      window.location.href = mapsAppUrl;
+      setTimeout(() => {
+        window.open(googleMapsUrl, "_blank");
+      }, 1000);
+    } else {
+      window.open(googleMapsUrl, "_blank");
+    }
+  };
 
   return (
     <div

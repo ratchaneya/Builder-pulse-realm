@@ -13,6 +13,7 @@ import Redemption from "./pages/Redemption";
 import ARExperience from "./pages/ARExperience";
 import CameraTest from "./pages/CameraTest";
 import CheckIn from "./pages/CheckIn";
+import LocalExplorer from "./pages/LocalExplorer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

@@ -44,7 +44,7 @@ export const ecoCheckInDestinations: EcoDestination[] = [
   },
   {
     id: "hang_dong_pottery",
-    name: "หมู่บ้านเครื่องปั้นดินเผาหางดง",
+    name: "หมู่บ้านเครื่��งปั้นดินเผาหางดง",
     nameEn: "Hang Dong Pottery Village",
     coordinates: { lat: 18.6719, lng: 98.9342 },
     radius: 100,
@@ -89,15 +89,20 @@ export class GeolocationService {
     coord1: LocationCoordinates,
     coord2: LocationCoordinates,
   ): number {
-    const R = 6371e3; // Earth's radius in meters
-    const φ1 = (coord1.lat * Math.PI) / 180;
-    const φ2 = (coord2.lat * Math.PI) / 180;
-    const Δφ = ((coord2.lat - coord1.lat) * Math.PI) / 180;
-    const Δλ = ((coord2.lng - coord1.lng) * Math.PI) / 180;
+    const R = 6371000; // Earth radius in meters (more precise)
+    const lat1 = coord1.lat;
+    const lon1 = coord1.lng;
+    const lat2 = coord2.lat;
+    const lon2 = coord2.lng;
 
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
     const a =
-      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     return R * c; // Distance in meters

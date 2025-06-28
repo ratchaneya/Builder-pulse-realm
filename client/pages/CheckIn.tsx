@@ -1,25 +1,3 @@
-import * as React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { LocationCheckIn } from "@/components/ui/location-check-in";
-import {
-  geolocationService,
-  ecoCheckInDestinations,
-  type EcoDestination,
-} from "@/services/geolocation";
-import { cn } from "@/lib/utils";
-import {
-  MapPin,
-  Loader2,
-  AlertTriangle,
-  Target,
-  Trophy,
-  Navigation,
-  RefreshCw,
-} from "lucide-react";
-
 interface CheckInState {
   userLocation: GeolocationPosition | null;
   nearbyDestinations: (EcoDestination & { distance: number })[];
@@ -281,7 +259,7 @@ export default function CheckIn() {
               size="sm"
               className="text-green-700"
             >
-              ← ��ลับ
+              ← กลับ
             </Button>
             <div className="flex-1">
               <h1 className="text-xl font-bold text-green-900">
@@ -518,7 +496,7 @@ export default function CheckIn() {
               <li>• กดที่การ์ดเพื่อตรวจสอบตำแหน่ง GPS</li>
               <li>• เมื่อระบบยืนยันตำแหน่งแล้ว จะเปิดกล้องให้ดรอปรูป</li>
               <li>• ถ่ายรูปยืนยันการมาเยือน</li>
-              <li>• สัมผัส��ระสบการณ์ AR กับฮีโร่ท้องถิ่น</li>
+              <li>• สัมผัสประสบการณ์ AR กับฮีโร่ท้องถิ่น</li>
               <li>• รับ Green Miles และแชร์เรื่องราว</li>
             </ul>
           </CardContent>

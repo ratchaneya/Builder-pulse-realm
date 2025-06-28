@@ -57,10 +57,23 @@ export const LocationCheckIn: React.FC<LocationCheckInProps> = ({
   language = "th",
 }) => {
   const [step, setStep] = React.useState<
-    "arrival" | "camera" | "hero" | "complete"
+    "arrival" | "camera" | "hero" | "ar-experience" | "complete"
   >("arrival");
   const [capturedPhoto, setCapturedPhoto] = React.useState<string | null>(null);
   const [isProcessing, setIsProcessing] = React.useState(false);
+  const [arState, setArState] = React.useState<
+    "scanning" | "marker_found" | "story" | "completed"
+  >("scanning");
+  const [isLanguageThai, setIsLanguageThai] = React.useState(true);
+  const [isAudioPlaying, setIsAudioPlaying] = React.useState(false);
+  const [isAudioMuted, setIsAudioMuted] = React.useState(false);
+  const [cameraStream, setCameraStream] = React.useState<MediaStream | null>(
+    null,
+  );
+  const [markerDetected, setMarkerDetected] = React.useState(false);
+
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const audioRef = React.useRef<HTMLAudioElement>(null);
 
   const isEnglish = language === "en";
   const locationName = isEnglish ? location.nameEn : location.name;

@@ -180,43 +180,60 @@ export function WarningBar({ className }: WarningBarProps) {
       <div className="space-y-3">
         {/* Destination Card */}
         <div
-          className="bg-white/10 backdrop-blur-sm rounded-lg p-3 cursor-pointer hover:bg-white/20 transition-all"
+          className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden cursor-pointer hover:bg-white/20 transition-all group"
           onClick={() => openGoogleMaps(currentDestination)}
         >
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-              <TypeIcon className="w-5 h-5 text-white" />
+          {/* Image Header */}
+          {currentDestination.imageUrl && (
+            <div className="relative h-24 overflow-hidden">
+              <img
+                src={currentDestination.imageUrl}
+                alt={currentDestination.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute top-2 left-2">
+                <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                  <TypeIcon className="w-4 h-4 text-white" />
+                </div>
+              </div>
+              <div className="absolute top-2 right-2">
+                <ChevronRight className="w-4 h-4 text-white/80" />
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between mb-1">
-                <h4 className="font-medium text-white text-sm leading-tight">
-                  {currentDestination.name}
-                </h4>
+          )}
+
+          <div className="p-3">
+            <div className="flex items-start justify-between mb-1">
+              <h4 className="font-medium text-white text-sm leading-tight">
+                {currentDestination.name}
+              </h4>
+              {!currentDestination.imageUrl && (
                 <ChevronRight className="w-4 h-4 text-white/80 flex-shrink-0 ml-2" />
-              </div>
-              <p className="text-xs text-green-100 mb-2 line-clamp-2">
-                {currentDestination.description}
-              </p>
+              )}
+            </div>
+            <p className="text-xs text-green-100 mb-2 line-clamp-2">
+              {currentDestination.description}
+            </p>
 
-              <div className="flex items-center gap-2 text-xs text-green-100 mb-2">
-                <MapPin className="w-3 h-3" />
-                <span>{currentDestination.location.district}</span>
-                <Clock className="w-3 h-3 ml-1" />
-                <span>{currentDestination.openingHours}</span>
-              </div>
+            <div className="flex items-center gap-2 text-xs text-green-100 mb-2">
+              <MapPin className="w-3 h-3" />
+              <span>{currentDestination.location.district}</span>
+              <Clock className="w-3 h-3 ml-1" />
+              <span>{currentDestination.openingHours}</span>
+            </div>
 
-              <div className="flex flex-wrap gap-1">
-                {currentDestination.highlights
-                  .slice(0, 2)
-                  .map((highlight, index) => (
-                    <Badge
-                      key={index}
-                      className="text-xs bg-white/20 text-white border-white/30 hover:bg-white/30"
-                    >
-                      {highlight}
-                    </Badge>
-                  ))}
-              </div>
+            <div className="flex flex-wrap gap-1">
+              {currentDestination.highlights
+                .slice(0, 2)
+                .map((highlight, index) => (
+                  <Badge
+                    key={index}
+                    className="text-xs bg-white/20 text-white border-white/30 hover:bg-white/30"
+                  >
+                    {highlight}
+                  </Badge>
+                ))}
             </div>
           </div>
         </div>

@@ -29,6 +29,7 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const dropAreaRef = React.useRef<HTMLDivElement>(null);
 
   const [stream, setStream] = React.useState<MediaStream | null>(null);
   const [capturedPhoto, setCapturedPhoto] = React.useState<string | null>(null);
@@ -38,8 +39,6 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
     "environment",
   );
   const [isDragOver, setIsDragOver] = React.useState(false);
-
-  const dropAreaRef = React.useRef<HTMLDivElement>(null);
 
   // Start camera
   const startCamera = React.useCallback(async () => {
@@ -163,13 +162,6 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
     context.restore();
   };
 
-  // Handle file upload
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    processFile(file);
-  };
-
   // Process uploaded file
   const processFile = (file: File) => {
     if (!file.type.startsWith("image/")) {
@@ -183,6 +175,13 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
       setCapturedPhoto(photoDataUrl);
     };
     reader.readAsDataURL(file);
+  };
+
+  // Handle file upload
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    processFile(file);
   };
 
   // Drag & Drop handlers
@@ -253,7 +252,7 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
             {destinationName}
           </Badge>
           <p className="text-sm text-green-700">
-            Take a photo to confirm your visit and earn Green Miles!
+            Take a photo or drag & drop an image to confirm your visit!
           </p>
         </div>
 
@@ -264,7 +263,7 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
             "relative rounded-lg overflow-hidden aspect-square transition-all duration-300",
             isDragOver
               ? "bg-green-100 border-4 border-dashed border-green-400"
-              : "bg-black border-2 border-dashed border-gray-300"
+              : "bg-black border-2 border-dashed border-gray-300",
           )}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -354,6 +353,17 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
           <canvas ref={canvasRef} className="hidden" />
         </div>
 
+        {/* Instructions */}
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3">
+          <div className="flex items-center gap-2 text-sm text-blue-700">
+            <Upload className="w-4 h-4" />
+            <span className="font-medium">Drag & Drop supported</span>
+          </div>
+          <p className="text-xs text-blue-600 mt-1">
+            You can drag image files directly onto the camera area
+          </p>
+        </div>
+
         {/* Controls */}
         <div className="space-y-3">
           {capturedPhoto ? (
@@ -362,23 +372,19 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
               <Button
                 onClick={retakePhoto}
                 variant="outline"
-          <div className="flex items-start gap-3">
-            <Camera className="w-5 h-5 text-blue-600 mt-1" />
-            <div>
-              <h4 className="font-medium text-blue-900 mb-1">
-                {isEnglish ? "Ready to Check-in?" : "พร้อมเช็คอินหรือยัง?"}
-              </h4>
-              <p className="text-sm text-blue-700 mb-2">
-                {isEnglish
-                  ? "Take a photo or drag & drop an image to confirm your visit!"
-                  : "ถ่ายรูปหรือลากไฟล์รูปมาวางเพื่อยืนยันการมาเยือน!"}
-              </p>
-              <div className="flex items-center gap-2 text-xs text-blue-600">
-                <Upload className="w-3 h-3" />
-                <span>Drag & Drop supported</span>
-              </div>
+                className="flex-1"
+              >
+                <X className="w-4 h-4 mr-2" />
+                Retake
+              </Button>
+              <Button
+                onClick={confirmPhoto}
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+              >
+                <Check className="w-4 h-4 mr-2" />
+                Confirm Check-in
+              </Button>
             </div>
-          </div>
           ) : (
             /* Camera controls */
             <div className="flex gap-3">

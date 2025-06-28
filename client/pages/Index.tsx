@@ -167,6 +167,11 @@ export default function Index() {
           </div>
         </section>
 
+        {/* GPS Navigation to Rural Destinations */}
+        <section>
+          <GPSNavigation />
+        </section>
+
         {/* Action Buttons */}
         <section className="space-y-3 pt-4">
           <Button

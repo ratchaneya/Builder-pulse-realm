@@ -153,6 +153,93 @@ export default function Index() {
     }
   };
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case "route-planner":
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                🚀 Smart Route Planner
+              </h2>
+              <p className="text-gray-600">
+                Plan eco-friendly routes to explore Chiang Mai sustainably
+              </p>
+            </div>
+
+            {/* Warning Section */}
+            <WarningBar
+              co2Level={2.8}
+              trafficDelay="+45 min"
+              timeToOvercrowd="90 minutes"
+            />
+
+            {/* Suggestions Section */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 mb-4">
+                <MapPin className="h-5 w-5 text-primary" />
+                <h3 className="text-lg font-semibold text-foreground">
+                  Alternative Destinations
+                </h3>
+              </div>
+
+              <p className="text-sm text-muted-foreground mb-4">
+                Discover cleaner, less crowded spots with better air quality and
+                peaceful environments.
+              </p>
+
+              <div className="space-y-4">
+                {suggestionData.map((suggestion, index) => (
+                  <SuggestionCard
+                    key={index}
+                    {...suggestion}
+                    onGoHere={() => handleGoHere(suggestion.locationName)}
+                    onLowCarbonRoute={() =>
+                      handleLowCarbonRoute(suggestion.locationName)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* GPS Navigation */}
+            <GPSNavigation />
+          </div>
+        );
+
+      case "check-in":
+        return (
+          <div className="h-full">
+            <CheckIn />
+          </div>
+        );
+
+      case "rewards":
+        return (
+          <div className="h-full">
+            <Redemption />
+          </div>
+        );
+
+      case "routes":
+        return (
+          <div className="h-full">
+            <RouteComparison />
+          </div>
+        );
+
+      case "miles":
+        return (
+          <div className="h-full">
+            <GreenMilesDashboard />
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-blue-50 relative">
       {/* Background Images */}

@@ -1,11 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { WarningBar } from "@/components/ui/warning-bar";
 import { SuggestionCard } from "@/components/ui/suggestion-card";
 import { QRScanner } from "@/components/ui/qr-scanner";
 import { GPSNavigation } from "@/components/ui/gps-navigation";
-import { Leaf, MapPin, RefreshCw, Route, Camera } from "lucide-react";
+import RoutePlanning from "./RoutePlanning";
+import CheckIn from "./CheckIn";
+import Redemption from "./Redemption";
+import RouteComparison from "./RouteComparison";
+import GreenMilesDashboard from "./GreenMilesDashboard";
+import {
+  Leaf,
+  MapPin,
+  RefreshCw,
+  Route,
+  Camera,
+  Gift,
+  Navigation,
+  Sparkles,
+} from "lucide-react";
+
+type TabType = "route-planner" | "check-in" | "rewards" | "routes" | "miles";
 
 const suggestionData = [
   {

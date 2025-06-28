@@ -144,6 +144,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["แกะสลักไม้", "ศิลปกรรม", "ของฝากพิเศษ"],
     priceRange: "budget",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1589993411266-1b4ae9f126da?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "san_kamphaeng_night_market",
@@ -154,11 +156,13 @@ const localDestinations: LocalDestination[] = [
     location: {
       name: "ตลาดสันกำแพง",
       coordinates: { lat: 18.7606, lng: 99.1828 },
-      district: "สันกำแพง",
+      district: "��ันกำแพง",
     },
     highlights: ["อาหารริมทาง", "ราคาถูก", "ของใช้ท้องถิ่น"],
     priceRange: "budget",
     isOpen: false,
+    imageUrl:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "mae_taeng_elephant_sanctuary",
@@ -174,6 +178,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["อนุรักษ์ช้าง", "การท่องเที่ยวยั่งยืน", "ธรรมชาติ"],
     priceRange: "premium",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "baan_kang_wat_community",
@@ -189,6 +195,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["ท่องเที่ยวชุมชน", "วัฒนธรรมท้องถิ่น", "วิถีชีวิต"],
     priceRange: "budget",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "khao_soi_mae_manee",
@@ -216,7 +224,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.8978, lng: 99.2234 },
       district: "สันทราย",
     },
-    highlights: ["���ักออร์แกนิค", "ทำอาหารเอง", "เรียนรู้การเกษตร"],
+    highlights: ["ผักออร์แกนิค", "ทำอาหารเอง", "เรียนรู้การเกษตร"],
     priceRange: "moderate",
     isOpen: true,
   },

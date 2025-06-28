@@ -51,7 +51,7 @@ export default function CheckIn() {
     setState((prev) => ({ ...prev, visitedLocations: visited }));
   }, []);
 
-  // Get user location and find nearby destinations
+  // Get user location and calculate distances to all destinations
   const updateLocation = React.useCallback(async () => {
     try {
       setState((prev) => ({ ...prev, isLoading: true, error: null }));
@@ -62,7 +62,7 @@ export default function CheckIn() {
         lng: position.coords.longitude,
       };
 
-      // Calculate distances to all destinations
+      // Calculate distances to all destinations (show all, not just nearby)
       const destinationsWithDistance = ecoCheckInDestinations.map((dest) => ({
         ...dest,
         distance: geolocationService.calculateDistance(
@@ -72,27 +72,25 @@ export default function CheckIn() {
         isVisited: state.visitedLocations.includes(dest.id),
       }));
 
-      // Filter nearby destinations (within 500m for discovery)
-      const nearby = destinationsWithDistance.filter(
-        (dest) => dest.distance <= 500,
-      );
-
-      // Sort by distance
-      nearby.sort((a, b) => a.distance - b.distance);
+      // Sort by distance (closest first)
+      destinationsWithDistance.sort((a, b) => a.distance - b.distance);
 
       setState((prev) => ({
         ...prev,
         userLocation: position,
-        nearbyDestinations: nearby,
+        nearbyDestinations: destinationsWithDistance, // Show all destinations
         isLoading: false,
       }));
 
-      // Auto-select target location if specified and nearby
+      // Auto-select target location if specified and user is at the location
       if (targetLocationId) {
-        const targetDestination = nearby.find(
+        const targetDestination = destinationsWithDistance.find(
           (dest) => dest.id === targetLocationId,
         );
-        if (targetDestination && targetDestination.distance <= 100) {
+        if (
+          targetDestination &&
+          targetDestination.distance <= targetDestination.radius
+        ) {
           setState((prev) => ({
             ...prev,
             selectedDestination: targetDestination,
@@ -299,7 +297,7 @@ export default function CheckIn() {
           <div className="flex items-center gap-2 mb-4">
             <Target className="h-5 w-5 text-green-600" />
             <h2 className="text-lg font-semibold text-green-900">
-              สถานที่ใกล้คุณ
+              สถานที่ใก��้คุณ
             </h2>
           </div>
 
@@ -407,7 +405,7 @@ export default function CheckIn() {
           <CardContent className="p-4">
             <h3 className="font-medium text-blue-900 mb-2">วิธีใช้</h3>
             <ul className="text-sm text-blue-700 space-y-1">
-              <li>• เดินเข้า��กล้สถานที่ท่องเที่ยว (ระยะ 100 เมตร)</li>
+              <li>• เดินเข้าใกล้สถานที่ท่องเที่ยว (ระยะ 100 เมตร)</li>
               <li>• กดที่การ์ดสถานที่เพื่อเริ่มเช็คอิน</li>
               <li>• ถ่ายรูปเพื่อยืนยันการมาเยือน</li>
               <li>• รับ Green Miles และพบกับฮีโร่ท้องถิ่น</li>

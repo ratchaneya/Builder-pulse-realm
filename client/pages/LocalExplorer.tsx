@@ -48,7 +48,7 @@ const localDestinations: LocalDestination[] = [
   {
     id: "aunt_pen_cafe",
     name: "คาเฟ่ป้าเป็น",
-    description: "คาเฟ่เล็กๆ ริมลำธาร เสิร์ฟกาแฟหอมกรุ่นและขนมโฮมเ���ด",
+    description: "คาเฟ่เล็กๆ ริมลำธาร เสิร์ฟกาแฟหอมกรุ่นและขนมโฮมเมด",
     type: "cafe",
     openingHours: "07:00-18:00",
     location: {
@@ -76,6 +76,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["ทอผ้าด้วยมือ", "สีธรรมชาติ", "ภูมิปัญญาท้องถิ่น"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "khun_chai_pottery",
@@ -91,6 +93,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["ปั้นดินเผา", "เผาด้วยฟืน", "วิธีดั้งเดิม"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "mae_sa_waterfall_cafe",
@@ -106,6 +110,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["ริมน้ำตก", "กลางป่า", "เสียงธรรมชาติ"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "doi_saket_coffee_farm",
@@ -121,6 +127,8 @@ const localDestinations: LocalDestination[] = [
     highlights: ["กาแฟอินทรีย์", "วิวดอยสูง", "ทัวร์ไร่กาแฟ"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "ban_tawai_woodcarving",
@@ -208,7 +216,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.8978, lng: 99.2234 },
       district: "สันทราย",
     },
-    highlights: ["ผักออร์แกนิค", "ทำอาหารเอง", "เรียนรู้การเกษตร"],
+    highlights: ["���ักออร์แกนิค", "ทำอาหารเอง", "เรียนรู้การเกษตร"],
     priceRange: "moderate",
     isOpen: true,
   },

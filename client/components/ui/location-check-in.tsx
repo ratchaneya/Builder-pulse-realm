@@ -285,6 +285,209 @@ export const LocationCheckIn: React.FC<LocationCheckInProps> = ({
     );
   }
 
+  // Show AR experience
+  if (step === "ar-experience" && hero) {
+    const heroName = isLanguageThai ? hero.name : hero.nameEn;
+    const heroRole = isLanguageThai ? hero.role : hero.roleEn;
+    const heroStory = isLanguageThai ? hero.story : hero.storyEn;
+    const heroVoiceLine = isLanguageThai ? hero.voiceLine : hero.voiceLineEn;
+    const heroAchievements = isLanguageThai
+      ? hero.achievements
+      : hero.achievementsEn;
+
+    return (
+      <div className="fixed inset-0 bg-black z-50">
+        {/* AR Camera Video */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          playsInline
+          muted
+        />
+
+        {/* AR Overlay Content */}
+        <div className="absolute inset-0 z-10">
+          {/* Header Controls */}
+          <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/70 to-transparent p-4">
+            <div className="flex items-center justify-between">
+              <Button
+                onClick={() => setStep("complete")}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white/20"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                {isLanguageThai ? "ข้าม" : "Skip"}
+              </Button>
+
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={() => setIsLanguageThai(!isLanguageThai)}
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/20"
+                >
+                  <Languages className="w-4 h-4 mr-1" />
+                  {isLanguageThai ? "EN" : "ไทย"}
+                </Button>
+
+                <Button
+                  onClick={() => setIsAudioMuted(!isAudioMuted)}
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/20"
+                >
+                  {isAudioMuted ? (
+                    <VolumeX className="w-4 h-4" />
+                  ) : (
+                    <Volume2 className="w-4 h-4" />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* AR State Content */}
+          {arState === "scanning" && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Card className="bg-black/70 backdrop-blur-sm text-white border-green-400 max-w-sm mx-4">
+                <CardContent className="p-6 text-center">
+                  <Scan className="w-12 h-12 text-green-400 mx-auto mb-4 animate-pulse" />
+                  <h3 className="text-lg font-semibold mb-2">
+                    {isLanguageThai
+                      ? "สแกนหาเครื่องหมาย AR"
+                      : "Scanning for AR Marker"}
+                  </h3>
+                  <p className="text-sm text-gray-300 mb-4">
+                    {isLanguageThai
+                      ? "มองหาป้ายหรือเครื่องหมายพิเศษรอบๆ บริเวณนี้"
+                      : "Look for special signs or markers around this area"}
+                  </p>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="bg-green-400 h-2 rounded-full animate-pulse w-3/4"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {arState === "marker_found" && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Card className="bg-green-600/90 backdrop-blur-sm text-white border-green-400 max-w-sm mx-4">
+                <CardContent className="p-6 text-center">
+                  <CheckCircle className="w-12 h-12 text-white mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">
+                    {isLanguageThai ? "พบเครื่องหมายแล้ว!" : "Marker Found!"}
+                  </h3>
+                  <p className="text-sm">
+                    {isLanguageThai
+                      ? "กำลังโหลดเรื่องราวของฮีโร่..."
+                      : "Loading hero story..."}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {arState === "story" && (
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+              <Card className="bg-white/10 backdrop-blur-sm text-white border border-white/20">
+                <CardContent className="p-4 space-y-4">
+                  {/* Hero Info */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                      <Star className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-lg">{heroName}</h3>
+                      <p className="text-green-200 text-sm">{heroRole}</p>
+                    </div>
+                    <Button
+                      onClick={toggleAudio}
+                      variant="ghost"
+                      size="sm"
+                      className="text-white hover:bg-white/20"
+                    >
+                      {isAudioPlaying ? (
+                        <Pause className="w-4 h-4" />
+                      ) : (
+                        <Play className="w-4 h-4" />
+                      )}
+                    </Button>
+                  </div>
+
+                  {/* Voice Line */}
+                  <div className="bg-white/20 rounded-lg p-3">
+                    <p className="text-sm italic mb-2">"{heroVoiceLine}"</p>
+                    <p className="text-xs text-gray-200">{heroStory}</p>
+                  </div>
+
+                  {/* Achievements */}
+                  <div className="flex flex-wrap gap-1">
+                    {heroAchievements.slice(0, 2).map((achievement, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-1 bg-yellow-500/20 text-yellow-200 text-xs px-2 py-1 rounded"
+                      >
+                        <Award className="w-3 h-3" />
+                        <span>{achievement}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Complete Button */}
+                  <Button
+                    onClick={completeARExperience}
+                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
+                  >
+                    <Heart className="w-4 h-4 mr-2" />
+                    {isLanguageThai ? "ได้รับแรงบันดาลใจแล้ว!" : "Inspired!"}
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {arState === "completed" && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Card className="bg-green-600/95 backdrop-blur-sm text-white border-green-400 max-w-sm mx-4">
+                <CardContent className="p-6 text-center">
+                  <Trophy className="w-16 h-16 text-yellow-300 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">
+                    {isLanguageThai
+                      ? "AR Experience สำเร็จ!"
+                      : "AR Experience Complete!"}
+                  </h3>
+                  <p className="text-sm">
+                    {isLanguageThai
+                      ? "ขอบคุณที่สำรวจเรื่องราวนี้"
+                      : "Thank you for exploring this story"}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </div>
+
+        {/* Hidden Audio Element */}
+        <audio
+          ref={audioRef}
+          preload="metadata"
+          muted={isAudioMuted}
+          onPlay={() => setIsAudioPlaying(true)}
+          onPause={() => setIsAudioPlaying(false)}
+          onEnded={() => setIsAudioPlaying(false)}
+        >
+          <source
+            src={`/audio/heroes/${hero.id}_${isLanguageThai ? "thai" : "english"}.mp3`}
+            type="audio/mpeg"
+          />
+        </audio>
+      </div>
+    );
+  }
+
   // Show completion screen
   if (step === "complete") {
     return (
@@ -379,7 +582,7 @@ export const LocationCheckIn: React.FC<LocationCheckInProps> = ({
               <Target className="w-10 h-10 text-green-600" />
             </div>
             <h3 className="text-xl font-bold text-green-900">
-              {isEnglish ? "You've Arrived!" : "คุณมาถึงจุดหมายแล้ว!"}
+              {isEnglish ? "You've Arrived!" : "คุณมาถึงจุดหมายแล���ว!"}
             </h3>
             <Badge className="bg-green-100 text-green-800 border-green-200">
               <MapPin className="w-3 h-3 mr-1" />

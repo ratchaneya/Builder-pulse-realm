@@ -25,28 +25,40 @@ type TabType = "route-planner" | "rewards" | "routes" | "miles";
 
 const suggestionData = [
   {
+    id: "doi_suthep",
     locationName: "Doi Suthep National Park",
     distance: 12,
     co2Level: 0.8,
     travelMethod: "bike" as const,
     description:
       "Escape to fresh mountain air with stunning temple views and peaceful hiking trails with low carbon footprint.",
+    coordinates: { lat: 18.8047, lng: 98.9284 },
+    heroId: "forest_guardian_somchai",
+    greenMilesReward: 15,
   },
   {
+    id: "san_kamphaeng",
     locationName: "San Kamphaeng District",
     distance: 18,
     co2Level: 1.1,
     travelMethod: "bus" as const,
     description:
       "Explore traditional handicraft villages and hot springs with eco-friendly transport options.",
+    coordinates: { lat: 18.745, lng: 99.1167 },
+    heroId: "wellness_expert_pim",
+    greenMilesReward: 16,
   },
   {
+    id: "mae_rim",
     locationName: "Mae Rim Valley",
     distance: 25,
     co2Level: 0.0,
     travelMethod: "bike" as const,
     description:
       "Discover organic farms, elephant sanctuaries, and riverside cafes with zero emissions cycling.",
+    coordinates: { lat: 18.9167, lng: 98.8833 },
+    heroId: "ranger_niran",
+    greenMilesReward: 18,
   },
 ];
 

@@ -13,6 +13,17 @@ import {
   CheckCircle,
   Clock,
   Target,
+  Scan,
+  Star,
+  Volume2,
+  VolumeX,
+  Play,
+  Pause,
+  Share2,
+  RotateCcw,
+  Award,
+  Gift,
+  Heart,
 } from "lucide-react";
 
 interface CheckInLocation {

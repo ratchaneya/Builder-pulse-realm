@@ -11,7 +11,16 @@ import CheckIn from "./CheckIn";
 import Redemption from "./Redemption";
 import RouteComparison from "./RouteComparison";
 import GreenMilesDashboard from "./GreenMilesDashboard";
-import { Leaf, MapPin, RefreshCw, Route, Camera, Gift, Navigation, Sparkles } from "lucide-react";
+import {
+  Leaf,
+  MapPin,
+  RefreshCw,
+  Route,
+  Camera,
+  Gift,
+  Navigation,
+  Sparkles,
+} from "lucide-react";
 
 type TabType = "route-planner" | "check-in" | "rewards" | "routes" | "miles";
 
@@ -200,33 +209,37 @@ export default function Index() {
 
       case "check-in":
         return (
-          <div className="h-full">
+          <div className="h-full -m-6">
             <CheckIn />
           </div>
         );
 
       case "rewards":
         return (
-          <div className="h-full">
+          <div className="h-full -m-6">
             <Redemption />
           </div>
         );
 
       case "routes":
         return (
-          <div className="h-full">
+          <div className="h-full -m-6">
             <RouteComparison />
           </div>
         );
 
       case "miles":
         return (
-          <div className="h-full">
+          <div className="h-full -m-6">
             <GreenMilesDashboard />
           </div>
         );
 
       default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-blue-50 relative">
       {/* Background Images */}
@@ -248,7 +261,9 @@ export default function Index() {
                 <Leaf className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-white">EcoTravel Chiang Mai</h1>
+                <h1 className="text-lg font-bold text-white">
+                  EcoTravel Chiang Mai
+                </h1>
                 <p className="text-xs text-green-100">
                   Sustainable Tourism • Local Experiences
                 </p>
@@ -281,8 +296,8 @@ export default function Index() {
         </div>
       </header>
 
-      {/* Main Layout - Side Tabs */}
-      <div className="relative z-10 container mx-auto h-[calc(100vh-80px)] flex">
+      {/* Desktop Layout - Side Tabs */}
+      <div className="relative z-10 container mx-auto h-[calc(100vh-80px)] hidden lg:flex">
         {/* Left Sidebar - Tabs */}
         <div className="w-64 bg-white/90 backdrop-blur-sm border-r border-green-200 shadow-lg">
           <div className="p-4 border-b border-green-100">
@@ -310,17 +325,21 @@ export default function Index() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                      isActive
-                        ? "bg-white/20"
-                        : "bg-gray-100 group-hover:bg-gray-200"
-                    }`}>
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        isActive
+                          ? "bg-white/20"
+                          : "bg-gray-100 group-hover:bg-gray-200"
+                      }`}
+                    >
                       <span className="text-lg">{tab.emoji}</span>
                     </div>
                     <div className="flex-1">
-                      <h3 className={`font-medium text-sm ${
-                        isActive ? "text-white" : "text-gray-800"
-                      }`}>
+                      <h3
+                        className={`font-medium text-sm ${
+                          isActive ? "text-white" : "text-gray-800"
+                        }`}
+                      >
                         {tab.label}
                       </h3>
                     </div>
@@ -348,8 +367,43 @@ export default function Index() {
 
         {/* Right Content Area */}
         <div className="flex-1 bg-white/80 backdrop-blur-sm overflow-auto">
-          <div className="p-6 h-full">
-            {renderContent()}
+          <div className="p-6 h-full">{renderContent()}</div>
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="relative z-10 lg:hidden">
+        <div className="pb-20">
+          <div className="p-4">{renderContent()}</div>
+        </div>
+
+        {/* Mobile Tab Bar at Bottom */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-20">
+          <div className="flex">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex-1 p-3 text-center transition-colors ${
+                    isActive
+                      ? "text-green-600 bg-green-50"
+                      : "text-gray-600 hover:text-gray-800"
+                  }`}
+                >
+                  <div className="text-lg mb-1">{tab.emoji}</div>
+                  <div
+                    className={`text-xs font-medium ${
+                      isActive ? "text-green-700" : "text-gray-500"
+                    }`}
+                  >
+                    {tab.label.split(" ")[0]}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -365,49 +419,6 @@ export default function Index() {
           </div>
         </div>
       )}
-
-      {/* Mobile Responsive - Tab Bar at Bottom */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-20">
-        <div className="flex">
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.id;
-
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex-1 p-3 text-center ${
-                  isActive
-                    ? "text-green-600 bg-green-50"
-                    : "text-gray-600"
-                }`}
-              >
-                <div className="text-lg mb-1">{tab.emoji}</div>
-                <div className={`text-xs font-medium ${
-                  isActive ? "text-green-700" : "text-gray-500"
-                }`}>
-                  {tab.label.split(' ')[0]}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Mobile Content Padding */}
-      <style jsx>{`
-        @media (max-width: 1024px) {
-          .container {
-            padding-bottom: 80px;
-          }
-        }
-      `}</style>
-    </div>
-  );
-}
-          </p>
-        </footer>
-      </main>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { WarningBar } from "@/components/ui/warning-bar";
 import { SuggestionCard } from "@/components/ui/suggestion-card";
 import { QRScanner } from "@/components/ui/qr-scanner";
+import { GPSNavigation } from "@/components/ui/gps-navigation";
 import { Leaf, MapPin, RefreshCw, Route, Camera } from "lucide-react";
 
 const suggestionData = [

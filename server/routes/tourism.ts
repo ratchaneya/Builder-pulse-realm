@@ -400,3 +400,197 @@ export const mockArrivalHandler: RequestHandler = (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// Check-in handlers
+export const checkInHandler: RequestHandler = async (req, res) => {
+  try {
+    const { userId, locationId, coordinates, photoData, greenMiles } = req.body;
+
+    if (!userId || !locationId || !coordinates) {
+      return res.status(400).json({
+        error: "User ID, location ID, and coordinates are required",
+      });
+    }
+
+    // Store check-in data (in a real app, this would go to a database)
+    const checkInData = {
+      id: `checkin_${Date.now()}`,
+      userId,
+      locationId,
+      coordinates,
+      timestamp: new Date().toISOString(),
+      photoData: photoData ? "stored" : undefined, // Don't store full photo data in memory
+      verified: true,
+    };
+
+    // Award Green Miles for check-in
+    if (greenMiles && greenMiles > 0) {
+      awardGreenMiles(
+        userId,
+        {
+          mode: { mode: "walk", co2Factor: 0 },
+          duration: 0,
+          distance: 0,
+          co2Emissions: 0,
+        },
+        true,
+        true,
+      );
+    }
+
+    res.json({
+      success: true,
+      checkIn: checkInData,
+      greenMilesAwarded: greenMiles || 0,
+      message: "Check-in successful!",
+    });
+  } catch (error) {
+    console.error("Error in checkIn:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getCheckInLocationsHandler: RequestHandler = (req, res) => {
+  try {
+    // Return available check-in locations
+    const locations = [
+      {
+        id: "mae_hia_agricultural",
+        name: "ศูนย์เกษตรกรรมแม่เหียะ",
+        nameEn: "Mae Hia Agricultural Center",
+        coordinates: { lat: 18.7261, lng: 98.9389 },
+        radius: 100,
+        heroId: "farmer_somjai",
+        greenMilesReward: 15,
+      },
+      {
+        id: "ban_pong_village",
+        name: "หมู่บ้านบ้านโป���ง",
+        nameEn: "Ban Pong Village",
+        coordinates: { lat: 18.8147, lng: 99.0525 },
+        radius: 120,
+        heroId: "artisan_malee",
+        greenMilesReward: 12,
+      },
+      {
+        id: "mae_sa_valley",
+        name: "หุบเขาแม่สา",
+        nameEn: "Mae Sa Valley",
+        coordinates: { lat: 18.9167, lng: 99.0833 },
+        radius: 150,
+        heroId: "ranger_niran",
+        greenMilesReward: 18,
+      },
+      {
+        id: "hang_dong_pottery",
+        name: "หมู่บ้านเครื่องปั้นดินเผาหางดง",
+        nameEn: "Hang Dong Pottery Village",
+        coordinates: { lat: 18.6719, lng: 98.9342 },
+        radius: 100,
+        heroId: "potter_khun_chai",
+        greenMilesReward: 14,
+      },
+      {
+        id: "san_kamphaeng_springs",
+        name: "บ่อน้ำพุร้อนสันกำแพง",
+        nameEn: "San Kamphaeng Hot Springs",
+        coordinates: { lat: 18.7606, lng: 99.1828 },
+        radius: 80,
+        heroId: "wellness_expert_pim",
+        greenMilesReward: 16,
+      },
+      {
+        id: "doi_saket_coffee",
+        name: "ไร่กาแฟดอยสะเก็ด",
+        nameEn: "Doi Saket Coffee Plantation",
+        coordinates: { lat: 18.9167, lng: 99.2167 },
+        radius: 200,
+        heroId: "coffee_farmer_somsak",
+        greenMilesReward: 20,
+      },
+    ];
+
+    res.json({ locations });
+  } catch (error) {
+    console.error("Error in getCheckInLocations:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getCheckInHistoryHandler: RequestHandler = (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    // In a real app, this would fetch from database
+    // For now, return empty history
+    const history: any[] = [];
+
+    res.json({
+      history,
+      totalCheckIns: history.length,
+      totalGreenMiles: history.reduce(
+        (sum, checkIn) => sum + (checkIn.greenMiles || 0),
+        0,
+      ),
+    });
+  } catch (error) {
+    console.error("Error in getCheckInHistory:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const verifyCheckInHandler: RequestHandler = (req, res) => {
+  try {
+    const { locationId, userCoordinates } = req.body;
+
+    if (!locationId || !userCoordinates) {
+      return res.status(400).json({
+        error: "Location ID and user coordinates are required",
+      });
+    }
+
+    // Simple distance verification (in a real app, this would be more sophisticated)
+    const locations = {
+      mae_hia_agricultural: { lat: 18.7261, lng: 98.9389, radius: 100 },
+      ban_pong_village: { lat: 18.8147, lng: 99.0525, radius: 120 },
+      mae_sa_valley: { lat: 18.9167, lng: 99.0833, radius: 150 },
+      hang_dong_pottery: { lat: 18.6719, lng: 98.9342, radius: 100 },
+      san_kamphaeng_springs: { lat: 18.7606, lng: 99.1828, radius: 80 },
+      doi_saket_coffee: { lat: 18.9167, lng: 99.2167, radius: 200 },
+    };
+
+    const location = locations[locationId as keyof typeof locations];
+    if (!location) {
+      return res.status(404).json({ error: "Location not found" });
+    }
+
+    // Calculate distance using Haversine formula
+    const R = 6371e3; // Earth's radius in meters
+    const φ1 = (userCoordinates.lat * Math.PI) / 180;
+    const φ2 = (location.lat * Math.PI) / 180;
+    const Δφ = ((location.lat - userCoordinates.lat) * Math.PI) / 180;
+    const Δλ = ((location.lng - userCoordinates.lng) * Math.PI) / 180;
+
+    const a =
+      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    const isWithinRange = distance <= location.radius;
+
+    res.json({
+      verified: isWithinRange,
+      distance: Math.round(distance),
+      maxDistance: location.radius,
+      location: locationId,
+    });
+  } catch (error) {
+    console.error("Error in verifyCheckIn:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

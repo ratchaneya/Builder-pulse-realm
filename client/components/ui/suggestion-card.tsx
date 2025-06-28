@@ -1,12 +1,4 @@
-import {
-  Bike,
-  Bus,
-  MapPin,
-  Leaf,
-  Navigation,
-  ExternalLink,
-  CheckCircle,
-} from "lucide-react";
+import { Bike, Bus, MapPin, Leaf, Navigation, ExternalLink, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -92,54 +84,97 @@ export function SuggestionCard({
         className,
       )}
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex-1">
-          <h3 className="font-semibold text-lg text-card-foreground mb-1">
-            {locationName}
-          </h3>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <MapPin className="h-4 w-4" />
-              <span>{distance} km away</span>
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="font-semibold text-foreground text-lg">
+                {locationName}
+              </h3>
+              {isCheckedIn && (
+                <Badge className="bg-green-100 text-green-800 border-green-300">
+                  <CheckCircle className="w-3 h-3 mr-1" />
+                  Visited
+                </Badge>
+              )}
+              {isNearby && !isCheckedIn && (
+                <Badge className="bg-blue-100 text-blue-800 border-blue-300 animate-pulse">
+                  📍 Nearby
+                </Badge>
+              )}
             </div>
-            <div className="flex items-center gap-1">
-              <TravelIcon className="h-4 w-4" />
-              <span className="capitalize">{travelMethod}</span>
-            </div>
+            <p className="text-sm text-muted-foreground mb-3">{description}</p>
           </div>
-        </div>
-
-        <div className="text-right">
-          <div className="flex items-center gap-1 mb-1">
-            <Leaf className="h-4 w-4 text-primary" />
-            <span
-              className={cn("font-medium text-sm", co2LevelColor(co2Level))}
-            >
-              {co2Level}kg
+          <div className="ml-4 flex flex-col items-center">
+            <TravelIcon className="h-6 w-6 text-muted-foreground mb-1" />
+            <span className="text-xs text-muted-foreground capitalize">
+              {travelMethod}
             </span>
           </div>
-          <div className={cn("text-xs", co2LevelColor(co2Level))}>
-            {co2LevelText(co2Level)}
+        </div>
+
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-4 text-sm">
+            <div className="flex items-center gap-1">
+              <MapPin className="h-4 w-4 text-muted-foreground" />
+              <span className="text-muted-foreground">{distance}km</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Leaf className={cn("h-4 w-4", co2LevelColor(co2Level))} />
+              <span className={co2LevelColor(co2Level)}>
+                {co2Level}kg • {co2LevelText(co2Level)}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-        {description}
-      </p>
+        {/* Step 1: Navigation Buttons */}
+        <div className="flex gap-2 mb-3">
+          <Button
+            onClick={openGoogleMaps}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+            size="sm"
+            disabled={!coordinates}
+          >
+            <Navigation className="w-4 h-4 mr-1" />
+            📍 Go Here
+            <ExternalLink className="w-3 h-3 ml-1" />
+          </Button>
+          <Button
+            onClick={onLowCarbonRoute}
+            size="sm"
+            variant="outline"
+            className="flex-1"
+          >
+            Low-Carbon Route
+          </Button>
+        </div>
 
-      <div className="flex gap-2">
-        <Button
-          onClick={onGoHere}
-          className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
-        >
-          Go here
-        </Button>
-        <Button
-          onClick={onLowCarbonRoute}
-          variant="outline"
-          className="flex-1 border-primary text-primary hover:bg-primary/5"
-        >
+        {/* Step 2: Check-in Button (only when nearby) */}
+        {isNearby && !isCheckedIn && (
+          <div className="border-t border-gray-200 pt-3">
+            <Button
+              onClick={onCheckIn}
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+              size="sm"
+            >
+              <CheckCircle className="w-4 h-4 mr-2" />
+              ✅ Check-In Now
+            </Button>
+            <p className="text-xs text-green-600 text-center mt-1">
+              You're within 100m • Tap to check-in and meet local heroes!
+            </p>
+          </div>
+        )}
+
+        {/* Checked-in Status */}
+        {isCheckedIn && (
+          <div className="border-t border-green-200 pt-3 bg-green-50 rounded-lg p-2">
+            <div className="flex items-center justify-center gap-2 text-green-700">
+              <CheckCircle className="w-4 h-4" />
+              <span className="text-sm font-medium">Experience completed!</span>
+            </div>
+          </div>
+        )}
           Low-carbon route
         </Button>
       </div>

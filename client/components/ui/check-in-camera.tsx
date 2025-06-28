@@ -257,28 +257,58 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
           </p>
         </div>
 
-        {/* Camera/Photo Display */}
-        <div className="relative bg-black rounded-lg overflow-hidden aspect-square">
+        {/* Camera/Photo Display with Drag & Drop */}
+        <div
+          ref={dropAreaRef}
+          className={cn(
+            "relative rounded-lg overflow-hidden aspect-square transition-all duration-300",
+            isDragOver
+              ? "bg-green-100 border-4 border-dashed border-green-400"
+              : "bg-black border-2 border-dashed border-gray-300",
+          )}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
           {cameraError ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-              <Camera className="w-12 h-12 text-gray-400 mb-4" />
-              <p className="text-sm text-gray-300 mb-4">{cameraError}</p>
-              <Button
-                onClick={() => fileInputRef.current?.click()}
-                variant="outline"
-                size="sm"
-                className="bg-white"
-              >
-                <Upload className="w-4 h-4 mr-2" />
-                Upload Photo Instead
-              </Button>
+              {/* Drag & Drop Area */}
+              <div className="w-full h-full flex flex-col items-center justify-center">
+                <Upload className="w-16 h-16 text-gray-400 mb-4" />
+                <p className="text-sm text-gray-600 mb-2 font-medium">
+                  📸 Drag & drop your check-in photo here
+                </p>
+                <p className="text-xs text-gray-500 mb-4">
+                  or click to upload from device
+                </p>
+                <Button
+                  onClick={() => fileInputRef.current?.click()}
+                  variant="outline"
+                  size="sm"
+                  className="bg-white border-green-300 text-green-700 hover:bg-green-50"
+                >
+                  <Upload className="w-4 h-4 mr-2" />
+                  Choose Photo
+                </Button>
+              </div>
             </div>
           ) : capturedPhoto ? (
-            <img
-              src={capturedPhoto}
-              alt="Captured check-in photo"
-              className="w-full h-full object-cover"
-            />
+            <>
+              <img
+                src={capturedPhoto}
+                alt="Captured check-in photo"
+                className="w-full h-full object-cover"
+              />
+              {/* Drag overlay for replacing photo */}
+              {isDragOver && (
+                <div className="absolute inset-0 bg-green-400/80 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <Upload className="w-12 h-12 mx-auto mb-2" />
+                    <p className="font-medium">Drop to replace photo</p>
+                  </div>
+                </div>
+              )}
+            </>
           ) : (
             <>
               {isLoading ? (
@@ -289,20 +319,34 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
                   </div>
                 </div>
               ) : (
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className="w-full h-full object-cover"
-                />
+                <>
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    muted
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* Drag overlay */}
+                  {isDragOver && (
+                    <div className="absolute inset-0 bg-green-400/80 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <Upload className="w-12 h-12 mx-auto mb-2" />
+                        <p className="font-medium">Drop photo to upload</p>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
 
               {/* Camera viewfinder overlay */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-4 border-2 border-green-400 rounded-lg"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-green-400 rounded-full"></div>
-              </div>
+              {!isDragOver && (
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute inset-4 border-2 border-green-400 rounded-lg"></div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
+              )}
             </>
           )}
 

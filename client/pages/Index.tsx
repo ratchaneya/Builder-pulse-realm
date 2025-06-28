@@ -143,7 +143,7 @@ export default function Index() {
       </header>
 
       {/* Main Content */}
-      <main className="container max-w-md mx-auto px-4 py-6 space-y-6">
+      <main className="relative z-10 container max-w-md mx-auto px-4 py-6 space-y-6">
         {/* Warning Section */}
         <WarningBar
           co2Level={2.8}

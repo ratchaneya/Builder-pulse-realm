@@ -7,7 +7,6 @@ import { SuggestionCard } from "@/components/ui/suggestion-card";
 import { QRScanner } from "@/components/ui/qr-scanner";
 import { GPSNavigation } from "@/components/ui/gps-navigation";
 import RoutePlanning from "./RoutePlanning";
-import CheckIn from "./CheckIn";
 import Redemption from "./Redemption";
 import RouteComparison from "./RouteComparison";
 import GreenMilesDashboard from "./GreenMilesDashboard";

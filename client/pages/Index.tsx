@@ -182,6 +182,14 @@ export default function Index() {
             Smart Route Planner
           </Button>
 
+          <Button
+            onClick={() => navigate("/local-explorer")}
+            className="w-full bg-orange-600 hover:bg-orange-700 text-white"
+          >
+            <MapPin className="h-4 w-4 mr-2" />
+            Local Explorer
+          </Button>
+
           <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={() => setShowQRScanner(true)}

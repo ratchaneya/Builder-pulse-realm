@@ -1,5 +1,14 @@
-import { Bike, Bus, MapPin, Leaf } from "lucide-react";
+import {
+  Bike,
+  Bus,
+  MapPin,
+  Leaf,
+  Navigation,
+  ExternalLink,
+  CheckCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 interface SuggestionCardProps {
@@ -8,9 +17,13 @@ interface SuggestionCardProps {
   co2Level: number;
   travelMethod: "bike" | "bus" | "walk";
   description: string;
+  coordinates?: { lat: number; lng: number };
   className?: string;
   onGoHere: () => void;
   onLowCarbonRoute: () => void;
+  onCheckIn?: () => void;
+  isNearby?: boolean;
+  isCheckedIn?: boolean;
 }
 
 const travelIcons = {

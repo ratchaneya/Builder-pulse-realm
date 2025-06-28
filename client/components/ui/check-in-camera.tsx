@@ -37,6 +37,9 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
   const [facingMode, setFacingMode] = React.useState<"user" | "environment">(
     "environment",
   );
+  const [isDragOver, setIsDragOver] = React.useState(false);
+
+  const dropAreaRef = React.useRef<HTMLDivElement>(null);
 
   // Start camera
   const startCamera = React.useCallback(async () => {

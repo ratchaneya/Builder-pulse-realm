@@ -48,6 +48,8 @@ export default function CheckIn() {
     isLoading: true,
     error: null,
     visitedLocations: [],
+    gpsCheckResult: null,
+    isCheckingGPS: false,
   });
 
   // Load visited locations from localStorage

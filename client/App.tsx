@@ -31,7 +31,6 @@ const App = () => (
           <Route path="/redemption" element={<Redemption />} />
           <Route path="/ar-experience" element={<ARExperience />} />
           <Route path="/camera-test" element={<CameraTest />} />
-          <Route path="/check-in" element={<CheckIn />} />
           <Route path="/traffic" element={<SmartRedirection />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

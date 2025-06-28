@@ -93,7 +93,7 @@ const featuredDestinations: LocalDestination[] = [
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=250&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop&crop=center",
   },
 ];
 

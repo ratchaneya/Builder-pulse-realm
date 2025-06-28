@@ -111,7 +111,7 @@ const localDestinations: LocalDestination[] = [
     priceRange: "moderate",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1493804714600-6edb1cd93080?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "doi_saket_coffee_farm",
@@ -192,7 +192,7 @@ const localDestinations: LocalDestination[] = [
       coordinates: { lat: 18.8456, lng: 99.0123 },
       district: "สันทราย",
     },
-    highlights: ["ท่องเที่ยวชุมชน", "วัฒนธรรมท้องถิ่น", "วิถีชีวิต"],
+    highlights: ["ท่องเที่ยวชุมชน", "วัฒนธรรมท้องถิ่น", "วิถี��ีวิต"],
     priceRange: "budget",
     isOpen: true,
     imageUrl:

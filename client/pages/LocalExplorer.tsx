@@ -60,7 +60,7 @@ const localDestinations: LocalDestination[] = [
     priceRange: "budget",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "grandma_mali_weaving",
@@ -320,7 +320,7 @@ export default function LocalExplorer() {
                 Local Explorer
               </h1>
               <p className="text-sm text-green-600">
-                สำรวจสถานที่ท้องถิ่นนอกเมือง
+                สำรวจสถานที่ท้องถิ่���นอกเมือง
               </p>
             </div>
           </div>

@@ -55,6 +55,8 @@ const featuredDestinations: LocalDestination[] = [
     highlights: ["Drip Coffee", "Homemade Pastries", "Riverside Setting"],
     priceRange: "budget",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&h=250&fit=crop&crop=center",
   },
   {
     id: "grandma_mali_weaving",
@@ -71,6 +73,8 @@ const featuredDestinations: LocalDestination[] = [
     highlights: ["Hand Weaving", "Natural Dyes", "Local Wisdom"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=250&fit=crop&crop=center",
   },
   {
     id: "doi_saket_coffee_farm",
@@ -87,6 +91,8 @@ const featuredDestinations: LocalDestination[] = [
     highlights: ["Organic Coffee", "Mountain Views", "Farm Tours"],
     priceRange: "moderate",
     isOpen: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=250&fit=crop&crop=center",
   },
 ];
 

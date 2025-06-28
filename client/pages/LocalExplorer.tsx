@@ -166,7 +166,7 @@ const localDestinations: LocalDestination[] = [
   },
   {
     id: "mae_taeng_elephant_sanctuary",
-    name: "ปางช้างแ��่แตง",
+    name: "ปางช้างแม่แตง",
     description: "อนุรักษ์ช้างอย่างยั่งยืน ไม่มีการบังคับช้างแสดง",
     type: "scenic",
     openingHours: "08:00-17:00",
@@ -213,7 +213,7 @@ const localDestinations: LocalDestination[] = [
     priceRange: "budget",
     isOpen: true,
     imageUrl:
-      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1563379091339-03246963d24a?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "organic_farm_mae_jo",

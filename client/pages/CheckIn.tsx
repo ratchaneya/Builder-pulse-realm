@@ -364,12 +364,9 @@ export default function CheckIn() {
                     "bg-white border-green-200 transition-all duration-200",
                     destination.distance <= destination.radius
                       ? "ring-2 ring-green-300 bg-green-50 cursor-pointer hover:shadow-md hover:scale-[1.02]"
-                      : "cursor-not-allowed opacity-75",
+                      : "cursor-pointer opacity-75 hover:opacity-90",
                   )}
-                  onClick={() =>
-                    destination.distance <= destination.radius &&
-                    handleDestinationSelect(destination)
-                  }
+                  onClick={() => handleDestinationSelect(destination)}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">

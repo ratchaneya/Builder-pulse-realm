@@ -507,12 +507,14 @@ export const LocationCheckIn: React.FC<LocationCheckInProps> = ({
 
             <div>
               <h3 className="text-xl font-bold text-green-900 mb-2">
-                {isEnglish ? "Check-in Successful!" : "เช็คอินสำเร็จ!"}
+                {isEnglish
+                  ? "Amazing Journey Complete!"
+                  : "การเดินทางสุดพิเศษสำเร็จ!"}
               </h3>
               <p className="text-green-700">
                 {isEnglish
-                  ? `You've successfully checked in at ${location.nameEn}`
-                  : `คุณเช็คอินที่ ${location.name} สำเร็จแล้ว`}
+                  ? `You've explored ${location.nameEn} and met a local hero!`
+                  : `คุณได้สำรวจ ${location.name} และพบกับฮีโร่ท้องถิ่นแล้ว!`}
               </p>
             </div>
 

@@ -264,7 +264,7 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
             "relative rounded-lg overflow-hidden aspect-square transition-all duration-300",
             isDragOver
               ? "bg-green-100 border-4 border-dashed border-green-400"
-              : "bg-black border-2 border-dashed border-gray-300",
+              : "bg-black border-2 border-dashed border-gray-300"
           )}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -362,19 +362,23 @@ export const CheckInCamera: React.FC<CheckInCameraProps> = ({
               <Button
                 onClick={retakePhoto}
                 variant="outline"
-                className="flex-1"
-              >
-                <X className="w-4 h-4 mr-2" />
-                Retake
-              </Button>
-              <Button
-                onClick={confirmPhoto}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
-              >
-                <Check className="w-4 h-4 mr-2" />
-                Confirm Check-in
-              </Button>
+          <div className="flex items-start gap-3">
+            <Camera className="w-5 h-5 text-blue-600 mt-1" />
+            <div>
+              <h4 className="font-medium text-blue-900 mb-1">
+                {isEnglish ? "Ready to Check-in?" : "พร้อมเช็คอินหรือยัง?"}
+              </h4>
+              <p className="text-sm text-blue-700 mb-2">
+                {isEnglish
+                  ? "Take a photo or drag & drop an image to confirm your visit!"
+                  : "ถ่ายรูปหรือลากไฟล์รูปมาวางเพื่อยืนยันการมาเยือน!"}
+              </p>
+              <div className="flex items-center gap-2 text-xs text-blue-600">
+                <Upload className="w-3 h-3" />
+                <span>Drag & Drop supported</span>
+              </div>
             </div>
+          </div>
           ) : (
             /* Camera controls */
             <div className="flex gap-3">

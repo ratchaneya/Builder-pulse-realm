@@ -55,5 +55,11 @@ export function createServer() {
   app.get("/api/ar/locations", getARLocationsHandler);
   app.get("/api/ar/mock-arrival/:locationId", mockArrivalHandler);
 
+  // Check-in API endpoints
+  app.post("/api/check-in", checkInHandler);
+  app.get("/api/check-in/locations", getCheckInLocationsHandler);
+  app.get("/api/check-in/history/:userId", getCheckInHistoryHandler);
+  app.post("/api/check-in/verify", verifyCheckInHandler);
+
   return app;
 }

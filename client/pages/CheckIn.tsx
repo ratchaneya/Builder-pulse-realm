@@ -292,33 +292,31 @@ export default function CheckIn() {
           </Card>
         )}
 
-        {/* Nearby Destinations */}
+        {/* Photo Drop Destinations */}
         <section>
           <div className="flex items-center gap-2 mb-4">
             <Target className="h-5 w-5 text-green-600" />
-            <h2 className="text-lg font-semibold text-green-900">
-              สถานที่ใก��้คุณ
-            </h2>
+            <h2 className="text-lg font-semibold text-green-900">จุดดรอปรูป</h2>
           </div>
+
+          <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 mb-4">
+            <CardContent className="p-4">
+              <p className="text-sm text-blue-700">
+                📍 <strong>วิธีใช้:</strong>{" "}
+                เดินทางไปยังจุดหมายแล้วดรอปรูปเพื่อรับ Green Miles
+                <br />
+                🚫 ต้องอยู่ในระยะที่กำหนดถึงจะดรอปรูปได้
+              </p>
+            </CardContent>
+          </Card>
 
           {state.nearbyDestinations.length === 0 ? (
             <Card className="bg-white border-gray-200">
               <CardContent className="p-6 text-center">
                 <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  ไม่พบสถานที่ใกล้คุณ
+                  กำลังโหลดจุดดรอปรูป...
                 </h3>
-                <p className="text-gray-600 mb-4">
-                  คุณต้องอยู่ในระยะ 500 เมตรจากสถานที่ท่องเที่ยวเพื่อเช็คอิน
-                </p>
-                <Button
-                  onClick={() => navigate("/")}
-                  variant="outline"
-                  className="border-green-300 text-green-700"
-                >
-                  <Navigation className="w-4 h-4 mr-2" />
-                  ดูสถานที่แนะนำ
-                </Button>
               </CardContent>
             </Card>
           ) : (

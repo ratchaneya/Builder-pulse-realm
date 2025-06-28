@@ -162,7 +162,7 @@ const localDestinations: LocalDestination[] = [
     priceRange: "budget",
     isOpen: false,
     imageUrl:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1528712306091-ed0763094c98?w=400&h=300&fit=crop&crop=center",
   },
   {
     id: "mae_taeng_elephant_sanctuary",
